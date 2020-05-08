@@ -25,6 +25,9 @@ var objPeople = [
     },
     {
         username: "Anis" , password: "anis1999"
+    },
+    {
+        username: "Fitri" , password: "kambing1"
     }
 ]
 
@@ -35,6 +38,7 @@ function getInfo(){
 
     for( i = 0 ; i < objPeople.length; i++){
         if(username == objPeople[i].username && password == objPeople[i].password){
+            window.location.href = "projects.html";
             alert(username + " is logged in!!");
             return
         }
