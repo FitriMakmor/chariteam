@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
    
-    <title>Welfare - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Chariteam - Add a Volunteers </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -31,27 +31,25 @@
   </head>
   <body>
     
-  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">Welfare</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="oi oi-menu"></span> Menu
-      </button>
-
-      <div class="collapse navbar-collapse" id="ftco-nav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-          <li class="nav-item"><a href="causes.html" class="nav-link">Causes</a></li>
-          <li class="nav-item"><a href="donate.html" class="nav-link">Donate</a></li>
-          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-          <li class="nav-item active"><a href="listvolunteer.html" class="nav-link">Volunteer</a></li>
-          <li class="nav-item"><a href="event.html" class="nav-link">Events</a></li>
-          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-        </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+      <div class="container">
+        <a class="navbar-brand" href="projects.html">Chariteam</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+          aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="oi oi-menu"></span> Menu
+        </button>
+  
+        <div class="collapse navbar-collapse" id="ftco-nav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a href="projects.html" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="meetingreport.html" class="nav-link">Reports</a></li>
+            <li class="nav-item active"><a href="listvolunteer.html" class="nav-link">Volunteers</a></li>
+            <li class="nav-item"><a href="userProfile.html" class="nav-link">Profile</a></li>
+            <li class="nav-item"><a href="login.html" class="nav-link">Log Out</a></li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
     <!-- END nav -->
     
     <div class="hero-wrap" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
@@ -59,9 +57,9 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> <span></span></p>
-             <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Volunteers</h1>
-           
+            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a
+                  href="listvolunteer.html">Volunteers</a></span><span> Add </span></p>
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Add a Volunteer</h1>
           </div>
         </div>
       </div>
@@ -76,16 +74,11 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-3 ">
-		     <div class="list-group ">
-          <img class="img-profile img-circle img-responsive center-block" src="images/newvolunteer.jpg" alt="" width="70%" height="70%">
+		     <div class="list-group "style="margin-left: auto; margin-right: auto; text-align: center;">
+          <img class="img-profile img-circle img-responsive center-block" style="margin-left: auto; margin-right: auto; text-align: center;border-radius: 50%"src="images/newvolunteer.jpg" alt="" width="90%" height="90%">
           <ul class="meta list list-unstyled">
-           
                <br> <label class="label label-info">Volunteer</label>
-               <!-- <div class="form-group avatar">
-                     
-                     <button type="submit" class="btn">Update Image</button>
-                 
-             </div> -->
+               
              <br><button type="submit" class="btn">Update Image</button>
 
            </ul>
@@ -124,11 +117,12 @@
                                 </div>
                               </div>
                               <div class="form-group row">
-                                <label for="select" class="col-4 col-form-label">Display Name public as</label> 
+                                <label for="select" class="col-4 col-form-label">Status</label> 
                                 <div class="col-8">
                                   <select id="select" name="select" class="custom-select">
-                                    <option value="admin">Admin</option>
-                                    <option value="admin">Volunteer</option>
+                                    <option value="admin">Single</option>
+                                    <option value="admin">Maried</option>
+                                    <option value="admin">Widow</option>
                                   </select>
                                 </div>
                               </div>
