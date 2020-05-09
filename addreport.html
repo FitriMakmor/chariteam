@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Welfare - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Chariteam - Add Report</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,600,700" rel="stylesheet">
 
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
@@ -28,7 +31,7 @@
     
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-      <a class="navbar-brand" href="index.html">Add</a>
+      <a class="navbar-brand" href="addreport.html">Add</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
       </button>
@@ -36,7 +39,7 @@
   </nav>
     <!-- END nav -->
     
-    <div class="hero-wrap" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+    <div class="hero-wrap" style="background-image: url('images/report1.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
@@ -49,49 +52,44 @@
     </div>
 
     
-    <section class="ftco-section contact-section ftco-degree-bg">
-      <div class="container">
-        <div class="row block-9">
-          <div class="col-md-6 pr-md-5">
-          	<h4 class="mb-4">Meeting Details</h4>
-            <form action="#">
-              <div class="form-group">
-                <p>Purpose</p>
-                <input type="text" class="form-control" placeholder="Purpose of Meeting">
+<section class="ftco-section contact-section ftco-degree-bg">
+    <div class="container">
+      <div class="row block-9">
+        <div class="col-md-8 pr-md-5">
+          <h4 class="mb-4" style="font-weight: bold;">Meeting Details</h4>
+          <form action="#">
+            <div class="form-group">
+              <p>Purpose</p>
+              <input type="text" class="form-control" placeholder="To discuss..">
+            </div>
+            <div class="form-group">
+              <p>Date of Meeting</p>
+              <input type="date" class="form-control" placeholder="Date of Meeting">
+            </div>
+            <div class="form-group">
+              <p>Start Time</p>
+              <input type="time" class="form-control" placeholder="Subject">
+            </div>
+            <div class="form-group">
+              <p>End Time</p>
+              <input type="time" class="form-control" placeholder="Subject">
               </div>
-              <div class="form-group">
-                <p>Date of Meeting</p>
-                <input type="date" class="form-control" placeholder="Date of Meeting">
+            <div class="form-group">
+              <p>Comments</p>
+              <textarea name="comments" id="form-control" cols="30" rows="5" class="form-control" placeholder="Message"></textarea>
+            </div>
+            <div class="text">
+              <p>Meeting Report File</p>
+              <input type="file" id="myFile" name="filename2">
+              <div class="mt-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
               </div>
-              <div class="form-group">
-                <p>Start Time</p>
-                <input type="time" class="form-control" placeholder="Subject">
-              </div>
-              <div class="form-group">
-                <p>End Time</p>
-                <input type="time" class="form-control" placeholder="Subject">
-              </div>
-              <div class="form-group">
-                <p>Comments</p>
-                <textarea name="" id="" cols="30" rows="5" class="form-control" placeholder="Message"></textarea>
-              </div>
-              <div class="text">
-                <input type="file" id="myFile" name="filename2">
-                <div class="mt-3">
-                  <button type="submit" class="btn btn-white px-3 py-2 mt-2">Submit</button>
-                </div>
-              <script>
-                $(".custom-file-input").on("change", function() {
-                var fileName = $(this).val().split("\\").pop();
-                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-                });
-              </script>
-              </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
     <footer class="ftco-footer ftco-section img">
     	<div class="overlay"></div>
