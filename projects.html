@@ -72,10 +72,13 @@
         <h3 class="">Current Charity Projects</h3>
       </div>
       <div class="col-md-6">
-        <a href="addProject.html" type="button" class="float-right btn btn-default btn-lg" aria-label="Add Project">
-          <span class="oi oi-plus" aria-hidden="true">
-          </span>
-        </a>
+        <div class="float-right">
+          <h3 class="d-inline mr-2 text-info">Add a Project</h3>
+          <a href="addProject.html" type="button" class="float-right btn btn-info btn-lg" aria-label="Add Project">
+            <span class="oi oi-plus" aria-hidden="true">
+            </span>
+          </a>
+        </div>
       </div>
     </div>
     <div class="row d-flex" id="page1">
@@ -91,11 +94,11 @@
             </div>
             <span class="fund-raised d-block">$22,306 raised of $30,000</span>
             <div class="text-center">
-              <a href="editProject.html" type="button" class="float-center btn btn-default" aria-label="Edit Project">
+              <a href="editProject.html" type="button" class="float-center btn btn-info" aria-label="Edit Project">
                 <span class="oi oi-pencil" aria-hidden="true">
                 </span>
               </a>
-              <a href="" type="button" class="btn-center btn btn-default" data-toggle="modal" data-target="#deleteModal" aria-label="Delete Project">
+              <a href="" type="button" class="btn-center btn btn-info" data-toggle="modal" data-target="#deleteModal" aria-label="Delete Project">
                 <span class="oi oi-minus" aria-hidden="true">
                 </span>
               </a>
@@ -115,11 +118,11 @@
             </div>
             <span class="fund-raised d-block">$12,004 raised of $30,000</span>
             <div class="text-center">
-              <a href="editProject.html" type="button" class="float-center btn btn-default" aria-label="Edit Project">
+              <a href="editProject.html" type="button" class="float-center btn btn-info" aria-label="Edit Project">
                 <span class="oi oi-pencil" aria-hidden="true">
                 </span>
               </a>
-              <a href="" type="button" class="btn-center btn btn-default" aria-label="Delete Project">
+              <a href="" type="button" class="btn-center btn btn-info" data-toggle="modal" data-target="#deleteModal" aria-label="Delete Project">
                 <span class="oi oi-minus" aria-hidden="true">
                 </span>
               </a>
@@ -139,11 +142,11 @@
             </div>
             <span class="fund-raised d-block">$17,032 raised of $30,000</span>
             <div class="text-center">
-              <a href="editProject.html" type="button" class="float-center btn btn-default" aria-label="Edit Project">
+              <a href="editProject.html" type="button" class="float-center btn btn-info" aria-label="Edit Project">
                 <span class="oi oi-pencil" aria-hidden="true">
                 </span>
               </a>
-              <a href="" type="button" class="btn-center btn btn-default" aria-label="Delete Project">
+              <a href="" type="button" class="btn-center btn btn-info" data-toggle="modal" data-target="#deleteModal" aria-label="Delete Project">
                 <span class="oi oi-minus" aria-hidden="true">
                 </span>
               </a>
@@ -163,11 +166,11 @@
             </div>
             <span class="fund-raised d-block">$14,548 raised of $30,000</span>
             <div class="text-center">
-              <a href="editProject.html" type="button" class="float-center btn btn-default" aria-label="Edit Project">
+              <a href="editProject.html" type="button" class="float-center btn btn-info" aria-label="Edit Project">
                 <span class="oi oi-pencil" aria-hidden="true">
                 </span>
               </a>
-              <a href="" type="button" class="btn-center btn btn-default" aria-label="Delete Project">
+              <a href="" type="button" class="btn-center btn btn-info" data-toggle="modal" data-target="#deleteModal" aria-label="Delete Project">
                 <span class="oi oi-minus" aria-hidden="true">
                 </span>
               </a>
@@ -187,11 +190,11 @@
             </div>
             <span class="fund-raised d-block">$10,212 raised of $30,000</span>
             <div class="text-center">
-              <a href="editProject.html" type="button" class="float-center btn btn-default" aria-label="Edit Project">
+              <a href="editProject.html" type="button" class="float-center btn btn-info" aria-label="Edit Project">
                 <span class="oi oi-pencil" aria-hidden="true">
                 </span>
               </a>
-              <a href="" type="button" class="btn-center btn btn-default" aria-label="Delete Project">
+              <a href="" type="button" class="btn-center btn btn-info" data-toggle="modal" data-target="#deleteModal" aria-label="Delete Project">
                 <span class="oi oi-minus" aria-hidden="true">
                 </span>
               </a>
@@ -211,11 +214,11 @@
             </div>
             <span class="fund-raised d-block">$17,471 raised of $30,000</span>
             <div class="text-center">
-              <a href="editProject.html" type="button" class="float-center btn btn-default" aria-label="Edit Project">
+              <a href="editProject.html" type="button" class="float-center btn btn-info" aria-label="Edit Project">
                 <span class="oi oi-pencil" aria-hidden="true">
                 </span>
               </a>
-              <a href="" type="button" class="btn-center btn btn-default" aria-label="Delete Project">
+              <a href="" type="button" class="btn-center btn btn-info" data-toggle="modal" data-target="#deleteModal" aria-label="Delete Project">
                 <span class="oi oi-minus" aria-hidden="true">
                 </span>
               </a>
@@ -419,9 +422,8 @@
         <br><br>
       </div>
       <div class="modal-footer">
-        <a href="project-volunteers.html" class="btn btn-primary"> Assigned Volunteers</a> 
+        <a href="project-volunteers.html" class="btn btn-primary">Manage Volunteers</a> 
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -468,7 +470,7 @@
          <div class="ftco-footer-widget mb-4 ml-md-4">
           <h2 class="ftco-heading-2">Site Links</h2>
           <ul class="list-unstyled">
-            <li><a href="projects.html" class="py-2 d-block">Home</a></li>
+            <li><a href="projects.html" class="py-2 d-block">Projects</a></li>
             <li><a href="meetingreport.html" class="py-2 d-block">Reports</a></li>
             <li><a href="listvolunteer.html" class="py-2 d-block">Volunteers</a></li>
             <li><a href="assign-volunteers.html" class="py-2 d-block">Assign</a></li>
