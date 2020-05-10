@@ -27,28 +27,21 @@
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/style-login.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
   </head>
   <body>
     
-  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">Welfare</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="oi oi-menu"></span> Menu
-      </button>
-    </div>
-  </nav>
-    <!-- END nav -->
-    
-    <div class="hero-wrap" style="background-image: url('images/bg_7.jpg');" data-stellar-background-ratio="0.5">
+    <div class="hero-wrap" style="background-image: url('images/children.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
+      <div class="headName">
+        <h1><strong>CHARITEAM</strong></h1><img src="images/620806.png">
+      </div>
       <div class="container1">
-        <form class="login-box" action="login.html" method="POST" name="form">
+        <form class="login-box" action="login.html" method="POST" name="form"  >
             <h1><strong>LOGIN</strong></h1>
             <div class="textbox">
                 <i class="fas fa-user"></i>
@@ -62,9 +55,13 @@
                 <i id="hide2" class="fas fa-eye-slash"></i>
                 </span>
             </div>
-            <label><input class="checkbox" type="checkbox" checked="checked" name="remember"><small><span>Remember me</span></small></label>
+            <label><input class="checkbox" type="checkbox" checked="checked" name="remember"><small><span> Remember me</span></small></label>
             <div class="pass"><small><a href="resetPassword.html">Forgot Password?</a></small></div>
-            <div class="text-center"><button class="btn btn3" type="button" onclick="getInfo()">Sign In</button><br></div>
+            <div class="text-center" >
+              <a href="projects.html" onclick ="return getInfo()">
+                <button class="btn btn3" id="button"  type="button">Sign In</button><br>
+              </a>
+            </div>
             <div class="social-icons">
                 <ul>
                   <li><i class="fab fa-facebook-f"></i></li>
@@ -199,7 +196,7 @@
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
-  <script src="loginJavaScript.js"></script>
+  <script src="js/loginJavaScript.js"></script>
 
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
