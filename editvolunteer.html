@@ -27,6 +27,8 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+    
+    <link rel="stylesheet" href="css/box.css"> 
   </head>
   <body>
     
@@ -51,7 +53,7 @@
     </nav>
     <!-- END nav -->
     
-    <div class="hero-wrap" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+    <div class="hero-wrap" style="background-image: url('images/volunteerheader.jpeg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
@@ -63,6 +65,7 @@
         </div>
       </div>
     </div>
+    
 
     <section class="ftco-section ftco-gallery">
     	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -126,6 +129,43 @@
                                 
 		               
                               <form>
+                                <div class="form-group row">
+                                <label for="email" class="col-4 col-form-label">Email*</label> 
+                                <div class="col-8">
+                                  <input id="email" name="email" placeholder="jackson@gmail.com" class="form-control here" required="required" type="text">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="add1" class="col-4 col-form-label">Address Line 1*</label> 
+                                <div class="col-8">
+                                  <input id="adress1" name="address1" placeholder="No 43 Jalan Murni" class="form-control here" required="required" type="text">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="add2" class="col-4 col-form-label">Address Line 2*</label> 
+                                <div class="col-8">
+                                  <input id="adress2" name="address2" placeholder="Taman Pasir Putih" class="form-control here" required="required" type="text">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="select" class="col-4 col-form-label" required="required">State*</label> 
+                                <div class="col-8">
+                                  <select id="select" name="select" class="custom-select">
+                                    <option value="admin">Johor</option>
+                                    <option value="admin">Melaka</option>
+                                    <option value="admin">Negeri Sembilan</option>
+                                    <option value="admin">Terengganu</option>
+                                    <option value="admin">Kedah</option>
+                                    <option value="admin">Perlis</option>
+                                    <option value="admin">Kuala Lumpur</option>
+                                    <option value="admin">Selangor</option>
+                                    <option value="admin">Pahang</option>
+                                    <option value="admin">Perak</option>
+                                    <option value="admin">Pulau Pinang</option>
+
+                                  </select>
+                                </div>
+                              </div>
                               <div class="form-group row">
                                 <label for="select" class="col-4 col-form-label">Status</label> 
                                 <div class="col-8">
@@ -137,12 +177,7 @@
                                   </select>
                                 </div>
                               </div>
-                              <div class="form-group row">
-                                <label for="email" class="col-4 col-form-label">Email*</label> 
-                                <div class="col-8">
-                                  <input id="email" name="email" placeholder="Email" class="form-control here" required="required" type="text">
-                                </div>
-                              </div>
+                              
                               <div class="form-group row">
                                 <label for="tel" class="col-4 col-form-label">Tel.</label> 
                                 <div class="col-8">
@@ -163,23 +198,37 @@
                               </div> 
                               <div class="form-group row">
                                 <div class="offset-4 col-8">
-                                  <button name="submit" type="submit" class="btn btn-primary">Update Profile</button>
+                                  <a href="#" name="submit" type="submit" class="btn btn-primary">Update Profile</a>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <div class="offset-4 col-8">
-                                  <button name="delete" type="button" class="btn btn-primary">Delete Profile</button>
+                                  <a href="#"   id="deletev" class="btn btn-primary">Delete Profile</a>
                                 </div>
                               </div>
                             </form>
                          
                         </div>
-		            </div>
-		            
-		        </div>
+                </div>
+                
+		      <div class="popupdelete">
+          <div class="popupdelete-content">
+
+           <img src="images/close.png" alt="close" class="close">
+           <h3>Delete Account</h3>
+           <p>Are you sure you want to delete this volunteer?</p>
+           <div class="offset-4 col-4">
+           <button id="no" class="btn btn-block btn-secondary">No</button>
+           <a href="#" class="btn btn-block btn-secondary">Yes</a>
+           </div>
+          </div>
+         </div>
+
 		    </div>
+		  </div>
 		</div>
-	</div>
+  </div>
+  
 </div>
     </section>
 
@@ -263,6 +312,18 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
+  <script>
+  document.getElementById("deletev").addEventListener("click",function(){
+    document.querySelector(".popupdelete").style.display="flex";
+  })
+  document.querySelector(".close").addEventListener("click",function(){
+    document.querySelector(".popupdelete").style.display="none";
+  })
+  document.getElementById("no").addEventListener("click",function(){
+    document.querySelector(".popupdelete").style.display="none";
+  })
+  
+</script>
   
   </body>
 </html>
