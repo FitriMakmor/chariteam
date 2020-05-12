@@ -114,7 +114,7 @@ thead {
 }
   
 input.success:checked + .slider {
-	background-color: #8bc34a;
+	background-color: cornflowerblue;
 }
   
 input:checked + .slider:before {

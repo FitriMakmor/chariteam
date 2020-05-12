@@ -11,7 +11,6 @@ function showPage(pageNum){
             page[i].classList.remove("d-flex");
             page[i].classList.add("d-none");
         }
-        console.log("Page "+(i+1)+" "+page[i].classList);
     }
 
   // var x = document.getElementById("myDIV");
