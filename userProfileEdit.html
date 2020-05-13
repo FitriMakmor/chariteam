@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Welfare - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Chariteam - MyAccount</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -27,14 +27,14 @@
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="DeleteProfileButton.css">
-
+    <link rel="shortcut icon" type="image/png" href="images/620806.png">
 
   </head>
   <body>
     
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-      <a class="navbar-brand" href="index.html">Welfare</a>
+      <a class="navbar-brand" href="projects.html">Chariteam</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
       </button>
@@ -53,12 +53,12 @@
   </nav>
     <!-- END nav -->
     
-    <div class="hero-wrap" style="background-image: url('images/bg_7.jpg');" data-stellar-background-ratio="0.5">
+    <div class="hero-wrap" style="background-image: url('images/bg_9.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-             <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="projects.html">Projects</a></span> <span>MyAccount</span></p>
+             <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="font-weight-bold">Settings</span></p>
             <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">My Account</h1>
           </div>
         </div>
@@ -74,8 +74,8 @@
            <div class="card p-3">
            <div class="e-navlist e-navlist--active-bg">
                <ul class="nav">
-               <li class="nav-item"><a class="nav-link px-2 active" href="userProfileMain.html"><i class="fa fa-fw fa-bar-chart mr-1"></i><span>Overview</span></a></li>
-               <li class="nav-item"><a class="nav-link px-2" href="userProfileEdit.html"><i class="fa fa-fw fa-cog mr-1"></i><span>Settings</span></a></li>
+               <li class="nav-item"><a class="nav-link px-2" href="userProfileMain.html"><i class="fa fa-fw fa-bar-chart mr-1"></i><span>Overview</span></a></li>
+               <li class="nav-item"><a class="nav-link px-2 active" href="userProfileEdit.html"><i class="fa fa-fw fa-cog mr-1"></i><span>Settings</span></a></li>
                </ul>
            </div>
            </div>
@@ -104,10 +104,36 @@
                     <p class="mb-0">@johnny.s</p>
                     <div class="text-muted"><small>Last seen 2 hours ago</small></div>
                     <div class="mt-2">
-                      <button class="btn btn-primary" type="button">
+                      <button class="btn btn-primary" type="button" onclick="document.getElementById('id02').style.display='block'">
                         <i class="fa fa-fw fa-camera"></i>
                         <span>Change Photo</span>
                       </button>
+                     
+                      <div id="id02" class="modal">
+                        <form class="modal-content" action="/action_page.php">
+                          <div class="containerhere">
+                            <form method='post' action='' enctype="multipart/form-data">
+                              Select file : <input type='file' name='file' id='file' class='form-control' ><br>
+                              <input type='button' class='btn btn-info' value='Upload' id='btn_upload'> &nbsp;
+                              <input type="button" onclick="document.getElementById('id02').style.display='none'" class="btn btn-primary" value='Cancel'>
+                            </form>
+                        
+                          </div>
+                        </form>
+                      </div>
+                      <script>
+                        // Get the modal
+                        var modal = document.getElementById('id02');
+                        
+                        // When the user clicks anywhere outside of the modal, close it
+                        window.onclick = function(event) {
+                          if (event.target == modal) {
+                            modal.style.display = "none";
+                          }
+                        }
+                        </script>
+                     
+                      
                       
 
                     </div>
@@ -190,17 +216,16 @@
       <div class="col-12 col-md-3 mb-3">
         <div class="card mb-3">
           <div class="card-body">
-              
-              <button onclick="document.getElementById('id01').style.display='block'" class="btn btn-block btn-secondary">
-                  
+              <div class="px-xl-2">
+              <button onclick="document.getElementById('id01').style.display='block'" class="btn btn-block btn-primary">
+                <i class="fa fa-trash" aria-hidden="true"></i>   
                   <span>Delete Account</span>
               </button>
-              
+              <div class="px-xl-3">
           </div>
           </div>
           <div id="id01" class="modal">
-            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
-            <form class="modal-content" action="/action_page.php">
+            <form class="myModal-content" action="/action_page.php">
               <div class="containerhere">
                 <h1>Delete Account</h1>
                 <p>Are you sure you want to delete your account?</p>
@@ -261,7 +286,7 @@
               <div class="block-21 mb-4 d-flex">
                 <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
                 <div class="text">
-                  <h3 class="heading"><a href="projects.html">Clean Water for The Urban Area</a></h3>
+                  <h3 class="heading"><a href="projects.html">Clean Water for The Rural Areas</a></h3>
                   <div class="meta">
                     <div><a href="#"><span class="icon-calendar"></span> November 25, 2019</a></div>
                     <div><a href="#"><span class="icon-person" name="Organisation"></span> Hope Org</a></div>
@@ -278,7 +303,6 @@
                 <li><a href="projects.html" class="py-2 d-block">Home</a></li>
                 <li><a href="meetingreport.html" class="py-2 d-block">Reports</a></li>
                 <li><a href="listvolunteer.html" class="py-2 d-block">Volunteers</a></li>
-                <li><a href="assign-volunteers.html" class="py-2 d-block">Assign</a></li>
                 <li><a href="userProfileMain.html" class="py-2 d-block">Profile</a></li>
                 <li><a href="login.html" class="py-2 d-block">Log Out</a></li>
               </ul>
@@ -310,9 +334,8 @@
   <script src="js/bootstrap-datepicker.js"></script>
   <script src="js/jquery.timepicker.min.js"></script>
   <script src="js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
+  
     
   </body>
 </html>
