@@ -2,10 +2,12 @@
 <html lang="en">
   <head>
    
-    <title>Chariteam - Edit Volunteers </title>
+    <title>Welfare - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
+    <link rel="shortcut icon" type="image/png" href="images/620806.png"> 
+
     <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,600,700" rel="stylesheet">
 
@@ -26,31 +28,31 @@
     
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/style.css">
-    
-    <link rel="stylesheet" href="css/box.css"> 
+    <link rel="stylesheet" href="css/style.css"> 
+    <link rel="stylesheet" href="css/box.css">
+
+
   </head>
   <body>
     
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-      <div class="container">
-        <a class="navbar-brand" href="projects.html">Chariteam</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-          aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="oi oi-menu"></span> Menu
-        </button>
-  
-        <div class="collapse navbar-collapse" id="ftco-nav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a href="projects.html" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="meetingreport.html" class="nav-link">Reports</a></li>
-            <li class="nav-item active"><a href="listvolunteer.html" class="nav-link">Volunteers</a></li>
-            <li class="nav-item"><a href="userProfileMain.html" class="nav-link">Profile</a></li>
-            <li class="nav-item"><a href="login.html" class="nav-link">Log Out</a></li>
-          </ul>
-        </div>
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Welfare</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
+
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a href="projects.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="meetingreport.html" class="nav-link">Reports</a></li>
+          <li class="nav-item active"><a href="listvolunteer.html" class="nav-link">Volunteers</a></li>
+          <li class="nav-item"><a href="userProfileMain.html" class="nav-link">Profile</a></li>
+          <li class="nav-item"><a href="login.html" class="nav-link">Log Out</a></li>
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
     <!-- END nav -->
     
     <div class="hero-wrap" style="background-image: url('images/volunteerheader.jpeg');" data-stellar-background-ratio="0.5">
@@ -58,20 +60,16 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a
-                  href="listvolunteer.html">Volunteers</a></span><span> Edit</span></p>
-            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Edit Profile</h1>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> <span></span></p>
+             <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Volunteers</h1>
+           
           </div>
         </div>
       </div>
     </div>
-    
 
     <section class="ftco-section ftco-gallery">
-    	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+    	<!--  -->
 
 <div class="container">
 	<div class="row">
@@ -219,7 +217,7 @@
            <p>Are you sure you want to delete this volunteer?</p>
            <div class="offset-4 col-4">
            <button id="no" class="btn btn-block btn-secondary">No</button>
-           <a href="#" class="btn btn-block btn-secondary">Yes</a>
+           <button id="yes" class="btn btn-block btn-secondary">Yes</button>
            </div>
           </div>
          </div>
@@ -231,62 +229,73 @@
   
 </div>
     </section>
-
     
+<script>
+  document.getElementById("deletev").addEventListener("click",function(){
+    document.querySelector(".popupdelete").style.display="flex";
+  })
+  document.querySelector(".close").addEventListener("click",function(){
+    document.querySelector(".popupdelete").style.display="none";
+  })
+  document.getElementById("no").addEventListener("click",function(){
+    document.querySelector(".popupdelete").style.display="none";
+  })
+  
+</script>
 
     <footer class="ftco-footer ftco-section img">
-    	<div class="overlay"></div>
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-md-4">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">About Website</h2>
-              <p>This is a simple and convenient system that helps Project Managers to manage their charity projects all in just one website</p>
-            </div>
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-4">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">About Website</h2>
+            <p>This is a simple and convenient system that helps Project Managers to manage their charity projects all in just one website</p>
           </div>
-          <div class="col-md-5">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Upcoming Projects</h2>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="projects.html">Safety Training to Growing Children</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> July 12, 2019</a></div>
-                    <div><a href="#"><span class="icon-person" name="Organisation"></span> We Love Earth</a></div>
-                   
-                  </div>
-                </div>
-              </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-                <div class="text">
-                  <h3 class="heading"><a href="projects.html">Clean Water for The Rural Areas</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> November 25, 2019</a></div>
-                    <div><a href="#"><span class="icon-person" name="Organisation"></span> Hope Org</a></div>
-                    
-                  </div>
+        </div>
+        <div class="col-md-5">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Upcoming Projects</h2>
+            <div class="block-21 mb-4 d-flex">
+              <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+              <div class="text">
+                <h3 class="heading"><a href="projects.html">Safety Training to Growing Children</a></h3>
+                <div class="meta">
+                  <div><a href="#"><span class="icon-calendar"></span> July 12, 2019</a></div>
+                  <div><a href="#"><span class="icon-person" name="Organisation"></span> We Love Earth</a></div>
+                 
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-md-2">
-             <div class="ftco-footer-widget mb-4 ml-md-4">
-              <h2 class="ftco-heading-2">Site Links</h2>
-              <ul class="list-unstyled">
-                <li><a href="projects.html" class="py-2 d-block">Home</a></li>
-                <li><a href="meetingreport.html" class="py-2 d-block">Reports</a></li>
-                <li><a href="listvolunteer.html" class="py-2 d-block">Volunteers</a></li>
-                <li><a href="userProfileMain.html" class="py-2 d-block">Profile</a></li>
-                <li><a href="login.html" class="py-2 d-block">Log Out</a></li>
-              </ul>
+            <div class="block-21 mb-4 d-flex">
+              <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+              <div class="text">
+                <h3 class="heading"><a href="projects.html">Clean Water for Rural Areas</a></h3>
+                <div class="meta">
+                  <div><a href="#"><span class="icon-calendar"></span> November 25, 2019</a></div>
+                  <div><a href="#"><span class="icon-person" name="Organisation"></span> Hope Org</a></div>
+                  
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        
+        <div class="col-md-2">
+           <div class="ftco-footer-widget mb-4 ml-md-4">
+            <h2 class="ftco-heading-2">Site Links</h2>
+            <ul class="list-unstyled">
+              <li><a href="projects.html" class="py-2 d-block">Projects</a></li>
+              <li><a href="meetingreport.html" class="py-2 d-block">Reports</a></li>
+              <li><a href="listvolunteer.html" class="py-2 d-block">Volunteers</a></li>
+              <li><a href="userProfileMain.html" class="py-2 d-block">Profile</a></li>
+              <li><a href="login.html" class="py-2 d-block">Log Out</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </footer>
+      
+    </div>
+  </footer>
     
   
 
@@ -308,19 +317,9 @@
   <script src="js/bootstrap-datepicker.js"></script>
   <script src="js/jquery.timepicker.min.js"></script>
   <script src="js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-  <script>
-  document.getElementById("deletev").addEventListener("click",function(){
-    document.querySelector(".popupdelete").style.display="flex";
-  })
-  document.querySelector(".close").addEventListener("click",function(){
-    document.querySelector(".popupdelete").style.display="none";
-  })
-  document.getElementById("no").addEventListener("click",function(){
-    document.querySelector(".popupdelete").style.display="none";
-  })
-  
-</script>
   
   </body>
 </html>
