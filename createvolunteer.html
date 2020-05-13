@@ -52,7 +52,7 @@
     </nav>
     <!-- END nav -->
     
-    <div class="hero-wrap" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+    <div class="hero-wrap" style="background-image: url('images/volunteerheader.jpeg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
@@ -79,8 +79,13 @@
           <ul class="meta list list-unstyled">
                <br> <label class="label label-info">Volunteer</label>
                
-             <br><button type="submit" class="btn">Update Image</button>
-
+             <!-- <br><button type="submit" class="btn">Update Image</button> -->
+             <form action="upload.php" method="post" enctype="multipart/form-data">
+              <!-- Select image to upload: -->
+              <input style="margin-left: auto; margin-right: auto;text-align: center;"type="file" name="fileToUpload" id="fileToUpload">
+              <br><br><input type="submit" value="Upload Image" name="submit">
+                     <!-- <br><button type="submit" class="btn">Update Image</button> -->
+              </form>
            </ul>
           
               
@@ -116,6 +121,44 @@
                                   <input id="ic" name="ic" placeholder="ic" class="form-control here"  required="required" type="text">
                                 </div>
                               </div>
+                             
+                              <div class="form-group row">
+                                <label for="email" class="col-4 col-form-label">Email*</label> 
+                                <div class="col-8">
+                                  <input id="email" name="email" placeholder="Email" class="form-control here" required="required" type="text">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="add1" class="col-4 col-form-label">Address Line 1*</label> 
+                                <div class="col-8">
+                                  <input id="address1" name="address1" placeholder="" class="form-control here" required="required" type="text">
+                                </div>
+                              </div>  
+                              <div class="form-group row">
+                                <label for="add2" class="col-4 col-form-label">Address Line 2*</label> 
+                                <div class="col-8">
+                                  <input id="address2" name="address2" placeholder="" class="form-control here" required="required" type="text">
+                                </div>
+                              </div> 
+                              <div class="form-group row">
+                                <label for="select" class="col-4 col-form-label" required="required">State*</label> 
+                                <div class="col-8">
+                                  <select id="select" name="select" class="custom-select">
+                                    <option value="admin">Johor</option>
+                                    <option value="admin">Melaka</option>
+                                    <option value="admin">Negeri Sembilan</option>
+                                    <option value="admin">Terengganu</option>
+                                    <option value="admin">Kedah</option>
+                                    <option value="admin">Perlis</option>
+                                    <option value="admin">Kuala Lumpur</option>
+                                    <option value="admin">Selangor</option>
+                                    <option value="admin">Pahang</option>
+                                    <option value="admin">Perak</option>
+                                    <option value="admin">Pulau Pinang</option>
+
+                                  </select>
+                                </div>
+                              </div>
                               <div class="form-group row">
                                 <label for="select" class="col-4 col-form-label">Status</label> 
                                 <div class="col-8">
@@ -124,12 +167,6 @@
                                     <option value="admin">Maried</option>
                                     <option value="admin">Widow</option>
                                   </select>
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label for="email" class="col-4 col-form-label">Email*</label> 
-                                <div class="col-8">
-                                  <input id="email" name="email" placeholder="Email" class="form-control here" required="required" type="text">
                                 </div>
                               </div>
                               <div class="form-group row">
