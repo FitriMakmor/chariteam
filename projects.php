@@ -73,6 +73,9 @@
       <div class="col-md-6">
         <h3 class="">Current Charity Projects</h3>
       </div>
+      <?php
+      include_once("scripts/config.php");
+      ?>
       <div class="col-md-6">
         <div class="float-right">
           <h3 class="d-inline mr-2 text-info">Add a Project</h3>
@@ -88,7 +91,7 @@
         <div class="cause-entry">
           <a href="#modal1" class="img" style="background-image: url(images/cause-1.jpg);" data-toggle="modal"></a>
           <div class="text p-3 p-md-4">
-            <h3><a href="#">Clean Water for Rural Areas</a></h3>
+            <h3><a href="#modal1" data-toggle="modal">Clean Water for Rural Areas</a></h3>
             <p>Provide countries with clean water to help them overcome dehydration and maintain positive hygiene.</p>
             <span class="donation-time mb-3 d-block">Last donation 3d ago</span>
             <div class="progress custom-progress-success">
@@ -398,7 +401,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

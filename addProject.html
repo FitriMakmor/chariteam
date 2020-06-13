@@ -78,23 +78,23 @@
       <div class="row block-9">
         <h2>Add a Project</h2>
         <div class="col-md-12 px-4 bg-warning rounded shadow-lg">
-          <form class="mt-5" action="#">
+          <form method="POST" class="mt-5" action="scripts/add_project.php" enctype="multipart/form-data">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Project Name">
+              <input name="projectName" type="text" class="form-control" placeholder="Project Name">
             </div>
             <div class="form-group">
-            <input type="number" class="form-control" placeholder="Donation Target" min="0" step="500">
+            <input name="target" type="number" class="form-control" placeholder="Donation Target" min="0" step="500">
             </div>
             <div class="form-group">
-              <textarea name="" id="" cols="30" rows="2" class="form-control" placeholder="Project Summary"></textarea>
+              <textarea name="summary" id="" cols="30" rows="2" class="form-control" placeholder="Project Summary"></textarea>
             </div>
             <div class="form-group">
-              <textarea name="" id="" cols="30" rows="6" class="form-control"
+              <textarea name="description" id="" cols="30" rows="6" class="form-control"
                 placeholder="Detailed Project Description"></textarea>
             </div>
             <div class="form-group">
               <label for="projectImageForm">Insert Project Image</label>
-              <input type="file" class="form-control-file" id="projectImageForm">
+              <input name="image" type="file" class="form-control-file" id="projectImageForm">
             </div>
             <div class="form-group">
               <input type="submit" value="Add Project" class="btn btn-primary py-3 px-5">
