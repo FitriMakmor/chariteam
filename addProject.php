@@ -185,7 +185,7 @@
   <script src="js/jquery.timepicker.min.js"></script>
   <script src="js/scrollax.min.js"></script>
   <script src="js/main.js"></script>
-  <script src="js/custom.js"></script>
+  <script src="js/addProject.js"></script>
   <?php
   if ($_GET["np"] == "fail") {
     echo "<script>alert(\"Error in adding project!\")</script>";

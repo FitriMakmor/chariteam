@@ -1,4 +1,4 @@
-//Start projects.php
+// Change pages depending on page number
 function showPage(pageNum, size) {
     var page = [];
     for (i = 0; i < size; i++) {
@@ -14,18 +14,3 @@ function showPage(pageNum, size) {
         }
     }
 }
-//end projects.php
-
-//Start addProject.html
-var start = document.getElementById('startInput');
-var end = document.getElementById('endInput');
-
-start.addEventListener('change', function () {
-    if (start.value)
-        end.min = start.value;
-}, false);
-end.addEventListener('change', function () {
-    if (end.value)
-        start.max = end.value;
-}, false);
-//End addProject.html

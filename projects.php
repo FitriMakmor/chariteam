@@ -121,7 +121,7 @@
               <div class="cause-entry">
                 <a href="#modal<?php echo $projectNo ?>" class="img" style="background-image: url(<?php echo 'data:' . $imageType . ';base64,' . base64_encode($image) . ''; ?>);" data-toggle="modal"></a>
                 <div class="text p-3 p-md-4">
-                  <h3><a href="#modal<?php echo $projectNo ?>" data-toggle="modal"><?php echo $projectName; ?></a></h3>
+                  <h3><a href="#modal<?php echo $projectNo; ?>" data-toggle="modal"><?php echo $projectName; ?></a></h3>
                   <p><?php echo $summary; ?></p>
                   <div class="progress custom-progress-success">
                     <div class="progress-bar bg-primary" role="progressbar" style="width: 73%" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100"></div>
@@ -132,7 +132,7 @@
                       <span class="oi oi-pencil" aria-hidden="true">
                       </span>
                     </a>
-                    <a href="" type="button" class="btn-center btn btn-info" data-toggle="modal" data-target="#deleteModal" aria-label="Delete Project">
+                    <a href="#deleteModal<?php echo $projectNo;?>" type="button" class="btn-center btn btn-info" data-toggle="modal" data-target="#deleteModal<?php echo $projectNo;?>" type="button" aria-label="Delete Project">
                       <span class="oi oi-minus" aria-hidden="true">
                       </span>
                     </a>
@@ -142,11 +142,11 @@
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="<?php echo "modal" . $projectNo ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="<?php echo "modal" . $projectNo;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle"><?php echo $projectName ?></h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle"><?php echo $projectName; ?></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -158,6 +158,27 @@
                   <div class="modal-footer">
                     <a href="project-volunteers.html" class="btn btn-primary">Manage Volunteers</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Confirm Deletion Modal -->
+            <div class="modal fade" id="<?php echo "deleteModal" . $projectNo; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Are you sure you would like to delete the project?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <a href="scripts/delete_project.php?project_ID=<?php echo $projectID?>" class="btn btn-primary">Confirm</a>
                   </div>
                 </div>
               </div>
@@ -177,7 +198,7 @@
                   <div class="block-27">
                     <ul>
                       <?php
-                      for ($i = 1; $i <= intdiv($projectNo, 3) + 1; $i++) {
+                      for ($i = 1; $i <= intdiv($projectNo-1, 3) + 1; $i++) {
                       ?>
                         <li><button class="btn btn-warning" onclick="showPage('<?php echo 'page' . $i; ?>', <?php echo intdiv($projectNo, 3) + 1; ?>); return false;"><?php echo $i; ?></button></li>
                       <?php
@@ -190,26 +211,7 @@
     </div>
   </section>
 
-  <!-- Confirm Deletion Modal -->
-  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure you would like to delete the project?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary">Confirm</button>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
 
 
@@ -244,7 +246,6 @@
                 <div class="meta">
                   <div><a href="#"><span class="icon-calendar"></span> November 25, 2019</a></div>
                   <div><a href="#"><span class="icon-person" name="Organisation"></span> Hope Org</a></div>
-
                 </div>
               </div>
             </div>
@@ -290,12 +291,18 @@
   <script src="js/jquery.timepicker.min.js"></script>
   <script src="js/scrollax.min.js"></script>
   <script src="js/main.js"></script>
-  <script src="js/custom.js"></script>
+  <script src="js/projects.js"></script>
 
   <?php
-  if ($_GET["np"] == "success") {
+  if ($_GET["np"] == "success_add") {
     echo "<script>alert(\"Project added successfully!\")</script>";
-  }
+  } elseif ($_GET["np"] == "success_edit") {
+    echo "<script>alert(\"Project edited successfully!\")</script>";
+  } elseif ($_GET["np"] == "success_delete") {
+    echo "<script>alert(\"Project deleted successfully!\")</script>";
+  }  elseif ($_GET["np"] == "fail_delete") {
+    echo "<script>alert(\"Error in deleting project!\")</script>";
+  } 
   ?>
 </body>
 
