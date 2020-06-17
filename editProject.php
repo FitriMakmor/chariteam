@@ -93,7 +93,7 @@
           <form method="POST" class="mt-5 text-dark font-weight-bold" action="scripts/add_project.php?project_ID=<?php echo $projectID?>" enctype="multipart/form-data">
             <div class="form-group">
               <label for="projectNameInput">Project Name</label>
-              <input name="projectName" id="projectNameInput" type="text" class="form-control" value="<?php echo $projectName?>" required>
+              <input name="projectName" id="projectNameInput" type="text" maxlength = "35" class="form-control" value="<?php echo $projectName?>" required>
             </div>
             <div class="form-group">
               <label for="startInput">Project Starting Date</label>
@@ -105,11 +105,11 @@
             </div>
             <div class="form-group">
               <label for="summaryInput">Summary</label>
-              <textarea name="summary" id="summaryInput" cols="30" rows="2" class="form-control" required><?php echo $summary?></textarea>
+              <textarea name="summary" id="summaryInput" cols="30" rows="2" maxlength="100" class="form-control" required><?php echo $summary?></textarea>
             </div>
             <div class="form-group">
               <label for="descriptionInput">Description</label>
-              <textarea name="description" id="descriptionInput" cols="30" rows="6" class="form-control" required><?php echo $description?></textarea>
+              <textarea name="description" id="descriptionInput" cols="30" rows="6" maxlength="1000" class="form-control" required><?php echo $description?></textarea>
             </div>
             <div class="form-group">
               <!-- For security reasons the default file is not placed as the pre-filled value-->

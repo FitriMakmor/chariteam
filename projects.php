@@ -121,18 +121,43 @@
               <div class="cause-entry">
                 <a href="#modal<?php echo $projectNo ?>" class="img" style="background-image: url(<?php echo 'data:' . $imageType . ';base64,' . base64_encode($image) . ''; ?>);" data-toggle="modal"></a>
                 <div class="text p-3 p-md-4">
-                  <h3><a href="#modal<?php echo $projectNo; ?>" data-toggle="modal"><?php echo $projectName; ?></a></h3>
-                  <p><?php echo $summary; ?></p>
-                  <div class="progress custom-progress-success">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 73%" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100"></div>
+                  <h3 class="project-name-text"><a href="#modal<?php echo $projectNo; ?>" data-toggle="modal"><?php echo $projectName; ?></a></h3>
+                  <div class="summary-div">
+                  <p class="summary-text"><?php echo $summary; ?></p>
                   </div>
-                  <span class="fund-raised d-block">$22,306 raised of $30,000</span>
+
+                  <?php
+                  $earlier = new DateTime($startDate);
+                  $later = new DateTime($endDate);
+                  $totaldays = $later->diff($earlier)->format("%a");
+                  $current = new DateTime("now");
+                  $currdays = $current->diff($earlier)->format("%a");
+                  $state = "";
+                  if($current<$earlier){
+                    $currdays = -$currdays;
+                  }
+                  if ($currdays < $totaldays && $currdays >= 0) {
+                    $progress = intdiv($currdays * 100, $totaldays);
+                    $state = "In Progress";
+                  } else if ($currdays > $totaldays) {
+                    $progress = 100;
+                    $state = "Completed!";
+                  } else {
+                    $progress = 0;
+                    $state = "Coming Soon";
+                  }
+                  ?>
+                  <div class="progress custom-progress-success">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: <?php echo $progress . "%"; ?>" aria-valuenow="<?php echo $progress; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="text-center">Status: <?php echo $state; ?></p>
+                  <span class="fund-raised d-block text-center"><?php echo $startDate; ?> until <?php echo $endDate; ?></span>
                   <div class="text-center">
                     <a href="editProject.php?project_ID=<?php echo $projectID; ?>" type="button" class="float-center btn btn-info" aria-label="Edit Project">
                       <span class="oi oi-pencil" aria-hidden="true">
                       </span>
                     </a>
-                    <a href="#deleteModal<?php echo $projectNo;?>" type="button" class="btn-center btn btn-info" data-toggle="modal" data-target="#deleteModal<?php echo $projectNo;?>" type="button" aria-label="Delete Project">
+                    <a href="#deleteModal<?php echo $projectNo; ?>" type="button" class="btn-center btn btn-info" data-toggle="modal" data-target="#deleteModal<?php echo $projectNo; ?>" type="button" aria-label="Delete Project">
                       <span class="oi oi-minus" aria-hidden="true">
                       </span>
                     </a>
@@ -142,7 +167,7 @@
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="<?php echo "modal" . $projectNo;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="<?php echo "modal" . $projectNo; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -178,7 +203,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <a href="scripts/delete_project.php?project_ID=<?php echo $projectID?>" class="btn btn-primary">Confirm</a>
+                    <a href="scripts/delete_project.php?project_ID=<?php echo $projectID ?>" class="btn btn-primary">Confirm</a>
                   </div>
                 </div>
               </div>
@@ -198,7 +223,7 @@
                   <div class="block-27">
                     <ul>
                       <?php
-                      for ($i = 1; $i <= intdiv($projectNo-1, 3) + 1; $i++) {
+                      for ($i = 1; $i <= intdiv($projectNo - 1, 3) + 1; $i++) {
                       ?>
                         <li><button class="btn btn-warning" onclick="showPage('<?php echo 'page' . $i; ?>', <?php echo intdiv($projectNo, 3) + 1; ?>); return false;"><?php echo $i; ?></button></li>
                       <?php
@@ -294,15 +319,18 @@
   <script src="js/projects.js"></script>
 
   <?php
-  if ($_GET["np"] == "success_add") {
-    echo "<script>alert(\"Project added successfully!\")</script>";
-  } elseif ($_GET["np"] == "success_edit") {
-    echo "<script>alert(\"Project edited successfully!\")</script>";
-  } elseif ($_GET["np"] == "success_delete") {
-    echo "<script>alert(\"Project deleted successfully!\")</script>";
-  }  elseif ($_GET["np"] == "fail_delete") {
-    echo "<script>alert(\"Error in deleting project!\")</script>";
-  } 
+  if (isset($_GET["np"])) {
+    if ($_GET["np"] == "success_add") {
+      echo "<script>alert(\"Project added successfully!\")</script>";
+    } elseif ($_GET["np"] == "success_edit") {
+      echo "<script>alert(\"Project edited successfully!\")</script>";
+    } elseif ($_GET["np"] == "success_delete") {
+      echo "<script>alert(\"Project deleted successfully!\")</script>";
+    } elseif ($_GET["np"] == "fail_delete") {
+      echo "<script>alert(\"Error in deleting project!\")</script>";
+    }
+  }
+
   ?>
 </body>
 

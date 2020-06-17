@@ -76,7 +76,7 @@
           <form method="POST" class="mt-5 text-dark font-weight-bold" action="scripts/add_project.php" enctype="multipart/form-data">
             <div class="form-group">
               <label for="projectNameInput">Project Name</label>
-              <input name="projectName" id="projectNameInput" type="text" class="form-control" placeholder="Project Name" required>
+              <input name="projectName" id="projectNameInput" type="text" maxlength ="35" class="form-control" placeholder="Project Name" required>
             </div>
             <div class="form-group">
               <label for="startInput">Project Starting Date</label>
@@ -88,11 +88,11 @@
             </div>
             <div class="form-group">
               <label for="summaryInput">Summary</label>
-              <textarea name="summary" id="summaryInput" cols="30" rows="2" class="form-control" placeholder="Project Summary" required></textarea>
+              <textarea name="summary" id="summaryInput" cols="30" rows="2" maxlength="100" class="form-control" placeholder="Project Summary" required></textarea>
             </div>
             <div class="form-group">
               <label for="descriptionInput">Description</label>
-              <textarea name="description" id="descriptionInput" cols="30" rows="6" class="form-control" placeholder="Detailed Project Description" required></textarea>
+              <textarea name="description" id="descriptionInput" cols="30" rows="6" maxlength="1000" class="form-control" placeholder="Detailed Project Description" required></textarea>
             </div>
             <div class="form-group">
               <label for="projectImageForm">Insert Project Image</label>
