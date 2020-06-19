@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,14 +40,14 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-      <a class="navbar-brand" href="projects.html">Chariteam</a>
+      <a class="navbar-brand" href="projects.php">Chariteam</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
       </button>
 
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active"><a href="projects.html" class="nav-link">Projects</a></li>
+          <li class="nav-item active"><a href="projects.php" class="nav-link">Projects</a></li>
           <li class="nav-item"><a href="meetingreport.html" class="nav-link">Reports</a></li>
           <li class="nav-item"><a href="listvolunteer.html" class="nav-link">Volunteers</a></li>
           <li class="nav-item"><a href="userProfileMain.html" class="nav-link">Profile</a></li>
@@ -59,7 +63,7 @@
     <div class="container">
       <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
         <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-          <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="projects.html">Projects</a></span><span>Add Project</span></p>
+          <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="projects.php">Projects</a></span><span>Add Project</span></p>
           <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Add a new Project</h1>
         </div>
       </div>
@@ -124,7 +128,7 @@
             <div class="block-21 mb-4 d-flex">
               <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
               <div class="text">
-                <h3 class="heading"><a href="projects.html">Safety Training to Growing Children</a></h3>
+                <h3 class="heading"><a href="projects.php">Safety Training to Growing Children</a></h3>
                 <div class="meta">
                   <div><a href="#"><span class="icon-calendar"></span> July 12, 2019</a></div>
                   <div><a href="#"><span class="icon-person" name="Organisation"></span> We Love Earth</a></div>
@@ -135,7 +139,7 @@
             <div class="block-21 mb-4 d-flex">
               <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
               <div class="text">
-                <h3 class="heading"><a href="projects.html">Clean Water for Rural Areas</a></h3>
+                <h3 class="heading"><a href="projects.php">Clean Water for Rural Areas</a></h3>
                 <div class="meta">
                   <div><a href="#"><span class="icon-calendar"></span> November 25, 2019</a></div>
                   <div><a href="#"><span class="icon-person" name="Organisation"></span> Hope Org</a></div>
@@ -149,7 +153,7 @@
           <div class="ftco-footer-widget mb-4 ml-md-4">
             <h2 class="ftco-heading-2">Site Links</h2>
             <ul class="list-unstyled">
-              <li><a href="projects.html" class="py-2 d-block">Projects</a></li>
+              <li><a href="projects.php" class="py-2 d-block">Projects</a></li>
               <li><a href="meetingreport.html" class="py-2 d-block">Reports</a></li>
               <li><a href="listvolunteer.html" class="py-2 d-block">Volunteers</a></li>
               <li><a href="userProfileMain.html" class="py-2 d-block">Profile</a></li>
@@ -188,7 +192,7 @@
   <script src="js/addProject.js"></script>
   <?php
   if ($_GET["np"] == "fail") {
-    echo "<script>alert(\"Error in adding project!\")</script>";
+    echo "<script>alert(\"Adding project failed: missing credentials!\")</script>";
   }
   ?>
 </body>

@@ -1,3 +1,7 @@
+<?php
+session_start();
+$_SESSION["userID"] = 52; // To be removed later
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,14 +40,14 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-      <a class="navbar-brand" href="projects.html">Chariteam</a>
+      <a class="navbar-brand" href="projects.php">Chariteam</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
       </button>
 
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active"><a href="projects.html" class="nav-link">Projects</a></li>
+          <li class="nav-item active"><a href="projects.php" class="nav-link">Projects</a></li>
           <li class="nav-item"><a href="meetingreport.html" class="nav-link">Reports</a></li>
           <li class="nav-item"><a href="listvolunteer.html" class="nav-link">Volunteers</a></li>
           <li class="nav-item"><a href="userProfileMain.html" class="nav-link">Profile</a></li>
@@ -66,14 +70,42 @@
     </div>
   </div>
 
-  <!--  <div class="container">
-</div> -->
 
   <section class="ftco-section">
     <div class="container">
+      <?php
+      if (isset($_GET["np"])) {
+        if ($_GET["np"] == "success_add") {
+      ?>
+          <div class='alert alert-success' role='alert'>
+            <h2 class="">Project added successfully!</h2>
+        </div>
+        <?php
+        } elseif ($_GET["np"] == "success_edit") {
+        ?>
+          <div class='alert alert-success' role='alert'>
+            <h2 class="">Project modified successfully!</h2>
+        </div>
+        <?php
+        } elseif ($_GET["np"] == "success_delete") {
+        ?>
+          <div class='alert alert-success' role='alert'>
+            <h2 class="">Project deleted successfully!</h2>
+        </div>
+        <?php
+        } elseif ($_GET["np"] == "fail_delete") {
+        ?>
+          <div class='alert alert-danger' role='alert'>
+            <h2 class="">Error in deleting project!</h2>
+        </div>
+      <?php
+        }
+      }
+
+      ?>
       <div class="row py-4">
         <div class="col-md-6">
-          <h3 class="">Current Charity Projects</h3>
+          <h3 class="">Your Projects</h3>
         </div>
         <div class="col-md-6">
           <div class="float-right">
@@ -93,146 +125,156 @@
         $result = $pdo->query($sql);
         $projectNo = 0;
         while ($res = $result->fetch()) {
-          $projectNo++;
-          $projectID = $res["project_ID"];
-          $projectName = $res["p_name"];
-          $startDate = $res["p_start_date"];
-          $endDate = $res["p_end_date"];
-          $summary = $res["p_summary"];
-          $description = $res["p_description"];
-          $image = $res["p_image"];
-          $imageType = $res["p_image_type"];
-          if ($projectNo % 3 == 1) {
-            if ($projectNo == 1) {
+          if ($res["userID"] == $_SESSION["userID"]) {
+            $projectNo++;
+            $projectID = $res["project_ID"];
+            $projectName = $res["p_name"];
+            $startDate = $res["p_start_date"];
+            $endDate = $res["p_end_date"];
+            $summary = $res["p_summary"];
+            $description = $res["p_description"];
+            $image = $res["p_image"];
+            $imageType = $res["p_image_type"];
+            if ($projectNo % 3 == 1) {
+              if ($projectNo == 1) {
       ?>
-              <div class="row d-flex" id="page1">
+                <div class="row d-flex" id="page1">
+                <?php
+              } else {
+                ?>
+                </div>
+                <div class="row d-none" id=<?php $pNum = intdiv($projectNo, 3) + 1;
+                                            echo "page" . $pNum; ?>>
               <?php
-            } else {
-              ?>
-              </div>
-              <div class="row d-none" id=<?php $pNum = intdiv($projectNo, 3) + 1;
-                                          echo "page" . $pNum; ?>>
-            <?php
+              }
             }
-          }
 
-            ?>
-            <div class="col-md-4 ftco-animate">
-              <div class="cause-entry">
-                <a href="#modal<?php echo $projectNo ?>" class="img" style="background-image: url(<?php echo 'data:' . $imageType . ';base64,' . base64_encode($image) . ''; ?>);" data-toggle="modal"></a>
-                <div class="text p-3 p-md-4">
-                  <h3 class="project-name-text"><a href="#modal<?php echo $projectNo; ?>" data-toggle="modal"><?php echo $projectName; ?></a></h3>
-                  <div class="summary-div">
-                  <p class="summary-text"><?php echo $summary; ?></p>
-                  </div>
+              ?>
+              <div class="col-md-4 ftco-animate">
+                <div class="cause-entry">
+                  <a href="#modal<?php echo $projectNo ?>" class="img" style="background-image: url(<?php echo 'data:' . $imageType . ';base64,' . base64_encode($image) . ''; ?>);" data-toggle="modal"></a>
+                  <div class="text p-3 p-md-4">
+                    <h3 class="project-name-text"><a href="#modal<?php echo $projectNo; ?>" data-toggle="modal"><?php echo $projectName; ?></a></h3>
+                    <div class="summary-div">
+                      <p class="summary-text"><?php echo $summary; ?></p>
+                    </div>
 
-                  <?php
-                  $earlier = new DateTime($startDate);
-                  $later = new DateTime($endDate);
-                  $totaldays = $later->diff($earlier)->format("%a");
-                  $current = new DateTime("now");
-                  $currdays = $current->diff($earlier)->format("%a");
-                  $state = "";
-                  if($current<$earlier){
-                    $currdays = -$currdays;
-                  }
-                  if ($currdays < $totaldays && $currdays >= 0) {
-                    $progress = intdiv($currdays * 100, $totaldays);
-                    $state = "In Progress";
-                  } else if ($currdays > $totaldays) {
-                    $progress = 100;
-                    $state = "Completed!";
-                  } else {
-                    $progress = 0;
-                    $state = "Coming Soon";
-                  }
-                  ?>
-                  <div class="progress custom-progress-success">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: <?php echo $progress . "%"; ?>" aria-valuenow="<?php echo $progress; ?>" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="text-center">Status: <?php echo $state; ?></p>
-                  <span class="fund-raised d-block text-center"><?php echo $startDate; ?> until <?php echo $endDate; ?></span>
-                  <div class="text-center">
-                    <a href="editProject.php?project_ID=<?php echo $projectID; ?>" type="button" class="float-center btn btn-info" aria-label="Edit Project">
-                      <span class="oi oi-pencil" aria-hidden="true">
-                      </span>
-                    </a>
-                    <a href="#deleteModal<?php echo $projectNo; ?>" type="button" class="btn-center btn btn-info" data-toggle="modal" data-target="#deleteModal<?php echo $projectNo; ?>" type="button" aria-label="Delete Project">
-                      <span class="oi oi-minus" aria-hidden="true">
-                      </span>
-                    </a>
+                    <?php
+                    $earlier = new DateTime($startDate);
+                    $later = new DateTime($endDate);
+                    $totaldays = $later->diff($earlier)->format("%a");
+                    $current = new DateTime("now");
+                    $currdays = $current->diff($earlier)->format("%a");
+                    $state = "";
+                    if ($current < $earlier) {
+                      $currdays = -$currdays;
+                    }
+                    if ($currdays < $totaldays && $currdays >= 0) {
+                      $progress = intdiv($currdays * 100, $totaldays);
+                      $state = "In Progress";
+                    } else if ($currdays > $totaldays) {
+                      $progress = 100;
+                      $state = "Completed!";
+                    } else {
+                      $progress = 0;
+                      $state = "Coming Soon";
+                    }
+                    ?>
+                    <div class="progress custom-progress-success">
+                      <?php if ($progress == 100) {
+                      } ?>
+                      <div class="progress-bar bg-<?php if ($progress == 100) {
+                                                    echo "success";
+                                                  } else echo "primary"; ?>" role="progressbar" style="width: <?php echo $progress . "%"; ?>" aria-valuenow="<?php echo $progress; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p class="text-center">Status: <?php echo $state; ?></p>
+                    <span class="fund-raised d-block text-center"><?php echo $startDate; ?> until <?php echo $endDate; ?></span>
+                    <div class="text-center">
+                      <a href="listOfReports1.php?projectID=<?php echo $projectID; ?>" type="button" class="float-center btn btn-success" aria-label="View Reports" title="View Reports">
+                        <span class="oi oi-project" aria-hidden="true">
+                        </span>
+                      </a>
+                      <a href="editProject.php?project_ID=<?php echo $projectID; ?>" type="button" class="float-center btn btn-info" aria-label="Edit Project" title="Edit Project">
+                        <span class="oi oi-pencil" aria-hidden="true">
+                        </span>
+                      </a>
+                      <a href="#deleteModal<?php echo $projectNo; ?>" type="button" class="btn-center btn btn-danger" data-toggle="modal" data-target="#deleteModal<?php echo $projectNo; ?>" type="button" aria-label="Delete Project">
+                        <span class="oi oi-minus" aria-hidden="true" title="Delete Project">
+                        </span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <!-- Modal -->
-            <div class="modal fade" id="<?php echo "modal" . $projectNo; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle"><?php echo $projectName; ?></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <img class="img-fluid" src="<?php echo 'data:' . $imageType . ';base64,' . base64_encode($image) . ''; ?>" alt="Cause One">
-                  <div class="modal-body">
-                    <?php echo $description ?>
-                  </div>
-                  <div class="modal-footer">
-                    <a href="project-volunteers.html" class="btn btn-primary">Manage Volunteers</a>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <!-- Modal -->
+              <div class="modal fade" id="<?php echo "modal" . $projectNo; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle"><?php echo $projectName; ?></h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <img class="img-fluid" src="<?php echo 'data:' . $imageType . ';base64,' . base64_encode($image) . ''; ?>" alt="Cause One">
+                    <div class="modal-body">
+                      <?php echo $description ?>
+                    </div>
+                    <div class="modal-footer">
+                      <a href="project-volunteers.html" class="btn btn-primary">Manage Volunteers</a>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <!-- Confirm Deletion Modal -->
-            <div class="modal fade" id="<?php echo "deleteModal" . $projectNo; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <p>Are you sure you would like to delete the project?</p>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <a href="scripts/delete_project.php?project_ID=<?php echo $projectID ?>" class="btn btn-primary">Confirm</a>
+              <!-- Confirm Deletion Modal -->
+              <div class="modal fade" id="<?php echo "deleteModal" . $projectNo; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Are you sure you would like to delete the project?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      <a href="scripts/delete_project.php?project_ID=<?php echo $projectID ?>" class="btn btn-primary">Confirm</a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
         <?php
+          }
         }
       } catch (Exception $e) {
         echo "Error: " . $e;
       }
       $pdo = null;
         ?>
-              </div>
+                </div>
 
-              <div class="row mt-5">
-                <div class="col text-center">
-                  <div class="block-27">
-                    <ul>
-                      <?php
-                      for ($i = 1; $i <= intdiv($projectNo - 1, 3) + 1; $i++) {
-                      ?>
-                        <li><button class="btn btn-warning" onclick="showPage('<?php echo 'page' . $i; ?>', <?php echo intdiv($projectNo, 3) + 1; ?>); return false;"><?php echo $i; ?></button></li>
-                      <?php
-                      }
-                      ?>
-                    </ul>
+                <div class="row mt-5">
+                  <div class="col text-center">
+                    <div class="block-27">
+                      <ul>
+                        <?php
+                        for ($i = 1; $i <= intdiv($projectNo - 1, 3) + 1; $i++) {
+                        ?>
+                          <li><button class="btn btn-warning" onclick="showPage('<?php echo 'page' . $i; ?>', <?php echo intdiv($projectNo, 3) + 1; ?>); return false;"><?php echo $i; ?></button></li>
+                        <?php
+                        }
+                        ?>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </div>
     </div>
   </section>
 
@@ -256,7 +298,7 @@
             <div class="block-21 mb-4 d-flex">
               <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
               <div class="text">
-                <h3 class="heading"><a href="projects.html">Safety Training to Growing Children</a></h3>
+                <h3 class="heading"><a href="projects.php">Safety Training to Growing Children</a></h3>
                 <div class="meta">
                   <div><a href="#"><span class="icon-calendar"></span> July 12, 2019</a></div>
                   <div><a href="#"><span class="icon-person" name="Organisation"></span> We Love Earth</a></div>
@@ -267,7 +309,7 @@
             <div class="block-21 mb-4 d-flex">
               <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
               <div class="text">
-                <h3 class="heading"><a href="projects.html">Clean Water for Rural Areas</a></h3>
+                <h3 class="heading"><a href="projects.php">Clean Water for Rural Areas</a></h3>
                 <div class="meta">
                   <div><a href="#"><span class="icon-calendar"></span> November 25, 2019</a></div>
                   <div><a href="#"><span class="icon-person" name="Organisation"></span> Hope Org</a></div>
@@ -280,7 +322,7 @@
           <div class="ftco-footer-widget mb-4 ml-md-4">
             <h2 class="ftco-heading-2">Site Links</h2>
             <ul class="list-unstyled">
-              <li><a href="projects.html" class="py-2 d-block">Projects</a></li>
+              <li><a href="projects.php" class="py-2 d-block">Projects</a></li>
               <li><a href="meetingreport.html" class="py-2 d-block">Reports</a></li>
               <li><a href="listvolunteer.html" class="py-2 d-block">Volunteers</a></li>
               <li><a href="userProfileMain.html" class="py-2 d-block">Profile</a></li>
@@ -317,21 +359,6 @@
   <script src="js/scrollax.min.js"></script>
   <script src="js/main.js"></script>
   <script src="js/projects.js"></script>
-
-  <?php
-  if (isset($_GET["np"])) {
-    if ($_GET["np"] == "success_add") {
-      echo "<script>alert(\"Project added successfully!\")</script>";
-    } elseif ($_GET["np"] == "success_edit") {
-      echo "<script>alert(\"Project edited successfully!\")</script>";
-    } elseif ($_GET["np"] == "success_delete") {
-      echo "<script>alert(\"Project deleted successfully!\")</script>";
-    } elseif ($_GET["np"] == "fail_delete") {
-      echo "<script>alert(\"Error in deleting project!\")</script>";
-    }
-  }
-
-  ?>
 </body>
 
 </html>
