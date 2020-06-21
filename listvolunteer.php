@@ -1,3 +1,6 @@
+<?php
+  include_once 'config.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
   <style>
@@ -48,7 +51,7 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"><a href="projects.html" class="nav-link">Projects</a></li>
           <li class="nav-item"><a href="meetingreport.html" class="nav-link">Reports</a></li>
-          <li class="nav-item active"><a href="listvolunteer.html" class="nav-link">Volunteers</a></li>
+          <li class="nav-item active"><a href="listvolunteer.php?page=1" class="nav-link">Volunteers</a></li>
           <li class="nav-item"><a href="userProfileMain.html" class="nav-link">Profile</a></li>
           <li class="nav-item"><a href="login.html" class="nav-link">Log Out</a></li> 
         </ul>
@@ -69,148 +72,144 @@
       </div>
     </div>
 
+   
     
     <section class="ftco-section bg-light">
-      <div class="container" style="border: #000000;">
-        <div class="row">
+      <div class="container" style="border: #000000;"><div class="row">
+
+      <?php
+      $stmt = $pdo->prepare('SELECT * FROM volunteer ORDER BY volunteer_ID');
+      $stmt->execute();
+      $page=$_GET["page"];
+      if($stmt->rowCount()>$page*9-9){
+        $count=1;
+          while(($row=$stmt->fetch(PDO::FETCH_ASSOC))&& ($count<=(9*$page))){
+            // $count=$count+1;
+            // extract($row);
+            if($page==1){
+              $count=$count+1;
+              extract($row);
+            
+            ?>
+            
+             <!-- style=" -->
         	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff" style="background: rgb(216, 216, 216);">
+        		<div class="staff" style="width:500px;background: rgb(216, 216, 216);">
         			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/person_1.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="displayprofile.html">Ivan Jacobson</a></h3>
-        					<span1 class="position">445214-24-5784</span1>
+        				<div class="img" style="background-image: url(<?php echo 'data:' . $v_image_type . ';base64,' . base64_encode($v_image) . ''; ?>);"></div>
+                
+              	<div class="info ml-4">
+        					<h3><a href ="displayprofile.php?v_ID=<?php echo $row["volunteer_ID"];?>"><?php echo $row["v_firstName"]." ";echo $row["v_lastName"]?></a></h3>
+        					<span1 class="position"><?php echo $row['v_IC']?></span1>
         					<div class="text">
-		        				<p>Join 3 months ago</p>
+		        				<p>Join 
+                    <?php
+                    $days = '365';
+                    $start_date = strtotime($row['v_DOR']);
+                   $end_date = strtotime("2020-06-20");
+                   $datediff = $end_date-$start_date;
+                   echo round($datediff / (60 * 60 * 24));
+                     ?>
+                    days ago</p>
 		        			</div>
         				</div>
         			</div>
         		</div>
         	</div>
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
+          <?php
+          }else if($page==2){
+            extract($row);
+            if($count>9 ){
+              ?>
+              <div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
+        		<div class="staff" style="width:500px;background: rgb(216, 216, 216);">
         			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/person_2.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="displayprofile.html">Barney Stinson</a></h3>
-        					<span1 class="position">996874-24-5147</span1>
+        				<div class="img" style="background-image: url(<?php echo 'data:' . $v_image_type . ';base64,' . base64_encode($v_image) . ''; ?>);"></div>
+                
+              	<div class="info ml-4">
+        					<h3><a href ="displayprofile.php?v_ID=<?php echo $row["volunteer_ID"];?>"><?php echo $row["v_firstName"]." ";echo $row["v_lastName"]?></a></h3>
+        					<span1 class="position"><?php echo $row['v_IC']?></span1>
         					<div class="text">
-		        				<p>Join 1 year ago </p>
+		        				<p>Join 
+                    <?php
+                    $days = '365';
+                    $start_date = strtotime($row['v_DOR']);
+                   $end_date = strtotime("2020-06-20");
+                   $datediff = $end_date-$start_date;
+                   echo round($datediff / (60 * 60 * 24));
+                     ?>
+                    days ago</p>
 		        			</div>
         				</div>
         			</div>
         		</div>
-        	</div>
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff" style="background: rgb(216, 216, 216);">
-        			<div class="d-flex mb-4" >
-        				<div class="img" style="background-image: url(images/person_3.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="displayprofile.html">Alex Woolf</a></h3>
-        					<span1 class="position">887452-01-4752</span1>
-        					<div class="text">
-		        				<p>Join 1 year ago </p>
-		        			</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
+          	</div>
+              <?php
+              
+            }$count=$count+1;
+          }else if($page==3){
+            
+            extract($row);
+            if($count>18 && extract($row)==true){
+              ?>
+            <div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
+        		<div class="staff" style="width:500px;background: rgb(216, 216, 216);">
         			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/person_4.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="displayprofile.html">Kobe Irwin</a></h3>
-        					<span1 class="position">887452-01-4752</span1>
+        				<div class="img" style="background-image: url(<?php echo 'data:' . $v_image_type . ';base64,' . base64_encode($v_image) . ''; ?>);"></div>
+                
+              	<div class="info ml-4">
+        					<h3><a href ="displayprofile.php?v_ID=<?php echo $row["volunteer_ID"];?>"><?php echo $row["v_firstName"]." ";echo $row["v_lastName"]?></a></h3>
+        					<span1 class="position"><?php echo $row['v_IC']?></span1>
         					<div class="text">
-		        				<p>Join 2 years ago </p>
+		        				<p>Join 
+                    <?php
+                    $days = '365';
+                    $start_date = strtotime($row['v_DOR']);
+                   $end_date = strtotime("2020-06-20");
+                   $datediff = $end_date-$start_date;
+                   echo round($datediff / (60 * 60 * 24));
+                     ?>
+                    days ago</p>
 		        			</div>
         				</div>
         			</div>
         		</div>
-        	</div>
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff" style="background: rgb(216, 216, 216);">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/person_5.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="displayprofile.html">Lily Petuna</a></h3>
-        					<span1 class="position">542301-16-2458</span1>
-        					<div class="text">
-		        				<p>Join 4 years ago </p>
-		        			</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/person_6.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="displayprofile.html">Paul Kelvin</a></h3>
-        					<span1 class="position">336575-01-4752</span1>
-        					<div class="text">
-		        				<p>Join 2 days ago </p>
-		        			</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff" style="background: rgb(216, 216, 216);">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/person_7.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="displayprofile.html">Izzy Lizzy</a></h3>
-        					<span1 class="position">446325-51-2545</span1>
-        					<div class="text">
-		        				<p>Join 10 months ago </p>
-		        			</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/person_8.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="displayprofile.html">Niki Styles</a></h3>
-        					<span1 class="position">443579-01-5842</span1>
-        					<div class="text">
-		        				<p>Join 2 years ago </p>
-		        			</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff" style="background: rgb(216, 216, 216);">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/person_9.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="displayprofile.html">Calum Hood</a></h3>
-        					<span1 class="position">554721-01-5448</span1>
-        					<div class="text">
-		        				<p>Join 6 years ago </p>
-		        			</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        </div>
+        	   </div>
+              <?php  $count=$count+1;
+            }
+              
+          }
+        }
+      }else{
+        ?>
+	    <div class="col text-center">
+	   	<div class="alert alert-warning">
+			<span class="glyphicon glyphicon-info-sign"></span>&nbsp; No Data Found.
+		</div>
+	</div>
+	<?php
+}
+?>
+
+    </div>
         <div class="row mt-5">
           <div class="col text-center">
+            
             <div class="block-27">
               <ul>
-                <li><a href="#">&lt;</a></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&gt;</a></li>
+                
+                <li><a href="listvolunteer.php?page=<?php if($page==1)echo "1";else echo ($page-1)?>">&lt;</a></li>
+                <?php
+                for($i=1;$i<5;$i++){
+                  if($page==$i){?>
+                    <li class="active"><span><?php echo $page?></span></li> 
+
+                 <?php }else{ ?>
+                    <li><a href="listvolunteer.php?page=<?php echo $i?>"><?php echo $i?></a></li>
+                 <?php }
+                }
+                ?>
+                <li><a href="listvolunteer.php?page=<?php if($page==4)echo "4";else echo ($page+1)?>">&gt;</a></li>
               </ul>
             </div>
           </div>
@@ -225,7 +224,7 @@
     		<div class="row d-md-flex">
            
             <div class="box">
-              <a href="createvolunteer.html"class="btn btn-primary1" type="button">Add new Volunteers</a>
+              <a href="createvolunteer.php"class="btn btn-primary1" type="button">Add new Volunteers</a>
           </div>
     		  			
     		</div>
@@ -276,7 +275,7 @@
             <ul class="list-unstyled">
               <li><a href="projects.html" class="py-2 d-block">Projects</a></li>
               <li><a href="meetingreport.html" class="py-2 d-block">Reports</a></li>
-              <li><a href="listvolunteer.html" class="py-2 d-block">Volunteers</a></li>
+              <li><a href="listvolunteer.php?page=1" class="py-2 d-block">Volunteers</a></li>
               <li><a href="userProfileMain.html" class="py-2 d-block">Profile</a></li>
               <li><a href="login.html" class="py-2 d-block">Log Out</a></li>
             </ul>
