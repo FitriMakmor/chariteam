@@ -1,6 +1,6 @@
 <?php
 // Include config file
-include("config.php");
+include("scripts/config.php");
  
 // Define variables and initialize with empty values
 $test = $username = $fullname = $email = $password = $confirm_password = "";
