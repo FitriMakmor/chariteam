@@ -273,6 +273,7 @@ header('Location:displayprofile.php?v_ID='.$last_ID);
     </section>
 
     
+    <?php  $pdo ->null;?>
 
     <footer class="ftco-footer ftco-section img">
     <div class="overlay"></div>

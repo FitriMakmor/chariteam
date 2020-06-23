@@ -271,7 +271,7 @@ if(isset($_POST['delete'])){
                                   </select>
                                 </div>
                               </div>
-                              
+                              <?php $pdo->null;?>
                               <div class="form-group row">
                                 <label for="tel" class="col-4 col-form-label">Tel.</label> 
                                 <div class="col-8">
