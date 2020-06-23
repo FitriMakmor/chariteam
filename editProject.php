@@ -204,9 +204,8 @@ session_start();
   <script src="js/bootstrap-datepicker.js"></script>
   <script src="js/jquery.timepicker.min.js"></script>
   <script src="js/scrollax.min.js"></script>
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADPWVyNFbG-E0rpvNF6qnL6XBdIy48L94"></script>
-<script src="js/google-map.js"></script> -->
   <script src="js/main.js"></script>
+  <script src="js/addProject.js"></script>
 
 </body>
 
