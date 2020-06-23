@@ -192,11 +192,7 @@ session_start();
   <script src="js/addProject.js"></script>
   <?php
   if ($_GET["np"] == "fail") {
-<<<<<<< HEAD:addProject.php
-    echo "<script>alert(\"Error in adding project!\")</script>";
-=======
     echo "<script>alert(\"Adding project failed: missing credentials!\")</script>";
->>>>>>> a8182e868f6cf2720f28a20928f68d2bae86a6bb:addProject.html
   }
   ?>
 </body>
