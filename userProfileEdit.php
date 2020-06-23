@@ -1,11 +1,8 @@
 <?php
-//Step 1. Connect to the database.
-//Step 2. Handle connection errors
-// including the database connection file
 session_start();
 $userID=$_SESSION["userID"];
 include_once("scripts/config.php");
-//$u_name = $u_telNum = $u_email = $u_bio = $u_DOB= $u_IC = $username = "";
+
 
 $nameErr = $telNumErr = $emailErr = "";
      $u_name = $u_telNum = $u_email = "";
@@ -29,6 +26,14 @@ $nameErr = $telNumErr = $emailErr = "";
            $telNumErr = "Phone number should contain only numbers";
          }
        }
+
+       $checkduplicate = $pdo->query("SELECT COUNT(*) FROM volunteer WHERE (v_IC='$v_IC') ");
+        $dupe= $checkduplicate ->fetch();
+        $count=$dupe[0];
+          if($count>0){
+            $errMSG ="IC already registered";
+
+          }
    
        // Validate email
   if(empty(trim($_POST["email"]))){
@@ -200,8 +205,8 @@ function test_input($data) {
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
-          <li class="nav-item"><a href="projects.php.php?userID=<?php echo $_SESSION['userID'] ?>" class="nav-link">Projects</a></li>
-          <li class="nav-item"><a href="listvolunteer.php" class="nav-link">Volunteers</a></li>
+          <li class="nav-item"><a href="projects.php" class="nav-link">Projects</a></li>
+          <li class="nav-item"><a href="listvolunteer.php?page=1" class="nav-link">Volunteers</a></li>
           <li class="nav-item active"><a href="userProfileMain.php?userID=<?php echo $_SESSION['userID'] ?>" class="nav-link">Profile</a></li>
           <li class="nav-item"><a href="login.php" class="nav-link">Log Out</a></li> 
         </ul>
@@ -517,42 +522,30 @@ function formValidator()
             <p>This is a simple and convenient system that helps Project Managers to manage their charity projects all in just one website</p>
           </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-1"></div>
+       
+        <div class="col-md-4">
           <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Upcoming Projects</h2>
-            <div class="block-21 mb-4 d-flex">
-              <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-              <div class="text">
-                <h3 class="heading"><a href="projects.html">Safety Training to Growing Children</a></h3>
-                <div class="meta">
-                  <div><a href="#"><span class="icon-calendar"></span> July 12, 2019</a></div>
-                  <div><a href="#"><span class="icon-person" name="Organisation"></span> We Love Earth</a></div>
-                 
-                </div>
-              </div>
-            </div>
-            <div class="block-21 mb-4 d-flex">
-              <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-              <div class="text">
-                <h3 class="heading"><a href="projects.html">Clean Water for Rural Areas</a></h3>
-                <div class="meta">
-                  <div><a href="#"><span class="icon-calendar"></span> November 25, 2019</a></div>
-                  <div><a href="#"><span class="icon-person" name="Organisation"></span> Hope Org</a></div>
-                  
-                </div>
-              </div>
-            </div>
+            <h2 class="ftco-heading-2">Contact Us</h2>
+            <p>No. 39, Some Road Somewhere,
+            <br>Off Teluk Whatever,
+            <br>48900 A Place,
+            <br>someState, Malaysia
+            </p>
+            <p>03-12345678</p>
           </div>
         </div>
+        <div class="cold-md-3"></div>
+       
         <div class="col-md-2">
            <div class="ftco-footer-widget mb-4 ml-md-4">
             <h2 class="ftco-heading-2">Site Links</h2>
             <ul class="list-unstyled">
-              <li><a href="projects.html" class="py-2 d-block">Projects</a></li>
-              <li><a href="meetingreport.html" class="py-2 d-block">Reports</a></li>
-              <li><a href="listvolunteer.html" class="py-2 d-block">Volunteers</a></li>
-              <li><a href="userProfileMain.html" class="py-2 d-block">Profile</a></li>
-              <li><a href="login.html" class="py-2 d-block">Log Out</a></li>
+              <li><a href="about.php" class="py-2 d-block">About</a></li>
+              <li><a href="projects.php" class="py-2 d-block">Projects</a></li>
+              <li><a href="listvolunteer.php" class="py-2 d-block">Volunteers</a></li>
+              <li><a href="userProfileMain.php?userID="<?php echo $_SESSION['userID'] ?> class="py-2 d-block">Profile</a></li>
+              <li><a href="login.php" class="py-2 d-block">Log Out</a></li>
             </ul>
           </div>
         </div>
