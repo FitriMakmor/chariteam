@@ -1,7 +1,9 @@
+<?php
+include_once("config.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
   
-
   <head>
    
     <title>Chariteam - Display Profile</title>
@@ -45,7 +47,7 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"><a href="projects.html" class="nav-link">Projects</a></li>
           <li class="nav-item"><a href="meetingreport.html" class="nav-link">Reports</a></li>
-          <li class="nav-item active"><a href="listvolunteer.html" class="nav-link">Volunteers</a></li>
+          <li class="nav-item active"><a href="listvolunteer.php?page=1" class="nav-link">Volunteers</a></li>
           <li class="nav-item"><a href="userProfileMain.html" class="nav-link">Profile</a></li>
           <li class="nav-item"><a href="login.html" class="nav-link">Log Out</a></li>
         </ul>
@@ -69,19 +71,33 @@
 
     <section class="ftco-section ftco-gallery">
     
+<?php
+      $v_ID=$_GET["v_ID"];
+    $profile ="SELECT  * FROM volunteer WHERE volunteer_ID=:v_ID"; 
 
+      $result = $pdo->prepare($profile); 
+      $result -> execute(array(':v_ID'=>$v_ID));
+      $row=$result->fetch(PDO::FETCH_ASSOC);
+      $image=$row["v_image"];
+      $imageType=$row["v_image_type"];
+   ?>
 <div class="container">
 	<div class="row">
 		<div class="col-md-3 ">
 		     <div class="list-group " style="margin-left: auto; margin-right: auto; text-align: center;">
-          <img class="img-profile img-circle img-responsive center-block" style="margin-left: auto; margin-right: auto; text-align: center;border-radius: 50%"src="images/person_1.jpg" alt="" width="90%" height="90%">
-          <ul class="meta list list-unstyled">
+         <img class="img-profile img-circle img-responsive center-block" style="margin-left: auto; margin-right: auto; text-align: center;border-radius: 50%;width:140px;height:140px"src="<?php echo 'data:'.$imageType.';base64,'.base64_encode($image).'';?>"alt="" width="90%" height="90%">
+             <ul class="meta list list-unstyled">
                <br> <label class="label label-info" >Volunteer</label>
-               <br> <p>this is my public info!</p>
+               <br> <p>
+                <?php
+                           
+                    echo $row["v_publicInfo"];
+                ?></p>
 
           </ul> 
           </div> 
-		</div>
+    </div>
+    
 		<div class="col-md-9">
 		    <div class="card">
 		        <div class="card-body">
@@ -94,11 +110,15 @@
                     <div class="row">
                         <div class="col-4">
                           <label>First Name</label>
-                      
+                          
                         </div> 
                         <div class="col-8">
-                            <h5>Ivac</h5><br> 
-                             
+                            <h5> 
+                             <?php
+                           
+                          echo $row["v_firstName"];
+                             ?>
+                             </h5><br>
                           </div>
                      </div>
                      <div class="row">
@@ -106,7 +126,12 @@
                           <label>Last Name</label>
                         </div> 
                         <div class="col-8">
-                            <h5>Jackson</h5><br>
+                            <h5>
+                            <?php
+                           
+                           echo $row["v_lastName"];
+                              ?>
+                            </h5><br>
                           </div>
                      </div>
                      <div class="row">
@@ -114,7 +139,12 @@
                           <label>Ic</label>
                         </div> 
                         <div class="col-8">
-                            <h5>456321-01-4572</h5><br>
+                            <h5>
+                            <?php
+                           
+                           echo $row["v_IC"];
+                              ?>
+                            </h5><br>
                           </div>
                      </div>
                      <div class="row">
@@ -122,7 +152,12 @@
                           <label>Email</label>
                         </div> 
                         <div class="col-8">
-                            <h5>jackson@gmail.com</h5><br>
+                            <h5>
+                            <?php
+                           
+                           echo $row["v_email"];
+                              ?>
+                            </h5><br>
                           </div>
                      </div>
                      <div class="row">
@@ -130,7 +165,12 @@
                         <label>Address Line 1</label>
                       </div> 
                       <div class="col-8">
-                          <h5>No 43 Jalan Murni</h5><br>
+                          <h5>
+                          <?php
+                           
+                           echo $row["v_address1"];
+                              ?>
+                          </h5><br>
                         </div>
                    </div>
                    <div class="row">
@@ -138,7 +178,12 @@
                       <label>Address Line 2</label>
                     </div> 
                     <div class="col-8">
-                        <h5>Taman Pasir Putih</h5><br>
+                        <h5>
+                        <?php
+                           
+                           echo $row["v_address2"];
+                              ?>
+                        </h5><br>
                       </div>
                  </div>
                  <div class="row">
@@ -146,7 +191,12 @@
                     <label>State</label>
                   </div> 
                   <div class="col-8">
-                      <h5>Johor</h5><br>
+                      <h5>
+                      <?php
+                           
+                           echo $row["v_state"];
+                              ?>
+                      </h5><br>
                     </div>
                </div>
                <div class="row">
@@ -154,7 +204,10 @@
                   <label>Status</label>
                 </div> 
                 <div class="col-8">
-                    <h5>Single</h5><br>
+                    <h5><?php
+                           
+                           echo $row["v_status"];
+                              ?></h5><br>
                   </div>
              </div>
                      <div class="row">
@@ -162,7 +215,10 @@
                           <label>Tel</label>
                         </div> 
                         <div class="col-8">
-                            <h5>011-24577548</h5><br>
+                            <h5><?php
+                           
+                           echo $row["v_telNum"];
+                              ?></h5><br>
                           </div>
                      </div>
                      <div class="row">
@@ -170,13 +226,27 @@
                           <label>Occupation</label>
                         </div> 
                         <div class="col-8">
-                            <h5>Student</h5><br>
+                            <h5><?php
+                           
+                           echo $row["v_occ"];
+                              ?></h5><br>
+                          </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-4">
+                          <label>Date of Registration</label>
+                        </div> 
+                        <div class="col-8">
+                            <h5><?php
+                           
+                           echo $row["v_DOR"];
+                              ?></h5><br>
                           </div>
                      </div>
 		           
                     <div class="form-group row">
                         <div class="offset-4 col-8">
-                            <form action="editvolunteer.html"> 
+                            <form method ="post" action="editvolunteer.php?v_ID=<?php echo $v_ID;?>"> 
                           <button name="submit" type="submit" class="btn btn-primary">Edit Profile</button>
                        
                      </div>
@@ -187,7 +257,7 @@
 	</div>
 </div>
     </section>
-
+<?php  $pdo ->null;?>
     
 
     <footer class="ftco-footer ftco-section img">
@@ -233,7 +303,7 @@
             <ul class="list-unstyled">
               <li><a href="projects.html" class="py-2 d-block">Projects</a></li>
               <li><a href="meetingreport.html" class="py-2 d-block">Reports</a></li>
-              <li><a href="listvolunteer.html" class="py-2 d-block">Volunteers</a></li>
+              <li><a href="listvolunteer.php?page=1" class="py-2 d-block">Volunteers</a></li>
               <li><a href="userProfileMain.html" class="py-2 d-block">Profile</a></li>
               <li><a href="login.html" class="py-2 d-block">Log Out</a></li>
             </ul>
