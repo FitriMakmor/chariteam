@@ -50,11 +50,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   if(empty(trim($_POST["email"]))){
       $emailErr = "Please enter a email.";
   }else{
-    $test = test_input($_POST["email"]);
-    // check if e-mail address is well-formed
-    if (!filter_var($test, FILTER_VALIDATE_EMAIL)) {
-      $emailErr = "Invalid email format";
-    }else{
       // Prepare a select statement
       $sql = "SELECT userId FROM user WHERE u_email = :email";
       
@@ -78,7 +73,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
           // Close statement
           unset($stmt);
-      }
+      
     }
   }
 

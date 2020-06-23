@@ -1,6 +1,5 @@
 <?php
 session_start();
-$_SESSION["userID"] = 52; // To be removed later
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -190,7 +189,7 @@ $_SESSION["userID"] = 52; // To be removed later
                     <p class="text-center">Status: <?php echo $state; ?></p>
                     <span class="fund-raised d-block text-center"><?php echo $startDate; ?> until <?php echo $endDate; ?></span>
                     <div class="text-center">
-                      <a href="listOfReports1.php?projectID=<?php echo $projectID; ?>" type="button" class="float-center btn btn-success" aria-label="View Reports" title="View Reports">
+                      <a href="listOfReports1.php?project_ID=<?php echo $projectID; ?>&page=1" type="button" class="float-center btn btn-success" aria-label="View Reports" title="View Reports">
                         <span class="oi oi-project" aria-hidden="true">
                         </span>
                       </a>

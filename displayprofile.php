@@ -257,7 +257,7 @@ include_once("scripts/config.php");
 	</div>
 </div>
     </section>
-<?php  $pdo ->null;?>
+<?php  $pdo=null;?>
     
 
     <footer class="ftco-footer ftco-section img">
