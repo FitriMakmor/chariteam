@@ -65,6 +65,22 @@
 
     <!-- START name list -->
     <section class="ftco-section">
+
+    <?php
+              include_once("scripts/config.php");
+          
+              try {
+                $pdo->beginTransaction();
+                $sql2 = "SELECT volunteer_ID, v_image, v_image_type, v_firstName, v_lastName, v_state FROM volunteer WHERE volunteer_ID NOT IN 
+                (SELECT volunteer_ID FROM project_volunteer WHERE project_volunteer.project_ID='3') ";  
+                
+                $result2 = $pdo -> query($sql2);
+                //echo "all records selected successfully.";
+                $pdo->commit();
+              
+          
+          ?>
+          
       <div class="container">
         <div class="wrapper">
           <!-- Search Bar -->
@@ -77,8 +93,12 @@
             </div>
           </div>
           <br>
+
+          
+
           <!-- START table -->
           <table id="myTable" class="table table-striped table-dark table-hover">
+            <form method="GET" action="scripts/assign-volunteer.php" >
             <thead class="thead">
               <tr>
                 <th scope="col" class="text-center">Photo</th>
@@ -87,121 +107,50 @@
                 <th scope="col">Add</th>
               </tr>
             </thead>
+
+            <?php
+                while($data = $result2 -> fetch())  {
+                  $id = $data["volunteer_ID"];
+                  $image = $data["v_image"];
+                  $imageType = $data["v_image_type"];
+            ?>
           
               <tbody>
                 <tr>
-                  <th scope="row"><img src="images/person_1.jpg" class="mx-auto d-block" alt="user1.jpg"></th>
-                  <td><a href="displayprofile.html">Ivac Jackson</a></td>
-                  <td> selangor </td>
-                  <td><label class="switch "><input type="checkbox" class="success"><span class="slider round"></span></label></td>
+                  <th scope="row"><img src="<?php echo 'data:' . $imageType . ';base64,' . base64_encode($image) . '';?>" class="mx-auto d-block"></th>
+                  <td><a href="displayprofile.html"><?php echo $data["v_firstName"] . " " . $data["v_lastName"]; ?></a></td>
+                  <td><?php echo $data["v_state"]; ?></td>
+                  <td><label class="switch "><input type="checkbox" value="<?php echo $id; ?>" name="selected[]" class="success" /><span class="slider round"></span></label></td>
                 </tr>
-                <tr>
-                  <th scope="row"><img src="images/person_2.jpg" class="mx-auto d-block" alt="user2.jpg"></th>
-                  <td><a href="#">Nur Shafiqa Aliaa bin Ab Ran</a></td>
-                  <td> kedah </td>
-                  <td><label class="switch "><input type="checkbox" class="success"><span class="slider round"></span></label></td>
-                </tr>
-                <tr>
-                  <th scope="row"><img src="images/person_3.jpg" class="mx-auto d-block" alt="user3.jpg"></th>
-                  <td><a href="#">Muhammad Ashraaf Aziem bin Ab Ran</a></td>
-                  <td> kelantan </td>
-                  <td><label class="switch "><input type="checkbox" class="success"><span class="slider round"></span></label></td>
-                </tr>
-                <tr>
-                  <th scope="row"><img src="images/person_4.jpg" class="mx-auto d-block" alt="user4.jpg"></th>
-                  <td><a href="#">Nur Shaqhira Amira bin Ab Ran</a></td>
-                  <td> melaka </td>
-                  <td><label class="switch "><input type="checkbox" class="success"><span class="slider round"></span></label></td>
-                </tr>
-                <tr>
-                  <th scope="row"><img src="images/person_5.jpg" class="mx-auto d-block" alt="user1.jpg"></th>
-                  <td><a href="#">Muhammad Afiq Aziem bin Ab Ran</a></td>
-                  <td> negeri sembilan </td>
-                  <td><label class="switch "><input type="checkbox" class="success"><span class="slider round"></span></label></td>
-                </tr>
-                <tr>
-                  <th scope="row"><img src="images/person_6.jpg" class="mx-auto d-block" alt="user2.jpg"></th>
-                  <td><a href="#">Nur Shafiqa Aliaa bin Ab Ran</a></td>
-                  <td> pahang </td>
-                  <td><label class="switch "><input type="checkbox" class="success"><span class="slider round"></span></label></td>
-                </tr>
-                <tr>
-                  <th scope="row"><img src="images/person_7.jpg" class="mx-auto d-block" alt="user3.jpg"></th>
-                  <td><a href="#">Muhammad Ashraaf Aziem bin Ab Ran</a></td>
-                  <td> penang </td>
-                  <td><label class="switch "><input type="checkbox" class="success"><span class="slider round"></span></label></td>
-                </tr>
-                <tr>
-                  <th scope="row"><img src="images/person_8.jpg" class="mx-auto d-block" alt="user4.jpg"></th>
-                  <td><a href="#">Nur Shaqhira Amira bin Ab Ran</a></td>
-                  <td> perak </td>
-                  <td><label class="switch "><input type="checkbox" class="success"><span class="slider round"></span></label></td>
-                </tr>
-                <tr>
-                  <th scope="row"><img src="images/person_9.jpg" class="mx-auto d-block" alt="user1.jpg"></th>
-                  <td><a href="#">Muhammad Afiq Aziem bin Ab Ran</a></td>
-                  <td> perlis </td>
-                  <td><label class="switch "><input type="checkbox" class="success"><span class="slider round"></span></label></td>
-                </tr>
-                <tr>
-                  <th scope="row"><img src="images/person_1.jpg" class="mx-auto d-block" alt="user2.jpg"></th>
-                  <td><a href="#">Nur Shafiqa Aliaa bin Ab Ran</a></td>
-                  <td> sabah </td>
-                  <td><label class="switch "><input type="checkbox" class="success"><span class="slider round"></span></label></td>
-                </tr>
-                <tr>
-                  <th scope="row"><img src="images/person_2.jpg" class="mx-auto d-block" alt="user3.jpg"></th>
-                  <td><a href="#">Muhammad Ashraaf Aziem bin Ab Ran</a></td>
-                  <td> sarawak </td>
-                  <td><label class="switch "><input type="checkbox" class="success"><span class="slider round"></span></label></td>
-                </tr>
-                <tr>
-                  <th scope="row"><img src="images/person_3.jpg" class="mx-auto d-block" alt="user4.jpg"></th>
-                  <td><a href="#">Nur Shaqhira Amira bin Ab Ran</a></td>
-                  <td> selangor </td>
-                  <td><label class="switch "><input type="checkbox" class="success"><span class="slider round"></span></label></td>
-                </tr>
-                <tr>
-                  <th scope="row"><img src="images/person_4.jpg" class="mx-auto d-block" alt="user1.jpg"></th>
-                  <td><a href="#">Muhammad Afiq Aziem bin Ab Ran</a></td>
-                  <td> terengganu </td>
-                  <td><label class="switch "><input type="checkbox" class="success"><span class="slider round"></span></label></td>
-                </tr>
-                <tr>
-                  <th scope="row"><img src="images/person_5.jpg" class="mx-auto d-block" alt="user2.jpg"></th>
-                  <td><a href="#">Nur Shafiqa Aliaa bin Ab Ran</a></td>
-                  <td> terengganu </td>
-                  <td><label class="switch "><input type="checkbox" class="success"><span class="slider round"></span></label></td>
-                </tr>
-                <tr>
-                  <th scope="row"><img src="images/person_6.jpg" class="mx-auto d-block" alt="user3.jpg"></th>
-                  <td><a href="#">Muhammad Ashraaf Aziem bin Ab Ran</a></td>
-                  <td> terengganu </td>
-                  <td><label class="switch "><input type="checkbox" class="success"><span class="slider round"></span></label></td>
-                </tr>
-                <tr>
-                  <th scope="row"><img src="images/person_7.jpg" class="mx-auto d-block" alt="user4.jpg"></th>
-                  <td><a href="#">Nur Shaqhira Amira bin Ab Ran</a></td>
-                  <td> terengganu </td>
-                  <td><label class="switch "><input type="checkbox" class="success"><span class="slider round"></span></label></td>
-                </tr>
+                <?php } ?>
               </tbody>
+              
+              
             </table>
         </div>
       </div>
     </section>
     <!-- END name list -->
 
+    <?php
+    } catch (Exception $e) {
+      $pdo->rollback();
+      echo "Error: ".$e;
+    }
+    $pdo = null;
+?>
+
     <section class="ftco-section-3 img" style="background-image: url(images/bg_3.jpg);">
       <div class="overlay"></div>
-      <!-- add volunteers button -->
+      <!-- add selected volunteers button -->
         <div class="container">
           <div class="row d-md-flex">
           <div class="box">
-            <a href="#" class="btn btn-white btn-animation-1" data-toggle="modal" data-target="#exampleModal"> Confirm to add these selected volunteers? </a> 
+            <a href="#" type="button" name="btn-asign" id="btn-assign" class="btn btn-white btn-animation-1" data-toggle="modal" data-target="#exampleModal"> Confirm to add these selected volunteers? </a> 
           </div>   			
           </div>
         </div>
+        </section>
 
         <!-- ADD modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -217,13 +166,17 @@
                 Are you sure want to add these volunteers to this project?
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"> no </button>
-                <button type="button" class="btn btn-primary"> yes </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancel </button>
+                <button type="submit" class="btn btn-primary" name="submit"> Confirm </button>
               </div>
             </div>
           </div>
         </div>
-    </section>
+    
+        </form>
+
+
+    
 		
     <!-- START footer -->
     <footer class="ftco-footer ftco-section img">
@@ -296,10 +249,11 @@
   <script src="js/jquery.animateNumber.min.js"></script>
   <script src="js/bootstrap-datepicker.js"></script>
   <script src="js/jquery.timepicker.min.js"></script>
-  <script src="js/scrollax.min.js"></script> -->
+  <script src="js/scrollax.min.js"></script> 
   <script src="js/main.js"></script>
   <!-- js Syahira -->
   <script src="js/assign-volunteers.js"></script>
     
   </body>
 </html>
+
