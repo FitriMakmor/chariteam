@@ -9,7 +9,7 @@ session_start();
 // }
  
 // Include config file
-include("config.php");
+include("scripts/config.php");
  
 // Define variables and initialize with empty values
 $email = $new_password = "";
