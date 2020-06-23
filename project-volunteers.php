@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,6 +53,8 @@
       </div>
     </nav>
     <!-- END nav -->
+
+    
     
     <div class="hero-wrap" style="background-image: url('images/bg_vol2.png');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
@@ -60,143 +63,62 @@
           <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
             <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a
                   href="projects.html">Projects</a></span><span>Assigned Volunteers </span></p>
-            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Clean Water for Rural Areas Project's Volunteers</h1>
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> Assigned Volunteers </h1>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- START volunteers list -->
     <section class="ftco-section bg-light">
-      <div class="container">
-        <div class="row">
+    
 
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/person_1.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="displayprofile.html">Ivac Jackson</a></h3>
-        					<span class="position"> Selangor </span>
-        					<button class="del fa fa-trash" data-toggle="modal" data-target="#exampleModal"></button>
-        				</div>
-        			</div>
-        		</div>
-          </div>
-          
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/person_2.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single.html">Ivan Jacobson</a></h3>
-        					<span class="position">  Kuala Lumpur </span>
-        					<button class="del fa fa-trash" data-toggle="modal" data-target="#exampleModal"> </button>
-        				</div>
-        			</div>
-        		</div>
-          </div>
-          
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/person_3.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single.html">Ivan Jacobson</a></h3>
-        					<span class="position"> Selangor </span>
-                  <button class="del fa fa-trash" data-toggle="modal" data-target="#exampleModal"> </button>
-                </div>
-        			</div>
-        		</div>
-          </div>
-          
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/person_4.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single.html">Ivan Jacobson</a></h3>
-        					<span class="position">  Kuala Lumpur </span>
-                  <button class="del fa fa-trash" data-toggle="modal" data-target="#exampleModal"> </button>
-                </div>
-        			</div>
-        		</div>
-          </div>
-          
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/person_5.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single.html">Ivan Jacobson</a></h3>
-        					<span class="position">  Kuala Lumpur </span>
-                  <button class="del fa fa-trash" data-toggle="modal" data-target="#exampleModal"> </button>
-                </div>
-        			</div>
-        		</div>
-          </div>
-          
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/person_6.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single.html">Ivan Jacobson</a></h3>
-        					<span class="position">  Kuala Lumpur </span>
-                  <button class="del fa fa-trash" data-toggle="modal" data-target="#exampleModal"> </button>
-                </div>
-        			</div>
-        		</div>
-          </div>
-          
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/person_7.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single.html">Ivan Jacobson</a></h3>
-        					<span class="position">  Kuala Lumpur </span>
-                  <button class="del fa fa-trash" data-toggle="modal" data-target="#exampleModal"> </button>
-                </div>
-        			</div>
-        		</div>
-          </div>
-          
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/person_8.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single.html">Ivan Jacobson</a></h3>
-        					<span class="position">  Kuala Lumpur </span>
-                  <button class="del fa fa-trash" data-toggle="modal" data-target="#exampleModal"> </button>
-                </div>
-        			</div>
-        		</div>
-          </div>
-          
-        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/person_9.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="teacher-single.html">Ivan Jacobson</a></h3>
-        					<span class="position"> Selangor </span>
-                  <button class="del fa fa-trash" data-toggle="modal" data-target="#exampleModal"> </button>
-                </div>
-        			</div>
-        		</div>
-        	</div>
-        </div>
-      </div>
-      <!-- END volunteers list -->
+    <?php
+    include_once("scripts/config.php");
+      try {
+        
+        $pdo->beginTransaction();
+        $sql = "SELECT project_volunteer.project_ID, volunteer.volunteer_ID, volunteer.v_firstName, volunteer.v_lastName, volunteer.v_state, volunteer.v_image, volunteer.v_image_type, project.p_name
+        FROM volunteer INNER JOIN 
+        ( project INNER JOIN project_volunteer ON project.project_ID = project_volunteer.project_ID )
+        ON volunteer.volunteer_ID = project_volunteer.volunteer_ID 
+        WHERE project_volunteer.project_ID=3 ";        
+        //'.$_SESSION["project_ID"].'
+        
+        $result = $pdo -> query($sql);
+        $pdo->commit();           
+    ?>
 
-      <!-- REMOVE modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- START volunteers list -->   
+      <div class="container">     
+        <div class="row">      
+        <?php
+              while($data = $result -> fetch())  {
+                $id = $data["volunteer_ID"];  
+                $pid = $data["project_ID"];
+                $image = $data["v_image"];
+                $imageType = $data["v_image_type"];
+              ?> 
+        	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
+        		<div class="staff">
+        			<div class="d-flex mb-4">
+
+              <div class="img" style="background-image: url(<?php echo 'data:' . $imageType . ';base64,' . base64_encode($image) . '';?>);"></div>
+        				<div class="info ml-4">
+        					<h3><a href="teacher-single.html"><?php echo $data["v_firstName"] . " " . $data["v_lastName"]; ?></a></h3>
+        					<span class="position"><?php echo $data["v_state"]; ?></span>              
+                  <!-- <a href="#removeModal<//?php echo $id; ?>" type="button" data-vol="<//?php echo $id; ?>" data-project="<//?php echo $pid; ?>" class="del fa fa-trash" data-toggle="modal" data-target="#removeModal</?php echo $id; ?>" type="button" ></a> -->
+                  <button type="button" data-vol="<?php echo $id; ?>" data-project="<?php echo $pid; ?>" class="del fa fa-trash"  type="button" ></button>
+                </div>
+        			</div>
+        		</div>
+            
+          </div>
+          <!-- REMOVE modal -->
+      <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="removeModalLabel" aria-hidden="true">  
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+              <h5 class="modal-title" id="removeModalLabel">Confirmation</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -205,25 +127,43 @@
               Are you sure want to remove this volunteer from this project?
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal"> no </button>
-              <button type="button" class="btn btn-primary"> yes </button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancel </button>
+              <button type="button" id="inside" class="btn btn-primary"> Confirm
+              <!-- <a href="scripts/remove-volunteer.php </?php echo '?volunteer_ID='. $id; ?>"> Confirm </a>  -->
+              </button>                   
             </div>
-          </div>
+          </div>         
+        </div>
+      </div>     
+              <?php } ?>
         </div>
       </div>
-    </section>
+      <!-- END volunteers list -->
 
-    <!-- ADD volunteers button -->
+      
+    
+  <?php
+          
+      } catch (Exception $e) {
+          $pdo->rollback();
+          echo "Error: ".$e;
+      }
+      $pdo = null;
+  ?>
+  </section>
+
+    <!-- ADD MORE volunteers button -->
     <section class="ftco-section-3 img" style="background-image: url(images/bg_3.jpg);">
     	<div class="overlay"></div>
     	<div class="container">
     		<div class="row d-md-flex">
         <div class="box">
-          <a href="assign-volunteers.html" class="btn btn-white btn-animation-1">Add More Volunteers </a> 
+          <a href="assign-volunteers.php" class="btn btn-white btn-animation-1">Add More Volunteers </a> 
         </div>   			
     		</div>
     	</div>
     </section>
+    
 
     <!-- START footer -->
     <footer class="ftco-footer ftco-section img">
@@ -298,5 +238,6 @@
   <script src="js/jquery.timepicker.min.js"></script>
   <script src="js/scrollax.min.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/assignProject.js"></script>
   </body>
 </html>
