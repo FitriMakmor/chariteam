@@ -1,3 +1,15 @@
+<?php
+session_start();
+$userID=$_SESSION["userID"];
+
+include_once("config.php");
+//Step 1. Connect to the database.
+//Step 2. Handle connection errors
+//including the database connection file
+//include_once("config.php");						
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,7 +42,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/DeleteProfileButton.css">
     <link rel="shortcut icon" type="image/png" href="images/620806.png">
-
+    
   </head>
   <body>
     
@@ -43,17 +55,41 @@
 
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a href="projects.html" class="nav-link">Projects</a></li>
-          <li class="nav-item"><a href="meetingreport.html" class="nav-link">Reports</a></li>
-          <li class="nav-item"><a href="listvolunteer.html" class="nav-link">Volunteers</a></li>
-          <li class="nav-item active"><a href="userProfileMain.html" class="nav-link">Profile</a></li>
-          <li class="nav-item"><a href="login.html" class="nav-link">Log Out</a></li> 
+          <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="projects.php" class="nav-link">Projects</a></li>
+          <li class="nav-item"><a href="listvolunteer.php" class="nav-link">Volunteers</a></li>
+          <li class="nav-item active"><a href="userProfileMain.php?userID=<?php echo $_SESSION['userID'] ?>" class="nav-link">Profile</a></li>
+          <li class="nav-item"><a href="login.php" class="nav-link">Log Out</a></li> 
         </ul>
       </div>
     </div>
   </nav>
     <!-- END nav -->
-    
+    <?php
+
+   if (isset($_SESSION['loggedin']) && $_SESSION['userID'] && $_SESSION['username'] && $_SESSION['loggedin']==true ){
+      try {
+          $pdo->beginTransaction();
+          $userID=$_SESSION["userID"];
+          $sql2 = "SELECT * FROM user WHERE userID='$userID'";
+          $result = $pdo->query($sql2); 
+          //$result ->execute(array(':userID'=>$userID));
+          $res=$result->fetch();
+          $username = $res['username'];	
+          $u_name = $res['u_name'];
+          $u_telNum = $res['u_telNum'];
+          $u_bio = $res['u_bio'];
+          $u_DOB = $res['u_DOB'];
+          $u_email = $res['u_email'];	
+          $u_IC= $res['u_IC'];
+         // $u_image = $res['u_image'];
+          //$u_dateJoined = $res['u_dateJoined'];
+          $image=$res["u_image"];
+          $imageType=$res["u_imageType"];
+        
+
+
+        ?>
     
      
     <div class="hero-wrap" style="background-image: url('images/bg_UP1.jpg');" data-stellar-background-ratio="0.5">
@@ -61,7 +97,7 @@
         <div class="container">
           <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
             <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="userProfileMain.html">Profile</a></span></p>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="userProfileMain.php">Profile</a></span></p>
               <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Overview</h1>
             </div>
           </div>
@@ -73,21 +109,22 @@
     <section class="ftco-section">
        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
         <div class="container">
-            <div class="row flex-lg-nowrap">
-                <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
-            <div class="card p-3">
-            <div class="e-navlist e-navlist--active-bg">
-                <ul class="nav">
-                <li class="nav-item"><a class="nav-link px-2 active" href="userProfileMain.html"><i class="fa fa-fw fa-bar-chart mr-1"></i><span>Overview</span></a></li>
-                <li class="nav-item"><a class="nav-link px-2" href="userProfileEdit.html"><i class="fa fa-fw fa-cog mr-1"></i><span>Settings</span></a></li>
-                </ul>
-            </div>
-            </div>
-            <br>
-            
-        </div>
+          <div class="row flex-lg-nowrap">
+            <div class="col-12 col-lg-auto mb-3 ftco-animate" style="width: 200px;">
+              <div class="card p-3">
+                <div class="e-navlist e-navlist--active-bg">
+                  <ul class="nav">
+                    <li class="nav-item"><a class="nav-link px-2 active" href="userProfileMain.php?userID=<?php echo $_SESSION['userID'] ?>"><i class="fa fa-fw fa-bar-chart mr-1"></i><span>Overview</span></a></li>
+                    <li class="nav-item"><a class="nav-link px-2" href="userProfileEdit.php?userID=<?php echo $_SESSION['userID'] ?>"><i class="fa fa-fw fa-cog mr-1"></i><span>Edit Profile</span></a></li>
+                  </ul>
+                </div>
+              </div>
+             <br> 
+          </div>
 
-        <div class="col">
+        
+
+        <div class="col ftco-animate" >
             <div class="row">
             <div class="col mb-3">
                 <div class="card">
@@ -95,65 +132,68 @@
                     <div class="e-profile">
                     <div class="row">
                         <div class="col-12 col-sm-auto mb-3">
-                        <div class="mx-auto" style="width: 140px;">
-                            <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
-                            <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">140x140</span>
+                        <div class="mx-auto" style="width: 150px;">
+                            <div class="d-flex justify-content-center align-items-center rounded" style="height: 150px;">
+                              <img alt="" src="<?php echo 'data:'.$imageType.';base64,'.base64_encode($image).'';?>" style="width:150px;height:150px;" >
+                            
                             </div>
                         </div>
                         </div>
                         <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
-                        <div class="text-center text-sm-left mb-2 mb-sm-0">
-                            <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">John Smith</h4>
-                            <p class="mb-0">@johnny.s</p>
-                            <div class="text-muted"><small>Last seen 2 hours ago</small></div>
-                        </div>
-                        <div class="text-center text-sm-right">
-                            <span class="badge badge-secondary">Project Manager</span>
-                            <div class="text-muted"><small>Joined 09 Dec 2017</small></div>
-                        </div>
-                        </div>
+                  <div class="text-center text-sm-left mb-2 mb-sm-0">
+                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"><?php echo $u_name ?></h4>
+                    <p class="mb-0">@<?php echo $username ?></p>
+                    <!--div class="text-muted"><small>Last seen 2 hours ago</small></div-->
+                   
+                  </div>
+                  <div class="text-center text-sm-right">
+                    <span class="badge badge-secondary">Project Manager</span>
+                    <div class="text-muted"><small>Joined <!--?php echo $dateJoined?--></small></div>
+                  </div>
+                    </div>
                     </div>
                     
                     <div class="tab-content pt-3">
                         <div class="tab-pane active">
+                          <br>
                           <div class="row">
                             <div class="col-4">
-                            <label>About</label>
+                           <h5 style="color:dimgrey"><b>About</b></h5>
                             </div> 
                             <div class="col-8">
-                                <h5>Hi! This is my profile!</h5><br>
+                                <h5><?php echo $u_bio; ?></h5><br>
                             </div>
-                        </div>
-                            <div class="row">
-                                <div class="col-4">
-                                <label>Identification Number</label>
-                                </div> 
-                                <div class="col-8">
-                                    <h5>880415-01-4572</h5><br>
-                                </div>
-                            </div>
+                          </div>
                             <div class="row">
                                 <div class="col-4">
                                 <label>Email</label>
                                 </div> 
                                 <div class="col-8">
-                                    <h5>johnsmith@gmail.com</h5><br>
+                                    <h5><?php echo $u_email; ?></h5><br>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-4">
-                                <label>Tel</label>
+                                <label>Mobile Number</label>
                                 </div> 
                                 <div class="col-8">
-                                    <h5>016-12345678</h5><br>
+                                    <h5><?php echo $u_telNum; ?></h5><br>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-4">
-                                <label>Organisation</label>
+                                <label>IC num</label>
                                 </div> 
                                 <div class="col-8">
-                                    <h5>Hope Org</h5><br>
+                                    <h5><?php echo $u_IC; ?></h5><br>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                <label>Date of Birth</label>
+                                </div> 
+                                <div class="col-8">
+                                    <h5><?php echo $u_DOB; ?></h5><br>
                                 </div>
                             </div>
 
@@ -175,27 +215,27 @@
                     </div>
                 </div>
                 </div>
-                <div id="id01" class="modal">
-                  <form class="myModal-content" action="/action_page.php">
+                <div id="id01" class="modalA">
+                  <form class="myModal-content" action="deleteUser.php?userID="<?php echo $_SESSION['userID'] ?>>
                     <div class="containerhere">
                       <h1>Delete Account</h1>
                       <p>Are you sure you want to delete your account?</p>
                     
                       <div class="clearfix">
                         <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Delete</button>
+                        <button type="submit" onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Delete</button>
                       </div>
                     </div>
                   </form>
                 </div>
                 <script>
                   // Get the modal
-                  var modal = document.getElementById('id01');
+                  var modalA = document.getElementById('id01');
                   
                   // When the user clicks anywhere outside of the modal, close it
                   window.onclick = function(event) {
-                    if (event.target == modal) {
-                      modal.style.display = "none";
+                    if (event.target == modalA) {
+                      modalA.style.display = "none";
                     }
                   }
                   </script>
@@ -205,6 +245,15 @@
         </div>
         </div>
         </div>
+      <?php
+      
+    
+      } catch (Exception $e) {
+          echo "Error: " . $e;
+        }
+   }
+        $pdo = null;
+        ?>
     </section>
 
     

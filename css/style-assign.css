@@ -1,4 +1,4 @@
-/* table : volunteers list*/
+/* table : namelist of volunteers*/
 body {
   background-color: #e6e6e6;
 }
@@ -76,7 +76,7 @@ thead {
 
 
 
-/*button ADD VOLUNTEERS*/
+/*slider button to ADD VOLUNTEERS*/
 /* The switch - the box around the slider */
 .switch {
 	position: relative;
@@ -133,7 +133,7 @@ input:checked + .slider:before {
 }
 
 
-/* MODAL button */
+/* MODAL confirmation button */
 
 .box {
   position:absolute;
