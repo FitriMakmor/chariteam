@@ -2,8 +2,7 @@
 
 $volunteer_ID = $v_firstName = $v_lastName = $v_email = $v_address1 = $v_address2 ="";
 $v_state = $v_status = $v_telNum = $v_publicInfo = $v_DOR = $v_image = "";
-include_once("config.php");
-echo "ughhh";
+include_once("scripts/config.php");
 if(isset($_POST['update']))
 {
    // do post
@@ -74,9 +73,7 @@ if(isset($_POST['updateImage'])){
       echo "Error: ".$pdo->error."<br><br>";
   }
 }
-echo "ughhh";
 if(isset($_POST['delete'])){
-  echo "laluuuuu";
     $v_ID=$_GET["v_ID"];
     $stmt_delete = $pdo->prepare('DELETE FROM volunteer WHERE volunteer_ID =:uid');
     $stmt_delete->bindParam(':uid',$v_ID);

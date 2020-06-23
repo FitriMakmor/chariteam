@@ -2,7 +2,7 @@
  $volunteer_ID = $v_firstName = $v_lastName = $v_email = $v_address1 = $v_address2 ="";
  $v_state = $v_status = $v_telNum = $v_publicInfo = $v_DOR = $v_image =$v_occ= "";
 
-include_once("config.php");
+include_once("scripts/config.php");
  if (isset($_POST['submit'])) {
  // do post
  if ( isset($_POST["name"]) && isset($_POST["lastname"]) && isset($_POST["ic"]) && isset($_POST["email"]) && isset($_POST["address1"]) && isset($_POST["address2"]) && isset($_POST["state"])&& isset($_POST["status"])&& isset($_POST["tel"])&& isset($_POST["publicinfo"]) && isset($_POST["DOR"])&& isset($_POST["occ"])) {
