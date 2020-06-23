@@ -4,7 +4,7 @@
 // including the database connection file
 session_start();
 $userID=$_SESSION["userID"];
-include_once("config.php");
+include_once("scripts/config.php");
 //$u_name = $u_telNum = $u_email = $u_bio = $u_DOB= $u_IC = $username = "";
 
 $nameErr = $telNumErr = $emailErr = "";
