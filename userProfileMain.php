@@ -2,7 +2,7 @@
 session_start();
 $userID=$_SESSION["userID"];
 
-include_once("config.php");
+include_once("scripts/config.php");
 //Step 1. Connect to the database.
 //Step 2. Handle connection errors
 //including the database connection file

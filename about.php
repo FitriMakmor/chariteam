@@ -1,7 +1,7 @@
 <?php
 session_start();
 $userID=$_SESSION["userID"];
-include_once("config.php");
+include_once("scripts/config.php");
 ?>
 
 <!DOCTYPE html>

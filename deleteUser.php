@@ -4,7 +4,7 @@
 //including the database connection file
 session_start();
 $userID = $_SESSION['userID'];
-include("config.php");
+include("scripts/config.php");
 
 //getting id of the data from url
 
