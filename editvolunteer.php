@@ -11,6 +11,7 @@ if(isset($_POST['update']))
          
   $v_firstName = $_POST["name"];
     $v_lastName =  $_POST["lastname"];
+    $v_IC =$_POST["ic"];
     $v_email = $_POST["email"];
     $v_address1 = $_POST["address1"];
     $v_address2 = $_POST["address2"];
@@ -21,8 +22,8 @@ if(isset($_POST['update']))
     $v_DOR = $_POST["DOR"];
     $v_occ = $_POST["occ"];
 
-    $imageData = addslashes(file_get_contents($_FILES['image']['tmp_name']));
-    $imageProperties = getimagesize($_FILES['image']['tmp_name']);
+    // $imageData = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+    // $imageProperties = getimagesize($_FILES['image']['tmp_name']);
 
 } 
   
@@ -30,9 +31,10 @@ if(isset($_POST['update']))
 
 $v_ID=$_GET["v_ID"];
 // ,v_image=:v_image,v_image_type=:v_image_type
-$stmt = $pdo->prepare("UPDATE volunteer SET v_firstName=:fname,v_lastName=:lname,v_email=:v_email,v_address1=:add1,v_address2=:add2,v_state=:v_state,v_status=:v_status,v_telNum=:tel,v_publicinfo=:publicinfo,v_occ=:occ,v_DOR=:dor, v_image = '$imageData', v_image_type = '{$imageProperties['mime']}' WHERE volunteer_ID=:uid");
+$stmt = $pdo->prepare("UPDATE volunteer SET v_firstName=:fname,v_lastName=:lname,v_IC=:v_ic,v_email=:v_email,v_address1=:add1,v_address2=:add2,v_state=:v_state,v_status=:v_status,v_telNum=:tel,v_publicinfo=:publicinfo,v_occ=:occ,v_DOR=:dor  WHERE volunteer_ID=:uid");
 $stmt->bindValue(":fname",$v_firstName);
 $stmt->bindValue(":lname",$v_lastName);
+$stmt->bindValue(":v_ic",$v_IC);
 $stmt->bindParam(':v_email',$v_email);
 $stmt->bindParam(':add1',$v_address1);
 $stmt->bindParam(':add2',$v_address2);
@@ -55,6 +57,22 @@ else{
   echo "Error: ".$pdo->error."<br><br>";
 }
 
+}
+if(isset($_POST['updateImage'])){
+
+    $imageData = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+    $imageProperties = getimagesize($_FILES['image']['tmp_name']); 
+    $v_ID=$_GET["v_ID"];
+  $stmt2 = $pdo->prepare ("UPDATE volunteer SET  v_image='$imageData', v_image_type='{$imageProperties['mime']}' WHERE volunteer_ID=:uid") ;
+
+  $stmt2->bindParam(':uid',$v_ID);
+
+  if($stmt2->execute()){
+    header('Location:editvolunteer.php?v_ID='.$v_ID);
+  }
+  else{
+      echo "Error: ".$pdo->error."<br><br>";
+  }
 }
 echo "ughhh";
 if(isset($_POST['delete'])){
@@ -161,8 +179,12 @@ if(isset($_POST['delete'])){
           <ul class="meta list list-unstyled">
              <br><label class="label label-info">Volunteer</label>
              <form  method="post" enctype="multipart/form-data">
-              <input style="margin-left: auto; margin-right: auto;text-align: center;"type="file" name="image" id="fileToUpload">              
-           </ul>
+              <input style="margin-left: auto; margin-right: auto;text-align: center;"type="file" name="image" id="fileToUpload">             
+              <br><br>
+              <button name="updateImage" type="submit" class="btn btn-primary">Update Profile</button>
+
+</form>
+            </ul>
           
               
             </div> 
@@ -179,6 +201,7 @@ if(isset($_POST['delete'])){
            
 		            <div class="row">
 		                 <div class="col-md-12">
+                      <form method="post"> 
                              <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">First Name*</label> 
                                 <div class="col-8">
@@ -194,7 +217,7 @@ if(isset($_POST['delete'])){
                            <div class="form-group row">
                                 <label for="ic" class="col-4 col-form-label">IC*</label> 
                                 <div class="col-8">
-                                  <input id="ic" name="ic"  placeholder="123456-00-1234" pattern="[0-9]{6}-[0-9]{2}-[0-9]{4}"  class="form-control here"   value="<?php echo $row['v_lastName']; ?>"  type="text">
+                                  <input id="ic" name="ic"  placeholder="123456-00-1234" pattern="[0-9]{6}-[0-9]{2}-[0-9]{4}"  class="form-control here"   value="<?php echo $row['v_IC']; ?>"  type="text">
                                 </div>
                               </div>
                           
