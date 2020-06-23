@@ -56,41 +56,71 @@
         <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
             <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a
-                  href="meetingreport.html">Reports</a></span><span>Edit Report</span></p>
+                  href="projects.php">Projects</a></span><span>Edit Report</span></p>
             <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Edit Meeting Report</h1>
           </div>
         </div>
       </div>
     </div>
 
-    
+    <?php
+      include_once("scripts/config.php");
+      $projectID = $_GET["project_ID"];
+      $reportID = $_GET["report_ID"];
+      $sql = $pdo -> prepare("SELECT * FROM report WHERE report_ID=:reportID");
+      $sql -> execute(array(':reportID'=>$reportID));
+      $res = $sql->fetch(PDO::FETCH_ASSOC);
+      #$reportName = $_POST["r_name"];
+      #$purpose = $_POST["r_purpose"];
+      #$venue = $_POST["r_venue"];
+      #$date = $_POST["r_date"];
+      #$startTime = $_POST["r_startTime"];
+      #$endTime = $_POST["r_endTime"];
+      #$comments = $_POST["r_comments"];
+    ?>
     <section class="ftco-section contact-section ftco-degree-bg">
       <div class="container">
         <div class="row block-9">
           <div class="col-md-8 pr-md-5">
           	<h4 class="mb-4" style="font-weight: bold;">Replace Meeting Details</h4>
-            <form action="#">
+            <form method="post" action="scripts/edit_report.php?report_ID=<?php echo $reportID?>&project_ID=<?php echo $projectID?>" enctype="multipart/form-data">
+              <div class="form-group">
+                <p>Report Name</p>
+                <input name="reportName" type="text" class="form-control" value="<?php echo $res['r_name']?>" required>
+              </div>
               <div class="form-group">
                 <p>Purpose</p>
-                <input type="text" class="form-control" placeholder="Purpose of Meeting">
+                <input name="purpose" type="text" class="form-control" maxlength="70" value="<?php echo $res['r_purpose']?>" required>
+              </div>
+              <div class="form-group">
+                <p>Venue</p>
+                <input name="venue" type="text" class="form-control" value="<?php echo $res['r_venue']?>" required>
               </div>
               <div class="form-group">
                 <p>Date of Meeting</p>
-                <input type="date" class="form-control" placeholder="Date of Meeting">
+                <input name="date" type="date" class="form-control" value="<?php echo $res['r_date']?>" required>
               </div>
               <div class="form-group">
                 <p>Start Time</p>
-                <input type="time" class="form-control" placeholder="Subject">
+                <input name="startTime" type="time" class="form-control" value="<?php echo $res['r_startTime']?>" required>
               </div>
               <div class="form-group">
                 <p>End Time</p>
-                <input type="time" class="form-control" placeholder="Subject">
+                <input name="endTime" type="time" class="form-control" value="<?php echo $res['r_endTime']?>" required>
+              </div>
+              <div class="form-group">
+                <p>Content of Meeting (Include Participants)</p>
+                <textarea name="content" class="form-control" cols="30" rows="6" maxlength="3000" required><?php echo $res['r_content']?></textarea>
+              </div>
+              <div class="form-group">
+                <p>Participants</p>
+                <textarea name="comments" class="form-control" cols="30" rows="2" maxlength="200" required><?php echo $res['r_comments']?></textarea>
               </div>
               <div class="text">
-                <p>Insert file (PDF format)</p>
-                <input type="file" id="myFile" name="filename2" accept="application/pdf">
+               <!-- <p>Insert file (PDF format)</p>
+                <input name = "file" type="file" id="myFile" name="filename2" accept="application/pdf">-->
                 <div class="mt-3">
-                  <button type="submit" class="btn btn-white px-3 py-2 mt-2">Submit</button>
+                  <button name="submit" type="submit" class="btn btn-primary">Update</button>
                 </div>
               </div>
             </form>
@@ -98,6 +128,7 @@
         </div>
       </div>
     </section>
+
 
     <footer class="ftco-footer ftco-section img">
     <div class="overlay"></div>

@@ -41,8 +41,8 @@
 
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a href="projects.html" class="nav-link">Projects</a></li>
-          <li class="nav-item active"><a href="meetingreport.html" class="nav-link">Reports</a></li>
+          <li class="nav-item"><a href="projects.php" class="nav-link">Projects</a></li>
+          <li class="nav-item active"><a href="meetingreport.php" class="nav-link">Reports</a></li>
           <li class="nav-item"><a href="listvolunteer.html" class="nav-link">Volunteers</a></li>
           <li class="nav-item"><a href="userProfileMain.html" class="nav-link">Profile</a></li>
           <li class="nav-item"><a href="login.html" class="nav-link">Log Out</a></li> 
@@ -72,15 +72,23 @@
           </div>
         </div>
         <div class="row d-flex" id="page1">
-        	<div class="col-lg-4 mb-sm-4 ftco-animate">
+          <?php
+          include_once("scripts/config.php");
+          $stmt = $pdo->prepare('SELECT * FROM project');
+          $stmt->execute();
+          if($stmt->rowCount()>0){
+            while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
+              extract($row);
+          ?>
+         <div class="col-lg-4 mb-sm-4 ftco-animate">
         		<div class="staff">
         			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/cause-1.jpg);"></div>
+        				<div class="img" style="background-image: url(<?php echo 'data:' . $p_image_type . ';base64,' . base64_encode($p_image) . ''; ?>);"></div>
         				<div class="info ml-2">
-        					<h3><a href="#">Clean Water for The Rural Area</a></h3> 
-                      <a href="listOfReports1.html">Reports</a>                   
+        					<h3><a href="#"><?php echo $p_name; ?></a></h3> 
+                      <h4><a href="listOfReports1.php?project_ID=<?php echo $project_ID; ?>">Reports</a></h4>           
                   <div class="col-md-4">
-                    <a href="addreport.html" type="button" class="float-center btn btn-default" aria-label="Add Project">
+                    <a href="addreport.php?project_ID=<?php echo $project_ID; ?>" type="button" class="float-center btn btn-default" aria-label="Add Project">
                       <span class="oi oi-plus" aria-hidden="true">
                       </span>
                     </a>
@@ -88,92 +96,12 @@
                 </div>
         			</div>
             </div>
-        	</div>
-        	<div class="col-lg-4 mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/cause-2.jpg);"></div>
-        				<div class="info ml-2">
-        					<h3><a href="#">Safety Training to Growing Children</a></h3>
-                      <a href="#">Reports</a>
-                  <div class="col-md-4">
-                    <a href="addreport.html" type="button" class="float-center btn btn-default" aria-label="Add Project">
-                      <span class="oi oi-plus" aria-hidden="true">
-                      </span>
-                    </a>
-                  </div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-4 mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/cause-3.jpg);"></div>
-        				<div class="info ml-2">
-        					<h3><a href="#">Blankets For Those Without Shelter</a></h3>
-                      <a href="#">Reports</a>
-                  <div class="col-md-4">
-                    <a href="addreport.html" type="button" class="float-center btn btn-default" aria-label="Add Project">
-                      <span class="oi oi-plus" aria-hidden="true">
-                      </span>
-                    </a>
-                  </div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-4 mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/cause-4.jpg);"></div>
-        				<div class="info ml-2">
-        					<h3><a href="#">Medical Care for War Victims</a></h3>
-                      <a href="#">Reports</a>
-                  <div class="col-md-4">
-                    <a href="addreport.html" type="button" class="float-center btn btn-default" aria-label="Add Project">
-                      <span class="oi oi-plus" aria-hidden="true">
-                      </span>
-                    </a>
-                  </div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-4 mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/cause-5.jpg);"></div>
-        				<div class="info ml-2">
-        					<h3><a href="#">Care for Refugees In Foreign Countries</a></h3>
-                      <a href="#">Reports</a>
-                  <div class="col-md-4">
-                    <a href="addreport.html" type="button" class="float-center btn btn-default" aria-label="Add Project">
-                      <span class="oi oi-plus" aria-hidden="true">
-                      </span>
-                    </a>
-                  </div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-lg-4 mb-sm-4 ftco-animate">
-        		<div class="staff">
-        			<div class="d-flex mb-4">
-        				<div class="img" style="background-image: url(images/cause-6.jpg);"></div>
-        				<div class="info ml-4">
-        					<h3><a href="#">Education for The Poverty-Stricken</a></h3>
-                      <a href="#">Reports</a>
-                  <div class="col-md-4">
-                    <a href="addreport.html" type="button" class="float-center btn btn-default" aria-label="Add Project">
-                      <span class="oi oi-plus" aria-hidden="true">
-                      </span>
-                    </a>
-                  </div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
+          </div>
+        <?php
+          }
+        }
+        ?>
+        </div>
         </div>
         <div class="row mt-5">
           <div class="col text-center">
@@ -183,6 +111,8 @@
                 <li class="active"><span>1</span></li>
                 <li><a href="#">2</a></li>
                 <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
                 <li><a href="#">&gt;</a></li>
               </ul>
             </div>
@@ -269,5 +199,16 @@
   <script src="js/scrollax.min.js"></script>
   <script src="js/main.js"></script>
     
+  <?php
+  if ($_GET["np"] == "success_add") {
+    echo "<script>alert(\"Report added successfully!\")</script>";
+  } elseif ($_GET["np"] == "success_edit") {
+    echo "<script>alert(\"Report edited successfully!\")</script>";
+  } elseif ($_GET["np"] == "success_delete") {
+    echo "<script>alert(\"Report deleted successfully!\")</script>";
+  }  elseif ($_GET["np"] == "fail_delete") {
+    echo "<script>alert(\"Error in deleting project!\")</script>";
+  } 
+  ?>
   </body>
 </html>
