@@ -1,3 +1,7 @@
+<?php
+session_start();
+$userID=$_SESSION["userID"];
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -104,7 +108,7 @@
               <textarea name="content" cols="30" rows="6" maxlength="1000" class="form-control" required ></textarea>
             </div>
             <div class="form-group">
-              <p>Participants*</p>
+              <p>Name of Participants*</p>
               <textarea name="comments" class="form-control" cols="30" rows="2" maxlength="200" required></textarea>
             </div>
             <div class="text">
