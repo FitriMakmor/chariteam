@@ -46,7 +46,7 @@
           <li class="nav-item"><a href="projects.php" class="nav-link">Projects</a></li>
           <li class="nav-item"><a href="listvolunteer.php?page=1" class="nav-link">Volunteers</a></li>
           <li class="nav-item"><a href="userProfileMain.php?userID=<?php echo $_SESSION['userID'] ?>" class="nav-link">Profile</a></li>
-          <li class="nav-item"><a href="login.php" class="nav-link">Log Out</a></li> 
+          <li class="nav-item"><a href="logout.php" class="nav-link">Log Out</a></li> 
         </ul>
       </div>
     </div>
@@ -158,7 +158,7 @@
               <li><a href="projects.php" class="py-2 d-block">Projects</a></li>
               <li><a href="listvolunteer.php" class="py-2 d-block">Volunteers</a></li>
               <li><a href="userProfileMain.php?userID="<?php echo $_SESSION['userID'] ?> class="py-2 d-block">Profile</a></li>
-              <li><a href="login.php" class="py-2 d-block">Log Out</a></li>
+              <li><a href="logout.php" class="py-2 d-block">Log Out</a></li>
             </ul>
           </div>
         </div>
