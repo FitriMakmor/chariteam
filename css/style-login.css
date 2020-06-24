@@ -3,7 +3,13 @@ body{
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
+    height: 100%;
 }
+.hero-wrap{
+  max-width: 100%;
+  height: auto;
+}
+
 .headName h1{
   color: white;;
   float: left;
@@ -20,8 +26,8 @@ body{
 
 /* container for login */
 .container1{
-    width: 400px;
-    height: 450px;
+    width: 430px;
+    height: 400px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -34,8 +40,8 @@ body{
 }
 /* container for resetPassword */
 .container2{
-    width: 520px;
-    height: 280px;
+    width: 500px;
+    height: 400px;
     position: absolute;
     top: 40%;
     left: 50%;
@@ -47,8 +53,8 @@ body{
 }
 /* container for register */
 .container3{
-    width: 380px;
-    height: 440px;
+    width: 450px;
+    height: 500px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -59,10 +65,10 @@ body{
     box-shadow: 0 0 20px 2px #e99aab;
 }
 .login-box{
-    width: 300px;
+    width: 350px;
     height: 300px;
     position: absolute;
-    top: 35%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     color: #e25070;
@@ -70,10 +76,10 @@ body{
     margin-bottom: auto;
   }
   .reg{
-    width: 300px;
-    height: 350px;
+    width: 370px;
+    height: 420px;
     position: absolute;
-    top: 35%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     color: #e25070;
@@ -81,14 +87,24 @@ body{
     margin-bottom: auto;
   }
   .password{
-    width: 450px;
-    height: 270px;
+    width: 350px;
+    height: 300px;
     position: absolute;
-    top: 40%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%,-50%);
     color: #e25070;
     background: transparent;
+    margin-bottom: auto;
+  }
+  .reult{
+    width: 300px;
+    height: 350px;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #50a0e2;
     margin-bottom: auto;
   }
 /* class to go back to login page */
@@ -117,7 +133,12 @@ body{
     border-bottom: 1px solid white;
     font-weight: bold;
   }
-
+ #errorMessage{
+   border-bottom: none;
+   color: #dbf547;
+   font-size: 15px;
+   text-align: center;
+ }
   .textbox i{
     width: 26px;
     float: left;
