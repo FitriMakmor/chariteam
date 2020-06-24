@@ -8,7 +8,6 @@
       echo "Record deleted successfully";
       $projectID = $_GET["pro"];
       header("Location:../project-volunteers.php?project_ID=".$projectID);
-
       
     } catch (Exception $e) {
       $pdo->rollback();

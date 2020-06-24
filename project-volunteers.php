@@ -74,8 +74,8 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a
-                  href="projects.html">Projects</a></span><span>Assigned Volunteers </span></p>
+            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2">
+            <a href="projects.php">Projects</a></span><span>Assigned Volunteers </span></p>
             <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> Assigned Volunteers for <?php echo $pname;?></h1>
           </div>
           <?php } ?>
@@ -116,7 +116,7 @@
         			<div class="d-flex mb-4">
               <div class="img" style="background-image: url(<?php echo 'data:' . $imageType . ';base64,' . base64_encode($image) . '';?>);"></div>
         				<div class="info ml-4">
-        					<h3><a href="teacher-single.html"><?php echo $vname; ?></a></h3>
+        					<h3><a href ="displayprofile.php?v_ID=<?php echo $id;?>"><?php echo $vname; ?></a></h3>
         					<span class="position"><?php echo $vstate ?></span>              
                   <button type="button" data-vol="<?php echo $vid; ?>" data-pro="<?php echo $pid; ?>" class="del fa fa-trash"  type="button" ></button>
                 </div>
