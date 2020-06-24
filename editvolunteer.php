@@ -148,11 +148,11 @@ if(isset($_POST['delete'])){
 
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a href="projects.html" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="meetingreport.html" class="nav-link">Reports</a></li>
-          <li class="nav-item active"><a href="listvolunteer.php?page=1" class="nav-link">Volunteers</a></li>
-          <li class="nav-item"><a href="userProfileMain.html" class="nav-link">Profile</a></li>
-          <li class="nav-item"><a href="login.html" class="nav-link">Log Out</a></li>
+          <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="projects.php" class="nav-link">Projects</a></li>
+          <li class="nav-item"><a href="listvolunteer.php?page=1" class="nav-link">Volunteers</a></li>
+          <li class="nav-item"><a href="userProfileMain.php?userID=<?php echo $_SESSION['userID'] ?>" class="nav-link">Profile</a></li>
+          <li class="nav-item"><a href="logout.php" class="nav-link">Log Out</a></li> 
         </ul>
       </div>
     </div>

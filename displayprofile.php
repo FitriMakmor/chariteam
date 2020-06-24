@@ -47,11 +47,11 @@ $userID=$_SESSION["userID"];
 
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a href="projects.html" class="nav-link">Projects</a></li>
-          <li class="nav-item"><a href="meetingreport.html" class="nav-link">Reports</a></li>
-          <li class="nav-item active"><a href="listvolunteer.php?page=1" class="nav-link">Volunteers</a></li>
-          <li class="nav-item"><a href="userProfileMain.html" class="nav-link">Profile</a></li>
-          <li class="nav-item"><a href="login.html" class="nav-link">Log Out</a></li>
+          <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="projects.php" class="nav-link">Projects</a></li>
+          <li class="nav-item"><a href="listvolunteer.php?page=1" class="nav-link">Volunteers</a></li>
+          <li class="nav-item"><a href="userProfileMain.php?userID=<?php echo $_SESSION['userID'] ?>" class="nav-link">Profile</a></li>
+          <li class="nav-item"><a href="logout.php" class="nav-link">Log Out</a></li> 
         </ul>
       </div>
     </div>
@@ -303,11 +303,11 @@ $userID=$_SESSION["userID"];
            <div class="ftco-footer-widget mb-4 ml-md-4">
             <h2 class="ftco-heading-2">Site Links</h2>
             <ul class="list-unstyled">
-              <li><a href="projects.html" class="py-2 d-block">Projects</a></li>
-              <li><a href="meetingreport.html" class="py-2 d-block">Reports</a></li>
-              <li><a href="listvolunteer.php?page=1" class="py-2 d-block">Volunteers</a></li>
-              <li><a href="userProfileMain.html" class="py-2 d-block">Profile</a></li>
-              <li><a href="login.html" class="py-2 d-block">Log Out</a></li>
+              <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
+              <li class="nav-item"><a href="projects.php" class="nav-link">Projects</a></li>
+              <li class="nav-item"><a href="listvolunteer.php?page=1" class="nav-link">Volunteers</a></li>
+              <li class="nav-item"><a href="userProfileMain.php?userID=<?php echo $_SESSION['userID'] ?>" class="nav-link">Profile</a></li>
+              <li class="nav-item"><a href="logout.php" class="nav-link">Log Out</a></li> 
             </ul>
           </div>
         </div>

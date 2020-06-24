@@ -47,8 +47,8 @@ include_once("scripts/config.php");
           <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
           <li class="nav-item"><a href="projects.php" class="nav-link">Projects</a></li>
           <li class="nav-item"><a href="listvolunteer.php?page=1" class="nav-link">Volunteers</a></li>
-          <li class="nav-item active"><a href="userProfileMain.php?userID=<?php echo $_SESSION['userID'] ?>" class="nav-link">Profile</a></li>
-          <li class="nav-item"><a href="logout.php" class="nav-link">Log Out</a></li> 
+          <li class="nav-item"><a href="userProfileMain.php?userID=<?php echo $_SESSION['userID'] ?>" class="nav-link">Profile</a></li>
+          <li class="nav-item active"><a href="logout.php" class="nav-link">Log Out</a></li> 
         </ul>
       </div>
     </div>
@@ -222,10 +222,10 @@ include_once("scripts/config.php");
            <div class="ftco-footer-widget mb-4 ml-md-4">
             <h2 class="ftco-heading-2">Site Links</h2>
             <ul class="list-unstyled">
-              <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
+              <li class="nav-item active"><a href="about.php" class="nav-link">About</a></li>
               <li class="nav-item"><a href="projects.php" class="nav-link">Projects</a></li>
               <li class="nav-item"><a href="listvolunteer.php?page=1" class="nav-link">Volunteers</a></li>
-              <li class="nav-item active"><a href="userProfileMain.php?userID=<?php echo $_SESSION['userID'] ?>" class="nav-link">Profile</a></li>
+              <li class="nav-item"><a href="userProfileMain.php?userID=<?php echo $_SESSION['userID'] ?>" class="nav-link">Profile</a></li>
               <li class="nav-item"><a href="logout.php" class="nav-link">Log Out</a></li> 
             </ul>
           </div>
