@@ -1,6 +1,6 @@
 <?php
 session_start();
-$userID=$_SESSION["userID"];
+// $userID=$_SESSION["userID"];
 
 $volunteer_ID = $v_firstName = $v_lastName = $v_email = $v_address1 = $v_address2 ="";
 $v_state = $v_status = $v_telNum = $v_publicInfo = $v_DOR = $v_image = "";
@@ -23,15 +23,12 @@ if(isset($_POST['update']))
     $v_DOR = $_POST["DOR"];
     $v_occ = $_POST["occ"];
 
-    // $imageData = addslashes(file_get_contents($_FILES['image']['tmp_name']));
-    // $imageProperties = getimagesize($_FILES['image']['tmp_name']);
 
 } 
   
 
 
 $v_ID=$_GET["v_ID"];
-// ,v_image=:v_image,v_image_type=:v_image_type
 $stmt = $pdo->prepare("UPDATE volunteer SET v_firstName=:fname,v_lastName=:lname,v_IC=:v_ic,v_email=:v_email,v_address1=:add1,v_address2=:add2,v_state=:v_state,v_status=:v_status,v_telNum=:tel,v_publicinfo=:publicinfo,v_occ=:occ,v_DOR=:dor  WHERE volunteer_ID=:uid");
 $stmt->bindValue(":fname",$v_firstName);
 $stmt->bindValue(":lname",$v_lastName);
@@ -46,33 +43,35 @@ $stmt->bindParam(':publicinfo',$v_publicInfo);
 $stmt->bindParam(':occ',$v_occ);
 $stmt->bindParam(':dor',$v_DOR);
 $stmt->bindParam(':uid',$v_ID);
-// $stmt->bindParam(':v_image',$imageData);
-// $stmt->bindParam(':v_image_type',$imageProperties['mime']);
-$checkduplicate = $pdo->query("SELECT COUNT(*) FROM volunteer WHERE (v_IC='$v_IC') ");
-     $dupe= $checkduplicate ->fetch();
-     $count=$dupe[0];
-      if($count>1){
-        $errMSG ="IC already registered";
 
-      }
-      $checkduplicateEmail = $pdo->query("SELECT COUNT(*) FROM volunteer WHERE (v_email='$v_email') ");
+     $checkduplicate = $pdo->query("SELECT COUNT(*) FROM volunteer WHERE (v_IC='$v_IC') && (volunteer_ID!='$v_ID')");
+     $dupe= $checkduplicate ->fetch();
+     if($dupe==true  ){
+           $count=$dupe[0];
+            if($count>0){
+              
+            $errMSG ="IC already registered".$count;
+         }
+
+       }else{
+      $checkduplicateEmail = $pdo->query("SELECT COUNT(*) FROM volunteer WHERE (v_email='$v_email')  && (volunteer_ID!='$v_ID')");
      $dupeEmail = $checkduplicateEmail ->fetch();
      $countEmail=$dupeEmail[0];
-      if($countEmail>1){
+      if($countEmail>0){
         $errMSG ="Email is already registered";
 
-      }
+      }}
 
       if(!isset($errMSG)){
         $stmt->execute();
   header('Location:displayprofile.php?v_ID='.$v_ID);
-
+      }
 }
 // else{
 //   echo "Error: ".$pdo=error."<br><br>";
 // }
 
-}
+
 if(isset($_POST['updateImage'])){
 
     $imageData = addslashes(file_get_contents($_FILES['image']['tmp_name']));
@@ -226,7 +225,7 @@ if(isset($_POST['delete'])){
                              <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">First Name*</label> 
                                 <div class="col-8">
-                                  <input id="name" name="name" placeholder="First Name" class="form-control here"  value="<?php echo $row['v_firstName']; ?>" type="text">
+                                  <input id="name" name="name" placeholder="First Name" class="form-control here"  pattern =""value="<?php echo $row['v_firstName']; ?>" type="text">
                                 </div>
                               </div>
                               <div class="form-group row">
