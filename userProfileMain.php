@@ -158,7 +158,7 @@ include_once("scripts/config.php");
                           <br>
                           <div class="row">
                             <div class="col-4">
-                           <h5 style="color:dimgrey"><b>About</b></h5>
+                           <label><b>About</b></label>
                             </div> 
                             <div class="col-8">
                                 <h5><?php echo $u_bio; ?></h5><br>
