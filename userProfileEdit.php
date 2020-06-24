@@ -4,81 +4,6 @@ $userID=$_SESSION["userID"];
 include_once("scripts/config.php");
 
 
-$nameErr = $telNumErr = $emailErr = "";
-     $u_name = $u_telNum = $u_email = "";
-     
-     if ($_SERVER["REQUEST_METHOD"] == "POST"){
-
-       if (!empty($_POST["fullname"])) {
-         
-         $u_name = test_input($_POST["fullname"]);
-         // check if name only contains letters and whitespace
-         if (!preg_match("/^[a-zA-Z ]*$/",$u_name)) {
-           $nameErr = "Only letters and white space allowed";
-         }
-       }
-    
-       if (!empty($_POST["telnum"])) {
-        
-         $u_telNum = test_input($_POST["telnum"]);
-         // check if contact number is well-formed
-         if (!preg_match("/^(01)[0-46-9]*-[0-9]{7,8}$/",$u_telNum)) {
-           $telNumErr = "Phone number should contain only numbers";
-         }
-       }
-
-       $checkduplicate = $pdo->query("SELECT COUNT(*) FROM volunteer WHERE (v_IC='$v_IC') ");
-        $dupe= $checkduplicate ->fetch();
-        $count=$dupe[0];
-          if($count>0){
-            $errMSG ="IC already registered";
-
-          }
-   
-       // Validate email
-  if(empty(trim($_POST["email"]))){
-    $emailErr = "Please enter a email.";
-} else{
-    // Prepare a select statement
-    $sql = "SELECT userID FROM user WHERE u_email = :email";
-    
-    if($stmt3 = $pdo->prepare($sql)){
-        // Bind variables to the prepared statement as parameters
-        $stmt3->bindParam(":email", $u_email);
-        
-        // Set parameters
-        $u_email = trim($_POST["email"]);
-        
-        // Attempt to execute the prepared statement
-        if($stmt3->execute()){
-            if($stmt3->rowCount() == 1){
-                $emailErr = "This email is already taken.";
-            } else{
-                $email = trim($_POST["email"]);
-            }
-        } else{
-            echo "Oops! Something went wrong. Please try again later.";
-        }
-
-        // Close statement
-        unset($stmt);
-    }
-}
-     }
-      /* if (empty($_POST["email"])) {
-         $emailErr = "Email is required";
-       } else {
-         $u_email = test_input($_POST["email"]);
-         // check if e-mail address is well-formed
-         if (!filter_var($u_email, FILTER_VALIDATE_EMAIL)) {
-           $emailErr = "Invalid email format";
-         }
-       }
-       */
-  
-     
-  
-
 if(isset($_POST['update']))
 {	
   if ( isset($_POST["username"]) && isset($_POST["fullname"]) && isset($_POST["telnum"]) && isset($_POST["bio"]) && isset($_POST["dob"]) && isset($_POST["email"]) && isset($_POST["IC"])) { 
@@ -100,25 +25,39 @@ if(isset($_POST['update']))
 	$stmt->bindParam(':fullname',$u_name);
 	$stmt->bindParam(':telnum',$u_telNum);
 	$stmt->bindParam(':bio',$u_bio);	
-	//$stmt->bindParam(':org',$org_ID);
 	$stmt->bindParam(':dob',$u_DOB);
 	$stmt->bindParam(':email',$u_email);
 	$stmt->bindParam(':IC',$u_IC);
-  //$stmt->bindParam(':imagefile',$u_image);
-//  $stmt->bindParam(':u_image',$imageData);
-//  $stmt->bindParam(':u_imageType',$imageProperties['mime']);
   $stmt->bindParam(':uid',$userID);
   
 
+  $checkduplicate = $pdo->query("SELECT COUNT(*) FROM user WHERE userID!= $userID && (username='$username') ");
+  $dupe= $checkduplicate ->fetch();
+  $count=$dupe[0];
+    if($count>0){
+      $errMSG ="Username already in use. Please choose another one :)";
+    }
 
-	if($stmt->execute()){ 
+    $checkduplicateEmail = $pdo->query("SELECT COUNT(*) FROM user WHERE userID!= $userID && (u_email='$u_email') ");
+     $dupeEmail = $checkduplicateEmail ->fetch();
+     $countEmail=$dupeEmail[0];
+      if($countEmail>0){
+        $errMSG ="Email is already in use. Please choose another one :)";
+
+      }
+
+
+  if(!isset($errMSG)){
+	if($stmt->execute()) 
     header('Location:userProfileMain.php?userID='.$userID);
-  }
-  else{
-	  echo "Error: ".$pdo->error."<br><br>";
-  }
   
+
+  // else{
+	//   echo "Error: ".$pdo->error."<br><br>";
+  // }
+  }
 }
+     
 
 if(isset($_POST['updateimage'])){
   $imageData = addslashes(file_get_contents($_FILES['imagefile']['tmp_name']));
@@ -138,15 +77,6 @@ if(isset($_POST['updateimage'])){
 }
 
      
-    
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
-
-
         
 ?>
 
@@ -362,6 +292,13 @@ function test_input($data) {
               </ul>
               <div class="tab-content pt-3">
                 <div class="tab-pane active">
+                <?php if(isset($errMSG)){
+          ?>
+                <div class="alert alert-danger">
+                  <span class="glyphicon glyphicon-info-sign"></span> <strong><?php echo $errMSG; ?></strong>
+                </div>
+                <?php
+      }?>
                 <form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" onsubmit="return formValidator()">
                     <div class="row">
                       <div class="col">
@@ -384,8 +321,6 @@ function test_input($data) {
                             <div class="form-group">
                               <label for="email">Email</label>
                               <input type="email" class="form-control" name='email' id="email" aria-describedby="emailHelp" placeholder="user@example.com" value="<?php echo $res['u_email']; ?>">
-                             
-                              <span class="help-block"><?php echo $emailErr; ?></span>
                             </div>
                           </div> 
                         </div>
@@ -401,7 +336,7 @@ function test_input($data) {
                           <div class="col">
                             <div class="form-group">
                               <label for="phone">Mobile Number</label>
-                              <input type="tel" class="form-control" name="telnum" id="phone" placeholder="016-12345678" pattern="[0-9]{3}-[0-9]{7,8}" value="<?php echo $res['u_telNum']; ?>"> <span class="error"><?php echo $telNumErr;?>
+                              <input type="tel" class="form-control" name="telnum" id="phone" placeholder="016-12345678" pattern="[0-9]{3}-[0-9]{7,8}" value="<?php echo $res['u_telNum']; ?>"> 
                             </div>
                           </div>
                           <div class="col">
