@@ -7,7 +7,7 @@ include_once("scripts/config.php");
 $nameErr = $telNumErr = $emailErr = "";
      $u_name = $u_telNum = $u_email = "";
      
-     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+     if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
        if (!empty($_POST["fullname"])) {
          
@@ -42,16 +42,16 @@ $nameErr = $telNumErr = $emailErr = "";
     // Prepare a select statement
     $sql = "SELECT userID FROM user WHERE u_email = :email";
     
-    if($stmt = $pdo->prepare($sql)){
+    if($stmt3 = $pdo->prepare($sql)){
         // Bind variables to the prepared statement as parameters
-        $stmt->bindParam(":email", $u_email);
+        $stmt3->bindParam(":email", $u_email);
         
         // Set parameters
         $u_email = trim($_POST["email"]);
         
         // Attempt to execute the prepared statement
-        if($stmt->execute()){
-            if($stmt->rowCount() == 1){
+        if($stmt3->execute()){
+            if($stmt3->rowCount() == 1){
                 $emailErr = "This email is already taken.";
             } else{
                 $email = trim($_POST["email"]);
@@ -64,7 +64,7 @@ $nameErr = $telNumErr = $emailErr = "";
         unset($stmt);
     }
 }
-
+     }
       /* if (empty($_POST["email"])) {
          $emailErr = "Email is required";
        } else {
@@ -75,12 +75,7 @@ $nameErr = $telNumErr = $emailErr = "";
          }
        }
        */
-    
-       if (empty($_POST["service"])) {
-         $serviceErr = "Service is required";
-       } else {
-         $service = test_input($_POST["service"]);
-       }
+  
      
   
 
@@ -143,7 +138,7 @@ if(isset($_POST['updateimage'])){
 }
 
      
-}     
+    
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
@@ -253,48 +248,28 @@ function test_input($data) {
           $res=$result->fetch(PDO::FETCH_ASSOC);
           $image=$res["u_image"];
           $imageType=$res["u_imageType"];
-          
-         /*try {
         
-            $pdo->beginTransaction();
-            //$userID=$_GET["userID"];
-            $sql2 = "SELECT * FROM user";
-            $result = $pdo->query($sql2); 
-            //$result ->execute(array(':userID'=>$userID));
-            
-            while($res=$result->fetch()){
-            if ($res["userID"] == $_SESSION["userID"]){
-            $username = $res['username'];	
-            $u_name = $res['u_name'];
-            $u_telNum = $res['u_telNum'];
-            $u_bio = $res['u_bio'];
-            $u_DOB = $res['u_DOB'];
-            $u_email = $res['u_email'];	
-            $u_IC= $res['u_IC'];
-            $u_image = $res['u_image'];
-            //$u_dateJoined = $res['u_dateJoined'];
-*/
-
          ?> 
          
-         <!--script type='text/javascript'>
-function formValidator()
-{
+  <script type='text/javascript'>
+  
+  function formValidator()
+  {
     // Make quick references to our fields
-    alert("hiiiiiii");
     var fullname = document.getElementById('name').value;
     var email = document.getElementById('email').value;
-    var telnum = document.getElementById('tel').value;
+    var telnum = document.getElementById('phone').value;
 
     if( fullname=="" || fullname==null)
      {
-         alert("Please Enter user name");
+         alert("Please enter your name");
          return false;
      }
-     var alphaExp = /^[a-zA-Z]+$/;
-     if(!name.match(alphaExp))
+     var alphaExp =/^[a-zA-Z ]*$/;
+     if(!fullname.match(alphaExp))
       {
-          alert("please Enter only Alphabates for Name");
+         
+          alert("only letters and white spaces allowed for name");
           return false;
       }
 
@@ -306,6 +281,7 @@ function formValidator()
       var emailExp = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
       if(!email.match(emailExp))
        {
+
            alert("please Enter valid email address");
             return false;
        }
@@ -317,12 +293,12 @@ function formValidator()
        var numericExpression = /^(01)[0-46-9]*-[0-9]{7,8}$/;
        if(!telnum.match(numericExpression))
        {
-           alert("Enter only Digit for Phone Number");
+           alert("Please follow format");
            return false;
        }
        return true;
 }
-</script-->
+</script>
       
 
   <div class="col ftco-animate">
@@ -386,14 +362,14 @@ function formValidator()
               </ul>
               <div class="tab-content pt-3">
                 <div class="tab-pane active">
-                <form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                <form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" onsubmit="return formValidator()">
                     <div class="row">
                       <div class="col">
                         <div class="row">
                           <div class="col">
                             <div class="form-group">
-                              <label>Full Name</label>
-                              <input class="form-control" id="name" type="text" name="fullname" placeholder="John Smith" value="<?php echo $res['u_name']; ?>"><span class="error">* <?php echo $nameErr;?>
+                              <label >Full Name</label>
+                              <input class="form-control" id="name" type="text" name="fullname" placeholder="John Smith" value="<?php echo $res['u_name']; ?>">
                             </div>
                           </div>
                           <div class="col">
