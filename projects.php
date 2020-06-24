@@ -46,11 +46,11 @@ session_start();
 
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
           <li class="nav-item active"><a href="projects.php" class="nav-link">Projects</a></li>
-          <li class="nav-item"><a href="meetingreport.html" class="nav-link">Reports</a></li>
-          <li class="nav-item"><a href="listvolunteer.html" class="nav-link">Volunteers</a></li>
-          <li class="nav-item"><a href="userProfileMain.html" class="nav-link">Profile</a></li>
-          <li class="nav-item"><a href="login.html" class="nav-link">Log Out</a></li>
+          <li class="nav-item"><a href="listvolunteer.php?page=1" class="nav-link">Volunteers</a></li>
+          <li class="nav-item"><a href="userProfileMain.php?userID=<?php echo $_SESSION['userID'] ?>" class="nav-link">Profile</a></li>
+          <li class="nav-item"><a href="logout.php" class="nav-link">Log Out</a></li> 
         </ul>
       </div>
     </div>
@@ -78,25 +78,25 @@ session_start();
       ?>
           <div class='alert alert-success' role='alert'>
             <h2 class="">Project added successfully!</h2>
-        </div>
+          </div>
         <?php
         } elseif ($_GET["np"] == "success_edit") {
         ?>
           <div class='alert alert-success' role='alert'>
             <h2 class="">Project modified successfully!</h2>
-        </div>
+          </div>
         <?php
         } elseif ($_GET["np"] == "success_delete") {
         ?>
           <div class='alert alert-success' role='alert'>
             <h2 class="">Project deleted successfully!</h2>
-        </div>
+          </div>
         <?php
         } elseif ($_GET["np"] == "fail_delete") {
         ?>
           <div class='alert alert-danger' role='alert'>
             <h2 class="">Error in deleting project!</h2>
-        </div>
+          </div>
       <?php
         }
       }
@@ -119,6 +119,13 @@ session_start();
       <?php
       include_once("scripts/config.php");
       try {
+        if (!isset($_SESSION["userID"])) {
+      ?>
+          <div class='alert alert-danger' role='alert'>
+            <h2 class="">You are not logged in!</h2>
+          </div>
+          <?php
+        }
         $pdo->beginTransaction();
         $sql = "SELECT * FROM project";
         $result = $pdo->query($sql);
@@ -136,7 +143,7 @@ session_start();
             $imageType = $res["p_image_type"];
             if ($projectNo % 3 == 1) {
               if ($projectNo == 1) {
-      ?>
+          ?>
                 <div class="row d-flex" id="page1">
                 <?php
               } else {
@@ -221,7 +228,7 @@ session_start();
                       <?php echo $description ?>
                     </div>
                     <div class="modal-footer">
-                      <a href="project-volunteers.html" class="btn btn-primary">Manage Volunteers</a>
+                      <a href="project-volunteers.php" class="btn btn-primary">Manage Volunteers</a>
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                   </div>
@@ -291,41 +298,35 @@ session_start();
             <p>This is a simple and convenient system that helps Project Managers to manage their charity projects all in just one website</p>
           </div>
         </div>
-        <div class="col-md-5">
-          <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Upcoming Projects</h2>
-            <div class="block-21 mb-4 d-flex">
-              <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-              <div class="text">
-                <h3 class="heading"><a href="projects.php">Safety Training to Growing Children</a></h3>
-                <div class="meta">
-                  <div><a href="#"><span class="icon-calendar"></span> July 12, 2019</a></div>
-                  <div><a href="#"><span class="icon-person" name="Organisation"></span> We Love Earth</a></div>
+        <div class="col-md-1"></div>
 
-                </div>
-              </div>
-            </div>
-            <div class="block-21 mb-4 d-flex">
-              <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-              <div class="text">
-                <h3 class="heading"><a href="projects.php">Clean Water for Rural Areas</a></h3>
-                <div class="meta">
-                  <div><a href="#"><span class="icon-calendar"></span> November 25, 2019</a></div>
-                  <div><a href="#"><span class="icon-person" name="Organisation"></span> Hope Org</a></div>
-                </div>
-              </div>
-            </div>
+        <div class="col-md-4">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Contact Us</h2>
+            <p>No. 39, Some Road Somewhere,
+              <br>Off Teluk Whatever,
+              <br>48900 A Place,
+              <br>someState, Malaysia
+            </p>
+            <p>03-12345678</p>
           </div>
         </div>
+        <div class="cold-md-3"></div>
+
         <div class="col-md-2">
           <div class="ftco-footer-widget mb-4 ml-md-4">
             <h2 class="ftco-heading-2">Site Links</h2>
             <ul class="list-unstyled">
+              <li><a href="about.php" class="py-2 d-block">About</a></li>
               <li><a href="projects.php" class="py-2 d-block">Projects</a></li>
-              <li><a href="meetingreport.html" class="py-2 d-block">Reports</a></li>
-              <li><a href="listvolunteer.html" class="py-2 d-block">Volunteers</a></li>
-              <li><a href="userProfileMain.html" class="py-2 d-block">Profile</a></li>
-              <li><a href="login.html" class="py-2 d-block">Log Out</a></li>
+              <li><a href="listvolunteer.php" class="py-2 d-block">Volunteers</a></li>
+<<<<<<< HEAD
+              <li><a href="userProfileMain.php?userID=" <?php echo $_SESSION['userID'] ?> class="py-2 d-block">Profile</a></li>
+              <li><a href="login.php" class="py-2 d-block">Log Out</a></li>
+=======
+              <li><a href="userProfileMain.php?userID="<?php echo $_SESSION['userID'] ?> class="py-2 d-block">Profile</a></li>
+              <li><a href="logout.php" class="py-2 d-block">Log Out</a></li>
+>>>>>>> ccef5c5be33e863a6e895c2b01bfe0861a0f439e
             </ul>
           </div>
         </div>
