@@ -1,4 +1,6 @@
 <?php
+session_start();
+$userID=$_SESSION["userID"];
 
 $volunteer_ID = $v_firstName = $v_lastName = $v_email = $v_address1 = $v_address2 ="";
 $v_state = $v_status = $v_telNum = $v_publicInfo = $v_DOR = $v_image = "";
@@ -46,15 +48,29 @@ $stmt->bindParam(':dor',$v_DOR);
 $stmt->bindParam(':uid',$v_ID);
 // $stmt->bindParam(':v_image',$imageData);
 // $stmt->bindParam(':v_image_type',$imageProperties['mime']);
+$checkduplicate = $pdo->query("SELECT COUNT(*) FROM volunteer WHERE (v_IC='$v_IC') ");
+     $dupe= $checkduplicate ->fetch();
+     $count=$dupe[0];
+      if($count>1){
+        $errMSG ="IC already registered";
 
+      }
+      $checkduplicateEmail = $pdo->query("SELECT COUNT(*) FROM volunteer WHERE (v_email='$v_email') ");
+     $dupeEmail = $checkduplicateEmail ->fetch();
+     $countEmail=$dupeEmail[0];
+      if($countEmail>1){
+        $errMSG ="Email is already registered";
 
-if($stmt->execute()){
+      }
+
+      if(!isset($errMSG)){
+        $stmt->execute();
   header('Location:displayprofile.php?v_ID='.$v_ID);
 
 }
-else{
-  echo "Error: ".$pdo->error."<br><br>";
-}
+// else{
+//   echo "Error: ".$pdo=error."<br><br>";
+// }
 
 }
 if(isset($_POST['updateImage'])){
@@ -78,7 +94,7 @@ if(isset($_POST['delete'])){
     $stmt_delete = $pdo->prepare('DELETE FROM volunteer WHERE volunteer_ID =:uid');
     $stmt_delete->bindParam(':uid',$v_ID);
     if($stmt_delete->execute()){
-      header('Location:listvolunteer.php');
+      header('Location:listvolunteer.php?page=1');
     }else{
       echo "Error: ".$pdo->error."<br><br>";
     }
@@ -87,6 +103,7 @@ if(isset($_POST['delete'])){
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -125,18 +142,18 @@ if(isset($_POST['delete'])){
     
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-      <a class="navbar-brand" href="projects.html">Chariteam</a>
+      <a class="navbar-brand" href="about.php">Chariteam</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
       </button>
 
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
-          <li class="nav-item"><a href="projects.php" class="nav-link">Projects</a></li>
-          <li class="nav-item"><a href="listvolunteer.php?page=1" class="nav-link">Volunteers</a></li>
-          <li class="nav-item"><a href="userProfileMain.php?userID=<?php echo $_SESSION['userID'] ?>" class="nav-link">Profile</a></li>
-          <li class="nav-item"><a href="logout.php" class="nav-link">Log Out</a></li> 
+          <li class="nav-item"><a href="projects.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="meetingreport.html" class="nav-link">Reports</a></li>
+          <li class="nav-item active"><a href="listvolunteer.php?page=1" class="nav-link">Volunteers</a></li>
+          <li class="nav-item"><a href="userProfileMain.html" class="nav-link">Profile</a></li>
+          <li class="nav-item"><a href="login.html" class="nav-link">Log Out</a></li>
         </ul>
       </div>
     </div>
@@ -198,6 +215,13 @@ if(isset($_POST['delete'])){
            
 		            <div class="row">
 		                 <div class="col-md-12">
+                     <?php if(isset($errMSG)){
+          ?>
+                <div class="alert alert-danger">
+                  <span class="glyphicon glyphicon-info-sign"></span> <strong><?php echo $errMSG; ?></strong>
+                </div>
+                <?php
+      }?>
                       <form method="post"> 
                              <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">First Name*</label> 
@@ -246,12 +270,15 @@ if(isset($_POST['delete'])){
                                     <option value="Negeri Sembilan"<?php if ($default_state == "Negeri Sembilan" ) echo 'selected' ; ?>>Negeri Sembilan</option>
                                     <option value="Terengganu"<?php if ($default_state == "Terengganu" ) echo 'selected' ; ?>>Terengganu</option>
                                     <option value="Kedah"<?php if ($default_state == "Kedah" ) echo 'selected' ; ?>>Kedah</option>
+                                    <option value="Kelantan"<?php if ($default_state == "Kelantan" ) echo 'selected' ; ?>>Kelantan</option>
                                     <option value="Perlis"<?php if ($default_state == "Perlis" ) echo 'selected' ; ?>>Perlis</option>
                                     <option value="Kuala Lumpur"<?php if ($default_state == "Kuala Lumpur" ) echo 'selected' ; ?>>Kuala Lumpur</option>
                                     <option value="Selangor"<?php if ($default_state == "Selangor" ) echo 'selected' ; ?>>Selangor</option>
                                     <option value="Pahang"<?php if ($default_state == "Pahang" ) echo 'selected' ; ?>>Pahang</option>
                                     <option value="Perak"<?php if ($default_state == "Perak" ) echo 'selected' ; ?>>Perak</option>
                                     <option value="Pulau Pinang"<?php if ($default_state == "Pulau Pinang" ) echo 'selected' ; ?>>Pulau Pinang</option>
+                                    <option value="Sabah"<?php if ($default_state == "Sabah" ) echo 'selected' ; ?>>Sabah</option>
+                                    <option value="Sarawak"<?php if ($default_state == "Sarawak" ) echo 'selected' ; ?>>Sarawak</option>
 
                                   </select>
                                 </div>
@@ -262,13 +289,13 @@ if(isset($_POST['delete'])){
                                 <?php $default_status = $row['v_status']?>
                                   <select id="select" name="status"  value="<?php echo $row['v_lastName']; ?>"class="custom-select">
                                     <option value="Single"<?php if ($default_status == "Single" ) echo 'selected' ; ?>>Single</option>
-                                    <option value="Married"<?php if ($default_status == "Married" ) echo 'selected' ; ?>>Maried</option>
+                                    <option value="Married"<?php if ($default_status == "Married" ) echo 'selected' ; ?>>Married</option>
                                     <option value="Widow"<?php if ($default_status == "Widow" ) echo 'selected' ; ?>>Widow</option>
 
                                   </select>
                                 </div>
                               </div>
-                              <?php $pdo->null;?>
+                              <?php $pdo=null;?>
                               <div class="form-group row">
                                 <label for="tel" class="col-4 col-form-label">Tel.</label> 
                                 <div class="col-8">
@@ -336,7 +363,7 @@ if(isset($_POST['delete'])){
   
 </div>
     </section>
-    
+    <?php $pdo=null;?>
 
     <footer class="ftco-footer ftco-section img">
     <div class="overlay"></div>
@@ -348,30 +375,42 @@ if(isset($_POST['delete'])){
             <p>This is a simple and convenient system that helps Project Managers to manage their charity projects all in just one website</p>
           </div>
         </div>
-        <div class="col-md-1"></div>
-       
-        <div class="col-md-4">
+        <div class="col-md-5">
           <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Contact Us</h2>
-            <p>No. 39, Some Road Somewhere,
-            <br>Off Teluk Whatever,
-            <br>48900 A Place,
-            <br>someState, Malaysia
-            </p>
-            <p>03-12345678</p>
+            <h2 class="ftco-heading-2">Upcoming Projects</h2>
+            <div class="block-21 mb-4 d-flex">
+              <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+              <div class="text">
+                <h3 class="heading"><a href="projects.html">Safety Training to Growing Children</a></h3>
+                <div class="meta">
+                  <div><a href="#"><span class="icon-calendar"></span> July 12, 2019</a></div>
+                  <div><a href="#"><span class="icon-person" name="Organisation"></span> We Love Earth</a></div>
+                 
+                </div>
+              </div>
+            </div>
+            <div class="block-21 mb-4 d-flex">
+              <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+              <div class="text">
+                <h3 class="heading"><a href="projects.html">Clean Water for Rural Areas</a></h3>
+                <div class="meta">
+                  <div><a href="#"><span class="icon-calendar"></span> November 25, 2019</a></div>
+                  <div><a href="#"><span class="icon-person" name="Organisation"></span> Hope Org</a></div>
+                  
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="cold-md-3"></div>
-       
         <div class="col-md-2">
            <div class="ftco-footer-widget mb-4 ml-md-4">
             <h2 class="ftco-heading-2">Site Links</h2>
             <ul class="list-unstyled">
-              <li><a href="about.php" class="py-2 d-block">About</a></li>
-              <li><a href="projects.php" class="py-2 d-block">Projects</a></li>
-              <li><a href="listvolunteer.php" class="py-2 d-block">Volunteers</a></li>
-              <li><a href="userProfileMain.php?userID="<?php echo $_SESSION['userID'] ?> class="py-2 d-block">Profile</a></li>
-              <li><a href="logout.php" class="py-2 d-block">Log Out</a></li>
+              <li><a href="projects.html" class="py-2 d-block">Projects</a></li>
+              <li><a href="meetingreport.html" class="py-2 d-block">Reports</a></li>
+              <li><a href="listvolunteer.php?page=1" class="py-2 d-block">Volunteers</a></li>
+              <li><a href="userProfileMain.html" class="py-2 d-block">Profile</a></li>
+              <li><a href="login.html" class="py-2 d-block">Log Out</a></li>
             </ul>
           </div>
         </div>

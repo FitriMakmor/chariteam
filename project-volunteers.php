@@ -1,3 +1,7 @@
+<?php
+  session_start();
+  $userID=$_SESSION["userID"];
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +58,16 @@
     </nav>
     <!-- END nav -->
 
-    
+    <?php
+      include_once("scripts/config.php");
+      $pdo->beginTransaction();
+      $projectID = $_GET["project_ID"];
+      $sql2 = "SELECT p_name FROM project WHERE project_ID= $projectID";         
+      $result2 = $pdo -> query($sql2);
+      $pdo->commit();  
+      while($data2 = $result2 -> fetch())  {
+        $pname = $data2["p_name"];          
+    ?>  
     
     <div class="hero-wrap" style="background-image: url('images/bg_vol2.png');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
@@ -63,94 +76,86 @@
           <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
             <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a
                   href="projects.html">Projects</a></span><span>Assigned Volunteers </span></p>
-            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> Assigned Volunteers </h1>
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"> Assigned Volunteers for <?php echo $pname;?></h1>
           </div>
+          <?php } ?>
         </div>
       </div>
     </div>
-
-    <section class="ftco-section bg-light">
-    
-
+  
     <?php
     include_once("scripts/config.php");
-      try {
-        
+
+      try {    
         $pdo->beginTransaction();
-        $sql = "SELECT project_volunteer.project_ID, volunteer.volunteer_ID, volunteer.v_firstName, volunteer.v_lastName, volunteer.v_state, volunteer.v_image, volunteer.v_image_type, project.p_name
+        $sql = "SELECT volunteer.volunteer_ID, volunteer.v_firstName, volunteer.v_lastName, volunteer.v_state, volunteer.v_image, volunteer.v_image_type, project.p_name
         FROM volunteer INNER JOIN 
         ( project INNER JOIN project_volunteer ON project.project_ID = project_volunteer.project_ID )
         ON volunteer.volunteer_ID = project_volunteer.volunteer_ID 
-        WHERE project_volunteer.project_ID=3 ";        
-        //'.$_SESSION["project_ID"].'
+        WHERE project_volunteer.project_ID=" . $projectID ." ";        
         
         $result = $pdo -> query($sql);
         $pdo->commit();           
     ?>
 
+    <section class="ftco-section bg-light">
     <!-- START volunteers list -->   
       <div class="container">     
         <div class="row">      
         <?php
-              while($data = $result -> fetch())  {
-                $id = $data["volunteer_ID"];  
-                $pid = $data["project_ID"];
-                $image = $data["v_image"];
-                $imageType = $data["v_image_type"];
-              ?> 
+        while($data = $result -> fetch())  {
+          $vid = $data["volunteer_ID"];  
+          $pid = $projectID;
+          $vname = $data["v_firstName"] . " " . $data["v_lastName"];
+          $vstate = $data["v_state"];
+          $image = $data["v_image"];
+          $imageType = $data["v_image_type"];
+        ?> 
         	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
         		<div class="staff">
         			<div class="d-flex mb-4">
-
               <div class="img" style="background-image: url(<?php echo 'data:' . $imageType . ';base64,' . base64_encode($image) . '';?>);"></div>
         				<div class="info ml-4">
-        					<h3><a href="teacher-single.html"><?php echo $data["v_firstName"] . " " . $data["v_lastName"]; ?></a></h3>
-        					<span class="position"><?php echo $data["v_state"]; ?></span>              
-                  <!-- <a href="#removeModal<//?php echo $id; ?>" type="button" data-vol="<//?php echo $id; ?>" data-project="<//?php echo $pid; ?>" class="del fa fa-trash" data-toggle="modal" data-target="#removeModal</?php echo $id; ?>" type="button" ></a> -->
-                  <button type="button" data-vol="<?php echo $id; ?>" data-project="<?php echo $pid; ?>" class="del fa fa-trash"  type="button" ></button>
+        					<h3><a href="teacher-single.html"><?php echo $vname; ?></a></h3>
+        					<span class="position"><?php echo $vstate ?></span>              
+                  <button type="button" data-vol="<?php echo $vid; ?>" data-pro="<?php echo $pid; ?>" class="del fa fa-trash"  type="button" ></button>
                 </div>
         			</div>
         		</div>
             
           </div>
           <!-- REMOVE modal -->
-      <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="removeModalLabel" aria-hidden="true">  
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="removeModalLabel">Confirmation</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+          <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="removeModalLabel" aria-hidden="true">  
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="removeModalLabel">Confirmation</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Are you sure want to remove this from this project?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancel </button>
+                  <button type="button" id="confirmRemove" class="btn btn-primary"> Confirm </button>                   
+                </div>
+              </div>         
             </div>
-            <div class="modal-body">
-              Are you sure want to remove this volunteer from this project?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancel </button>
-              <button type="button" id="inside" class="btn btn-primary"> Confirm
-              <!-- <a href="scripts/remove-volunteer.php </?php echo '?volunteer_ID='. $id; ?>"> Confirm </a>  -->
-              </button>                   
-            </div>
-          </div>         
-        </div>
-      </div>     
-              <?php } ?>
+          </div>     
+          <?php } ?>
         </div>
       </div>
       <!-- END volunteers list -->
-
-      
-    
-  <?php
-          
-      } catch (Exception $e) {
-          $pdo->rollback();
-          echo "Error: ".$e;
+    <?php        
+      } catch (Exception $e) {       
+        $pdo->rollback();
+        echo "Error: ".$e;
       }
       $pdo = null;
-  ?>
-  </section>
+    ?>
+    </section>
 
     <!-- ADD MORE volunteers button -->
     <section class="ftco-section-3 img" style="background-image: url(images/bg_3.jpg);">
@@ -158,7 +163,7 @@
     	<div class="container">
     		<div class="row d-md-flex">
         <div class="box">
-          <a href="assign-volunteers.php" class="btn btn-white btn-animation-1">Add More Volunteers </a> 
+          <a href="assign-volunteers.php?project_ID=<?php echo $projectID; ?>" class="btn btn-white btn-animation-1">Assign More Volunteers </a> 
         </div>   			
     		</div>
     	</div>
@@ -226,6 +231,6 @@
   <script src="js/jquery.timepicker.min.js"></script>
   <script src="js/scrollax.min.js"></script>
   <script src="js/main.js"></script>
-  <script src="js/assignProject.js"></script>
+  <script src="js/removeVolunteer.js"></script>
   </body>
 </html>

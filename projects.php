@@ -39,7 +39,7 @@ session_start();
 
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-      <a class="navbar-brand" href="projects.php">Chariteam</a>
+      <a class="navbar-brand" href="about.php">Chariteam</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
       </button>
@@ -228,7 +228,7 @@ session_start();
                       <?php echo $description ?>
                     </div>
                     <div class="modal-footer">
-                      <a href="project-volunteers.php" class="btn btn-primary">Manage Volunteers</a>
+                      <a href="project-volunteers.php?project_ID=<?php echo $projectID ?>" class="btn btn-primary">Manage Volunteers</a>
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                   </div>
