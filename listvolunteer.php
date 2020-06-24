@@ -108,8 +108,8 @@ include_once("scripts/config.php");
                     <?php
                     $days = '365';
                     $start_date = strtotime($row['v_DOR']);
-                   $end_date = strtotime("2020-06-20");
-                   $datediff = $end_date-$start_date;
+                    $end_date =time();
+                    $datediff = $end_date-$start_date;
                    echo round($datediff / (60 * 60 * 24));
                      ?>
                     days ago</p>
@@ -136,8 +136,8 @@ include_once("scripts/config.php");
                     <?php
                     $days = '365';
                     $start_date = strtotime($row['v_DOR']);
-                   $end_date = strtotime("2020-06-20");
-                   $datediff = $end_date-$start_date;
+                    $end_date =time();
+                    $datediff = $end_date-$start_date;
                    echo round($datediff / (60 * 60 * 24));
                      ?>
                     days ago</p>
@@ -167,8 +167,8 @@ include_once("scripts/config.php");
                     <?php
                     $days = '365';
                     $start_date = strtotime($row['v_DOR']);
-                   $end_date = strtotime("2020-06-20");
-                   $datediff = $end_date-$start_date;
+                    $end_date =time();
+                    $datediff = $end_date-$start_date;
                    echo round($datediff / (60 * 60 * 24));
                      ?>
                     days ago</p>

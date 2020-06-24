@@ -1,4 +1,6 @@
 <?php
+session_start();
+$userID=$_SESSION["userID"];
 
 $volunteer_ID = $v_firstName = $v_lastName = $v_email = $v_address1 = $v_address2 ="";
 $v_state = $v_status = $v_telNum = $v_publicInfo = $v_DOR = $v_image = "";
@@ -44,10 +46,27 @@ $stmt->bindParam(':publicinfo',$v_publicInfo);
 $stmt->bindParam(':occ',$v_occ);
 $stmt->bindParam(':dor',$v_DOR);
 $stmt->bindParam(':uid',$v_ID);
-// $stmt->bindParam(':v_image',$imageData);
-// $stmt->bindParam(':v_image_type',$imageProperties['mime']);
 
+$checkduplicate = $pdo->query("SELECT COUNT(*) FROM volunteer WHERE (v_IC='$v_IC') ");
+     $dupe= $checkduplicate ->fetch();
+     $count=$dupe[0];
+      if($count>1){
+        $errMSG ="IC already registered";
 
+      }
+      $checkduplicateEmail = $pdo->query("SELECT COUNT(*) FROM volunteer WHERE (v_email='$v_email') ");
+     $dupeEmail = $checkduplicateEmail ->fetch();
+     $countEmail=$dupeEmail[0];
+      if($countEmail>1){
+        $errMSG ="Email is already registered";
+
+      }
+
+      if(!isset($errMSG)){
+        $stmt->execute();
+  header('Location:displayprofile.php?v_ID='.$v_ID);
+
+}
 if($stmt->execute()){
   header('Location:displayprofile.php?v_ID='.$v_ID);
 
@@ -337,7 +356,7 @@ if(isset($_POST['delete'])){
 </div>
     </section>
     
-
+<?php  $pdo=null;?>
     <footer class="ftco-footer ftco-section img">
     <div class="overlay"></div>
     <div class="container">

@@ -1,5 +1,7 @@
 <?php
 include_once("scripts/config.php");
+session_start();
+$userID=$_SESSION["userID"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
