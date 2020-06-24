@@ -221,7 +221,7 @@ session_start();
                       <?php echo $description ?>
                     </div>
                     <div class="modal-footer">
-                      <a href="project-volunteers.html" class="btn btn-primary">Manage Volunteers</a>
+                      <a href="project-volunteers.php?project_ID=<?php echo $projectID ?>" class="btn btn-primary">Manage Volunteers</a>
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                   </div>

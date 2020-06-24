@@ -68,11 +68,11 @@
 
     <?php
               include_once("scripts/config.php");
-          
+              $projectID = $_GET["project_ID"];
               try {
                 $pdo->beginTransaction();
                 $sql2 = "SELECT volunteer_ID, v_image, v_image_type, v_firstName, v_lastName, v_state FROM volunteer WHERE volunteer_ID NOT IN 
-                (SELECT volunteer_ID FROM project_volunteer WHERE project_volunteer.project_ID='3') ";  
+                (SELECT volunteer_ID FROM project_volunteer WHERE project_volunteer.project_ID=".$projectID.') ';  
                 
                 $result2 = $pdo -> query($sql2);
                 //echo "all records selected successfully.";
@@ -98,7 +98,7 @@
 
           <!-- START table -->
           <table id="myTable" class="table table-striped table-dark table-hover">
-            <form method="GET" action="scripts/assign-volunteer.php" >
+            <form method="GET" action="scripts/assign-volunteer.php">
             <thead class="thead">
               <tr>
                 <th scope="col" class="text-center">Photo</th>
@@ -121,6 +121,7 @@
                   <td><a href="displayprofile.html"><?php echo $data["v_firstName"] . " " . $data["v_lastName"]; ?></a></td>
                   <td><?php echo $data["v_state"]; ?></td>
                   <td><label class="switch "><input type="checkbox" value="<?php echo $id; ?>" name="selected[]" class="success" /><span class="slider round"></span></label></td>
+                  <td class="hidden"><label class="switch hidden"><input type="checkbox" value="<?php echo $projectID; ?>" name="projectID" class="hidden" checked="yes"/></label></td>
                 </tr>
                 <?php } ?>
               </tbody>
