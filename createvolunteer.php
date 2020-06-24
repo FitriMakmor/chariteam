@@ -1,7 +1,8 @@
 <?php
  $volunteer_ID = $v_firstName = $v_lastName = $v_email = $v_address1 = $v_address2 ="";
  $v_state = $v_status = $v_telNum = $v_publicInfo = $v_DOR = $v_image =$v_occ= "";
-
+ session_start();
+ $userID=$_SESSION["userID"];
 include_once("scripts/config.php");
  if (isset($_POST['submit'])) {
  // do post
@@ -39,7 +40,20 @@ include_once("scripts/config.php");
       
    
  } 
- 
+ $checkduplicate = $pdo->query("SELECT COUNT(*) FROM volunteer WHERE (v_IC='$v_IC') ");
+     $dupe= $checkduplicate ->fetch();
+     $count=$dupe[0];
+      if($count>0){
+        $errMSG ="IC already registered";
+
+      }
+      $checkduplicateEmail = $pdo->query("SELECT COUNT(*) FROM volunteer WHERE (v_email='$v_email') ");
+     $dupeEmail = $checkduplicateEmail ->fetch();
+     $countEmail=$dupeEmail[0];
+      if($countEmail>0){
+        $errMSG ="Email is already registered";
+
+      }
 
 
  if(!isset($errMSG)){
@@ -166,58 +180,58 @@ header('Location:displayprofile.php?v_ID='.$last_ID);
                 </div>
                 <?php
       }?>
-                              <div class="form-group row">
+                             <div class="form-group row">
                                 <label for="username" class="col-4 col-form-label">First Name*</label> 
                                 <div class="col-8">
-                                  <input id="name" name="name" placeholder="First Name" class="form-control here"  type="text">
+                                  <input id="name" name="name" placeholder="First Name"value="<?php echo $_POST['name'] ?? ''; ?>" class="form-control here"  type="text">
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="lastname" class="col-4 col-form-label">Last Name*</label> 
                                 <div class="col-8">
-                                  <input id="lastname" name="lastname" placeholder="Last Name" class="form-control here"   type="text">
+                                  <input id="lastname" name="lastname" placeholder="Last Name"value="<?php echo $_POST['lastname'] ?? ''; ?>"  class="form-control here"   type="text">
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="ic" class="col-4 col-form-label">IC*</label> 
                                 <div class="col-8">
-                                  <input id="ic" name="ic"  class="form-control here"  placeholder="123456-00-1234" pattern="[0-9]{6}-[0-9]{2}-[0-9]{4}"  type="text">
+                                  <input id="ic" name="ic"  class="form-control here" value="<?php echo $_POST['ic'] ?? ''; ?>"  placeholder="123456-00-1234" pattern="[0-9]{6}-[0-9]{2}-[0-9]{4}"  type="text">
                                 </div>
                               </div>
                              
                               <div class="form-group row">
                                 <label for="email" class="col-4 col-form-label">Email*</label> 
                                 <div class="col-8">
-                                  <input id="email" name="email" aria-describedby="emailHelp" placeholder="user@example.com"   class="form-control here"  type="text">
+                                  <input id="email" name="email" aria-describedby="emailHelp" value="<?php echo $_POST['email'] ?? ''; ?>" placeholder="user@example.com"   class="form-control here"  type="text">
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="add1" class="col-4 col-form-label">Address Line 1*</label> 
                                 <div class="col-8">
-                                  <input id="address1" name="address1" placeholder="Address Line 1" class="form-control here"  type="text">
+                                  <input id="address1" name="address1" placeholder="Address Line 1" value="<?php echo $_POST['address1'] ?? ''; ?>" class="form-control here"  type="text">
                                 </div>
                               </div>  
                               <div class="form-group row">
                                 <label for="add2" class="col-4 col-form-label">Address Line 2*</label> 
                                 <div class="col-8">
-                                  <input id="address2" name="address2" placeholder="Address Line 2" class="form-control here" type="text">
+                                  <input id="address2" name="address2" placeholder="Address Line 2"value="<?php echo $_POST['address2'] ?? ''; ?>"  class="form-control here" type="text">
                                 </div>
                               </div> 
                               <div class="form-group row">
                                 <label for="select" class="col-4 col-form-label" >State*</label> 
                                 <div class="col-8">
                                   <select id="select" name="state" class="custom-select">
-                                    <option name="Johor">Johor</option>
-                                    <option name="Melaka">Melaka</option>
-                                    <option name="Negeri Sembilan">Negeri Sembilan</option>
-                                    <option name="Terengganu">Terengganu</option>
-                                    <option name="Kedah">Kedah</option>
-                                    <option name="Perlis">Perlis</option>
-                                    <option name="Kuala Lumpur">Kuala Lumpur</option>
-                                    <option name="Selangor">Selangor</option>
-                                    <option name="Pahang">Pahang</option>
-                                    <option name="Perak">Perak</option>
-                                    <option name="Pulau Pinang">Pulau Pinang</option>
+                                    <option name="Johor"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Johor') ? 'selected' : ''; ?>>Johor</option>
+                                    <option name="Melaka"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Melaka') ? 'selected' : ''; ?>>Melaka</option>
+                                    <option name="Negeri Sembilan"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Negeri Sembilan') ? 'selected' : ''; ?>>Negeri Sembilan</option>
+                                    <option name="Terengganu"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Terengganu') ? 'selected' : ''; ?>>Terengganu</option>
+                                    <option name="Kedah"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Kedah') ? 'selected' : ''; ?>>Kedah</option>
+                                    <option name="Perlis"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Perlis') ? 'selected' : ''; ?>>Perlis</option>
+                                    <option name="Kuala Lumpur"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Kuala Lumpur') ? 'selected' : ''; ?>>Kuala Lumpur</option>
+                                    <option name="Selangor"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Selangor') ? 'selected' : ''; ?>>Selangor</option>
+                                    <option name="Pahang"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Pahang') ? 'selected' : ''; ?>>Pahang</option>
+                                    <option name="Perak"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Perak') ? 'selected' : ''; ?>>Perak</option>
+                                    <option name="Pulau Pinang"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Pulau Pinang') ? 'selected' : ''; ?>>Pulau Pinang</option>
 
                                   </select>
                                 </div>
@@ -226,34 +240,34 @@ header('Location:displayprofile.php?v_ID='.$last_ID);
                                 <label for="select" class="col-4 col-form-label">Status</label> 
                                 <div class="col-8">
                                   <select id="select" name="status" class="custom-select">
-                                    <option value="Single">Single</option>
-                                    <option value="Married">Maried</option>
-                                    <option value="Widow">Widow</option>
+                                    <option value="Single"<?php echo (isset($_POST['status']) && $_POST['status'] === 'Single') ? 'selected' : ''; ?>>Single</option>
+                                    <option value="Married"<?php echo (isset($_POST['status']) && $_POST['status'] === 'Married') ? 'selected' : ''; ?>>Maried</option>
+                                    <option value="Widow"<?php echo (isset($_POST['status']) && $_POST['status'] === 'Widow') ? 'selected' : ''; ?>>Widow</option>
                                   </select>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="tel" class="col-4 col-form-label">Tel.</label> 
                                 <div class="col-8">
-                                  <input id="tel" name="tel"  placeholder="016-12345678" pattern="[0-9]{3}-[0-9]{7,8}" class="form-control here" type="tel">
+                                  <input id="tel" name="tel"  placeholder="016-12345678" pattern="[0-9]{3}-[0-9]{7,8}"value="<?php echo $_POST['tel'] ?? ''; ?>"  class="form-control here" type="tel">
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="publicinfo" class="col-4 col-form-label">Public Info</label> 
                                 <div class="col-8">
-                                  <textarea id="publicinfo" name="publicinfo" cols="40" rows="4" class="form-control"></textarea>
+                                  <textarea id="publicinfo" name="publicinfo" cols="40" rows="4" class="form-control"><?php echo isset($_POST['publicinfo']) ? htmlspecialchars($_POST['publicinfo'], ENT_QUOTES) : ''; ?></textarea>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="occupation" class="col-4 col-form-label">Occupation</label> 
                                 <div class="col-8">
-                                  <input id="occ" name="occ" placeholder="" class="form-control here" type="text">
+                                  <input id="occ" name="occ" placeholder="" class="form-control here" value="<?php echo $_POST['occ'] ?? ''; ?>" type="text">
                                 </div>
                               </div>
                               <div class="form-group row">
-                                <label for="tel" class="col-4 col-form-label">Date of Registration</label> 
+                                <label for="tel" class="col-4 col-form-label">Date of Registration*</label> 
                                 <div class="col-8">
-                                  <input id="DOR" name="DOR" placeholder="" class="form-control here" type="date">
+                                  <input id="DOR" name="DOR" placeholder="" class="form-control here" value="<?php echo $_POST['DOR'] ?? ''; ?>" required="required" type="date">
                                 </div>
                               </div> 
                               <div class="form-group row">
@@ -273,7 +287,7 @@ header('Location:displayprofile.php?v_ID='.$last_ID);
     </section>
 
     
-    <?php  $pdo ->null;?>
+    <?php  $pdo =null;?>
 
     <footer class="ftco-footer ftco-section img">
     <div class="overlay"></div>
