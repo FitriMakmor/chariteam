@@ -1,70 +1,115 @@
 <?php
-// Initialize the session
-session_start();
- 
-// Check if the user is already logged in, if yes then redirect him to welcome page
-// if(isset($_SESSION["loggedin"]) === true){
-//     header("location: projects.html");
-//     exit;
-// }
- 
 // Include config file
 include("scripts/config.php");
  
 // Define variables and initialize with empty values
-$email = $new_password = "";
-$emailErr = $new_password_err =  "";
+$email = $password =  "";
+$emailErr = $password_err =  "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
-  // Check if email is empty
+    
+  // Validate email
   if(empty(trim($_POST["email"]))){
-      $emailErr = "*Please enter email.";
-  } else{
-      $email = trim($_POST["email"]);
-  }
+    $emailErr = "Please enter a email.";
+    echo '
+    <script type="text/javascript">
+        alert("*Please enter a email."); 
+        window.location.href = "register.php";
+    </script>';
+  }else{
 
-  // Validate new password
-  if(empty(trim($_POST["password"]))){
-    $new_password_err = "*Please enter the new password.";     
-  } elseif(strlen(trim($_POST["password"])) < 6){
-      $new_password_err = "*Password must have at least 6 characters.";
-  } else{
-      $new_password = trim($_POST["password"]);
-  }
-  
-  if(empty($emaiErr) && empty($new_password_err)){
     // Prepare a select statement
-    $sql = "UPDATE user SET user_password = :password WHERE u_email = :email";
-      
+    $sql = "SELECT userId FROM user WHERE u_email = :email";
+
     if($stmt = $pdo->prepare($sql)){
-        // Bind variables to the prepared statement as parameters
-        $stmt->bindParam(":password", $param_password, PDO::PARAM_STR);
-        $stmt->bindParam(":email", $param_email, PDO::PARAM_STR); 
-
-        // Set parameters
-        $param_email = trim($_POST["email"]);
-        $param_password = password_hash($new_password, PASSWORD_DEFAULT); // Creates a password hash
-
-        // Attempt to execute the prepared statement
-        if($stmt->execute()){
-          // Password updated successfully. Destroy the session, and redirect to login page
-          session_destroy();
-          header("location: login.php");
-          exit();
+      // Bind variables to the prepared statement as parameters
+      $stmt->bindParam(":email", $param_email, PDO::PARAM_STR);
+      
+      // Set parameters
+      $param_email = trim($_POST["email"]);
+      
+      // Attempt to execute the prepared statement
+      if($stmt->execute()){
+          $email = trim($_POST["email"]);
+          if (empty($_POST["email"]) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+              $emailErr = "Email address '$email' is considered valid.";
+          }
       } else{
-          echo "*Oops! Something went wrong. Please try again later.";
+          echo "Oops! Something went wrong. Please try again later.";
       }
 
-        // Close statement
-        unset($stmt);
+      // Close statement
+      unset($stmt);
+      }
     }
-}
-  // Close connection
-  unset($pdo);
+
+  // Validate password
+  if(empty(trim($_POST["password"]))){
+      $password_err = "Please enter a password.";  
+      echo '
+        <script type="text/javascript">
+            alert("*Please enter a password."); 
+            window.location.href = "register.php";
+        </script>';   
+  } elseif(strlen(trim($_POST["password"])) < 6){
+      $password_err = "Password must have at least 6 characters.";
+      echo '
+        <script type="text/javascript">
+            alert("*Password must have at least 6 characters."); 
+            window.location.href = "register.php";
+        </script>';  
+  } else{
+      $password = trim($_POST["password"]);
+  }
+  
+
+  // Validate credentials
+  if(empty($emailErr) && empty($password_err)){
+
+    // Prepare a select statement
+    $sql = "SELECT u_email FROM user WHERE u_email = :email";
+    
+    $stmt->bindParam(":email", $param_email, PDO::PARAM_STR);
+    
+    // Set parameters
+    $param_email = trim($_POST["email"]);
+      
+    if($stmt = $pdo->prepare($sql)){
+      if($stmt->rowCount() == 1){
+
+        // Prepare a select statement
+        $sql = "UPDATE user SET user_password = :password WHERE u_email = :email";
+
+        if($stmt = $pdo->prepare($sql)){
+          // Bind variables to the prepared statement as parameters
+          $stmt->bindParam(":password", $param_password, PDO::PARAM_STR);
+          $stmt->bindParam(":email", $param_email, PDO::PARAM_STR); 
+  
+          // Set parameters
+          $param_email = trim($_POST["email"]);
+          $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+  
+          // Attempt to execute the prepared statement
+          if($stmt->execute()){
+            // Password updated successfully. Destroy the session, and redirect to login page
+            session_destroy();
+            header("location: login.php");
+            exit();
+          } else{
+          echo "*Oops! Something went wrong. Please try again later.";
+        } 
+      }else{
+        echo "*Oops! Something went wrong. Please try again later.";
+      } 
+    }
+  }
+  }
+  // Close statement
+  unset($stmt);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -110,11 +155,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       <h1><strong>CHARITEAM</strong></h1><img src="images/620806.png">
     </div>
     <div class="container2">
-    <div class="textbox" id = "errorMessage">
-      <input type="hidden" class="text-center">
-      <small><?php echo $emailErr; ?></small><br>
-      <small><?php echo $new_password_err; ?></small>
-    </div>
     <form class="password" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
       <h5><strong>Reset your password</strong></h5>
       <div  class="text-center">
@@ -126,7 +166,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       </div>
       <div class="textbox">
         <i class="fas fa-lock"></i>
-        <input type="password" placeholder="Password" id="password" name="password" value ="<?php echo $new_password; ?>" required>
+        <input type="password" placeholder="Password" id="password" name="password" value ="<?php echo $password; ?>" required>
         <span class="eye" onclick="myFunction()">
         <i id="hide1" class="fas fa-eye"></i>
         <i id="hide2" class="fas fa-eye-slash"></i>
@@ -140,17 +180,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
   <script>
-    // // this function is to validate input
-    // function validate(){
-    //   var tag = document.getElementById("email").value;
-    //   if(document.getElementById("email").value == ""){
-    //     alert("Please enter your email to reset your password")
-    //     return false;
-    //   }else if(document.getElementById("email").value != ""){
-    //     alert("a link is send to your email");
-    //     return true;
-    //   }
-    // }
     function myFunction(){
     var x = document.getElementById("password");
     var y = document.getElementById("hide1");
