@@ -97,7 +97,7 @@ if(isset($_POST['delete'])){
     $stmt_delete = $pdo->prepare('DELETE FROM volunteer WHERE volunteer_ID =:uid');
     $stmt_delete->bindParam(':uid',$v_ID);
     if($stmt_delete->execute()){
-      header('Location:listvolunteer.php');
+      header('Location:listvolunteer.php?page=1');
     }else{
       echo "Error: ".$pdo->error."<br><br>";
     }
@@ -265,12 +265,15 @@ if(isset($_POST['delete'])){
                                     <option value="Negeri Sembilan"<?php if ($default_state == "Negeri Sembilan" ) echo 'selected' ; ?>>Negeri Sembilan</option>
                                     <option value="Terengganu"<?php if ($default_state == "Terengganu" ) echo 'selected' ; ?>>Terengganu</option>
                                     <option value="Kedah"<?php if ($default_state == "Kedah" ) echo 'selected' ; ?>>Kedah</option>
+                                    <option value="Kelantan"<?php if ($default_state == "Kelantan" ) echo 'selected' ; ?>>Kelantan</option>
                                     <option value="Perlis"<?php if ($default_state == "Perlis" ) echo 'selected' ; ?>>Perlis</option>
                                     <option value="Kuala Lumpur"<?php if ($default_state == "Kuala Lumpur" ) echo 'selected' ; ?>>Kuala Lumpur</option>
                                     <option value="Selangor"<?php if ($default_state == "Selangor" ) echo 'selected' ; ?>>Selangor</option>
                                     <option value="Pahang"<?php if ($default_state == "Pahang" ) echo 'selected' ; ?>>Pahang</option>
                                     <option value="Perak"<?php if ($default_state == "Perak" ) echo 'selected' ; ?>>Perak</option>
                                     <option value="Pulau Pinang"<?php if ($default_state == "Pulau Pinang" ) echo 'selected' ; ?>>Pulau Pinang</option>
+                                    <option value="Sabah"<?php if ($default_state == "Sabah" ) echo 'selected' ; ?>>Sabah</option>
+                                    <option value="Sarawak"<?php if ($default_state == "Sarawak" ) echo 'selected' ; ?>>Sarawak</option>
 
                                   </select>
                                 </div>
@@ -281,13 +284,13 @@ if(isset($_POST['delete'])){
                                 <?php $default_status = $row['v_status']?>
                                   <select id="select" name="status"  value="<?php echo $row['v_lastName']; ?>"class="custom-select">
                                     <option value="Single"<?php if ($default_status == "Single" ) echo 'selected' ; ?>>Single</option>
-                                    <option value="Married"<?php if ($default_status == "Married" ) echo 'selected' ; ?>>Maried</option>
+                                    <option value="Married"<?php if ($default_status == "Married" ) echo 'selected' ; ?>>Married</option>
                                     <option value="Widow"<?php if ($default_status == "Widow" ) echo 'selected' ; ?>>Widow</option>
 
                                   </select>
                                 </div>
                               </div>
-                              <?php $pdo->null;?>
+                              <?php $pdo=null;?>
                               <div class="form-group row">
                                 <label for="tel" class="col-4 col-form-label">Tel.</label> 
                                 <div class="col-8">

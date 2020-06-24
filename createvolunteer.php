@@ -226,13 +226,15 @@ header('Location:displayprofile.php?v_ID='.$last_ID);
                                     <option name="Negeri Sembilan"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Negeri Sembilan') ? 'selected' : ''; ?>>Negeri Sembilan</option>
                                     <option name="Terengganu"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Terengganu') ? 'selected' : ''; ?>>Terengganu</option>
                                     <option name="Kedah"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Kedah') ? 'selected' : ''; ?>>Kedah</option>
+                                    <option name="Kelantan"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Kelantan') ? 'selected' : ''; ?>>Kelantan</option>
                                     <option name="Perlis"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Perlis') ? 'selected' : ''; ?>>Perlis</option>
                                     <option name="Kuala Lumpur"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Kuala Lumpur') ? 'selected' : ''; ?>>Kuala Lumpur</option>
                                     <option name="Selangor"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Selangor') ? 'selected' : ''; ?>>Selangor</option>
                                     <option name="Pahang"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Pahang') ? 'selected' : ''; ?>>Pahang</option>
                                     <option name="Perak"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Perak') ? 'selected' : ''; ?>>Perak</option>
                                     <option name="Pulau Pinang"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Pulau Pinang') ? 'selected' : ''; ?>>Pulau Pinang</option>
-
+                                    <option name="Sabah"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Sabah') ? 'selected' : ''; ?>>Sabah</option>
+                                    <option name="Sarawak"<?php echo (isset($_POST['state']) && $_POST['state'] === 'Sarawak') ? 'selected' : ''; ?>>Sarawak</option>
                                   </select>
                                 </div>
                               </div>
