@@ -39,7 +39,7 @@ session_start();
 
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-      <a class="navbar-brand" href="projects.php">Chariteam</a>
+      <a class="navbar-brand" href="about.php">Chariteam</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
       </button>
@@ -228,11 +228,7 @@ session_start();
                       <?php echo $description ?>
                     </div>
                     <div class="modal-footer">
-<<<<<<< HEAD
                       <a href="project-volunteers.php?project_ID=<?php echo $projectID ?>" class="btn btn-primary">Manage Volunteers</a>
-=======
-                      <a href="project-volunteers.php" class="btn btn-primary">Manage Volunteers</a>
->>>>>>> master
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                   </div>
@@ -324,13 +320,8 @@ session_start();
               <li><a href="about.php" class="py-2 d-block">About</a></li>
               <li><a href="projects.php" class="py-2 d-block">Projects</a></li>
               <li><a href="listvolunteer.php" class="py-2 d-block">Volunteers</a></li>
-<<<<<<< HEAD
-              <li><a href="userProfileMain.php?userID=" <?php echo $_SESSION['userID'] ?> class="py-2 d-block">Profile</a></li>
-              <li><a href="login.php" class="py-2 d-block">Log Out</a></li>
-=======
               <li><a href="userProfileMain.php?userID="<?php echo $_SESSION['userID'] ?> class="py-2 d-block">Profile</a></li>
               <li><a href="logout.php" class="py-2 d-block">Log Out</a></li>
->>>>>>> ccef5c5be33e863a6e895c2b01bfe0861a0f439e
             </ul>
           </div>
         </div>
