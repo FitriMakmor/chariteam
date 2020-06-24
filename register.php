@@ -3,96 +3,143 @@
 include("scripts/config.php");
  
 // Define variables and initialize with empty values
-$test = $username = $fullname = $email = $password = $confirm_password = "";
+$username = $fullname = $email = $password = $confirm_password = "";
 $username_err = $fullnameErr = $emailErr = $password_err = $confirm_password_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
-  // Validate username
-  if(empty(trim($_POST["username"]))){
-      $username_err = "Please enter a username.";
-  } else{
-      // Prepare a select statement
-      $sql = "SELECT userId FROM user WHERE username = :username";
+    
+    // Validate username
+    if(empty(trim($_POST["username"]))){
+        $username_err = "Please enter a username.";
+        echo '
+        <script type="text/javascript">
+            alert("*Please enter a username."); 
+            window.location.href = "register.php";
+        </script>';
+    }else{
+        // Prepare a select statement
+        $sql = "SELECT userId FROM user WHERE username = :username";
       
-      if($stmt = $pdo->prepare($sql)){
-          // Bind variables to the prepared statement as parameters
-          $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
+        if($stmt = $pdo->prepare($sql)){
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
           
-          // Set parameters
-          $param_username = trim($_POST["username"]);
-          
-          // Attempt to execute the prepared statement
-          if($stmt->execute()){
-              if($stmt->rowCount() == 1){
-                  $username_err = "This username is already taken.";
-              } else{
-                  $username = trim($_POST["username"]);
-              }
-          } else{
-              echo "Oops! Something went wrong. Please try again later.";
-          }
-
-          // Close statement
-          unset($stmt);
-      }
-  }
-
-  // Validate fullname
-  if(empty(trim($_POST["fullname"]))){
-      $fullnameErr = "Please enter a full name.";
-  } else{
-      $fullname = trim($_POST["fullname"]);
-  }
-  
-  // Validate email
-  if(empty(trim($_POST["email"]))){
-      $emailErr = "Please enter a email.";
-  }else{
-      // Prepare a select statement
-      $sql = "SELECT userId FROM user WHERE u_email = :email";
-      
-      if($stmt = $pdo->prepare($sql)){
-          // Bind variables to the prepared statement as parameters
-          $stmt->bindParam(":email", $param_email, PDO::PARAM_STR);
-          
-          // Set parameters
-          $param_email = trim($_POST["email"]);
-          
-          // Attempt to execute the prepared statement
-          if($stmt->execute()){
-              if($stmt->rowCount() == 1){
-                  $emailErr = "This email is already taken.";
-              } else{
-                  $email = trim($_POST["email"]);
-              }
-          } else{
-              echo "Oops! Something went wrong. Please try again later.";
-          }
-
-          // Close statement
-          unset($stmt);
-      
+            // Set parameters
+            $param_username = trim($_POST["username"]);
+            
+            // Attempt to execute the prepared statement
+            if($stmt->execute()){
+                if($stmt->rowCount() == 1){
+                    $username_err = "This username is already taken.";
+                    echo '
+                    <script type="text/javascript">
+                        alert("*This username is already taken."); 
+                        window.location.href = "register.php";
+                    </script>';
+                }else{
+                    $username = trim($_POST["username"]);
+                }
+            }else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+            // Close statement
+            unset($stmt);
+        }
     }
-  }
+
+// Validate fullname
+if(empty(trim($_POST["fullname"]))){
+    $fullnameErr = "Please enter a full name.";
+    echo '
+    <script type="text/javascript">
+        alert("*Please enter a full name."); 
+        window.location.href = "register.php";
+    </script>';
+} else{
+    $fullname = trim($_POST["fullname"]);
+}
+
+// Validate email
+if(empty(trim($_POST["email"]))){
+    $emailErr = "Please enter a email.";
+    echo '
+    <script type="text/javascript">
+        alert("*Please enter a email."); 
+        window.location.href = "register.php";
+    </script>';
+}else{
+
+// Prepare a select statement
+$sql = "SELECT userId FROM user WHERE u_email = :email";
+
+if($stmt = $pdo->prepare($sql)){
+    // Bind variables to the prepared statement as parameters
+    $stmt->bindParam(":email", $param_email, PDO::PARAM_STR);
+    
+    // Set parameters
+    $param_email = trim($_POST["email"]);
+    
+    // Attempt to execute the prepared statement
+    if($stmt->execute()){
+        if($stmt->rowCount() == 1){
+            $emailErr = "This email is already taken.";
+            echo '
+            <script type="text/javascript">
+                alert("*This email is already taken."); 
+                window.location.href = "register.php";
+            </script>';
+        } else{
+            $email = trim($_POST["email"]);
+            if (empty($_POST["email"]) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $emailErr = "Email address '$email' is considered valid.";
+            }
+        }
+    } else{
+        echo "Oops! Something went wrong. Please try again later.";
+    }
+
+    // Close statement
+    unset($stmt);
+    }
+}
 
   // Validate password
   if(empty(trim($_POST["password"]))){
-      $password_err = "Please enter a password.";     
+      $password_err = "Please enter a password.";  
+      echo '
+        <script type="text/javascript">
+            alert("*Please enter a password."); 
+            window.location.href = "register.php";
+        </script>';   
   } elseif(strlen(trim($_POST["password"])) < 6){
       $password_err = "Password must have at least 6 characters.";
+      echo '
+        <script type="text/javascript">
+            alert("*Password must have at least 6 characters."); 
+            window.location.href = "register.php";
+        </script>';  
   } else{
       $password = trim($_POST["password"]);
   }
   
   // Validate confirm password
   if(empty(trim($_POST["password2"]))){
-      $confirm_password_err = "Please repeat password.";     
+      $confirm_password_err = "Please enter repeat password.";    
+      echo '
+        <script type="text/javascript">
+            alert("*Please enter enter repeat password."); 
+            window.location.href = "register.php";
+        </script>';  
   } else{
       $confirm_password = trim($_POST["password2"]);
       if(empty($password_err) && ($password != $confirm_password)){
           $confirm_password_err = "Password did not match.";
+          echo '
+            <script type="text/javascript">
+                alert("*Password did not match."); 
+                window.location.href = "register.php";
+            </script>';
       }
   }
 
@@ -189,21 +236,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <div class="headName">
       <h1><strong>CHARITEAM</strong></h1><img src="images/620806.png">
     </div>
-    <!-- <?php
-      // if(isset($_SESSION['message'])){
-      //   echo $_SESSION['message'];
-      //   unset($_SESSION['message']);
-      // }
-    ?> -->
     <div class="container3">
-    <div class="textbox" id = "errorMessage">
-        <input type="hidden" >
-        <small><?php echo $username_err; ?></small>
-        <small><?php echo $fullnameErr; ?></small>
-        <small><?php echo $emailErr; ?></small>
-        <small><?php echo $password_err; ?></small>
-        <small><?php echo $confirm_password_err; ?></small>
-    </div>
     <form class="reg" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" name="form">
         <h1><strong>REGISTER</strong></h1>
         <div class="textbox">

@@ -51,7 +51,7 @@ session_start();
           <li class="nav-item"><a href="projects.php" class="nav-link">Projects</a></li>
           <li class="nav-item"><a href="listvolunteer.php?page=1" class="nav-link">Volunteers</a></li>
           <li class="nav-item"><a href="userProfileMain.php?userID=<?php echo $_SESSION['userID'] ?>" class="nav-link">Profile</a></li>
-          <li class="nav-item"><a href="login.php" class="nav-link">Log Out</a></li> 
+          <li class="nav-item"><a href="logout.php" class="nav-link">Log Out</a></li> 
         </ul>
       </div>
     </div>
@@ -144,7 +144,7 @@ session_start();
               <li class="nav-item"><a href="projects.php" class="nav-link">Projects</a></li>
               <li class="nav-item"><a href="listvolunteer.php?page=1" class="nav-link">Volunteers</a></li>
               <li class="nav-item active"><a href="userProfileMain.php?userID=<?php echo $_SESSION['userID'] ?>" class="nav-link">Profile</a></li>
-              <li class="nav-item"><a href="login.php" class="nav-link">Log Out</a></li> 
+              <li class="nav-item"><a href="logout.php" class="nav-link">Log Out</a></li> 
             </ul>
           </div>
         </div>

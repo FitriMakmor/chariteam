@@ -59,7 +59,7 @@ include_once("scripts/config.php");
           <li class="nav-item"><a href="projects.php" class="nav-link">Projects</a></li>
           <li class="nav-item"><a href="listvolunteer.php?page=1" class="nav-link">Volunteers</a></li>
           <li class="nav-item active"><a href="userProfileMain.php?userID=<?php echo $_SESSION['userID'] ?>" class="nav-link">Profile</a></li>
-          <li class="nav-item"><a href="login.php" class="nav-link">Log Out</a></li> 
+          <li class="nav-item"><a href="logout.php" class="nav-link">Log Out</a></li> 
         </ul>
       </div>
     </div>
@@ -97,7 +97,7 @@ include_once("scripts/config.php");
         <div class="container">
           <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
             <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="userProfileMain.php">Profile</a></span></p>
+              <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="userProfileMain.php?userID<?php echo $_SESSION['userID']?>">Profile</a></span></p>
               <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Overview</h1>
             </div>
           </div>
@@ -158,7 +158,7 @@ include_once("scripts/config.php");
                           <br>
                           <div class="row">
                             <div class="col-4">
-                           <h5 style="color:dimgrey"><b>About</b></h5>
+                           <label><b>About</b></label>
                             </div> 
                             <div class="col-8">
                                 <h5><?php echo $u_bio; ?></h5><br>
@@ -292,7 +292,7 @@ include_once("scripts/config.php");
               <li><a href="projects.php" class="py-2 d-block">Projects</a></li>
               <li><a href="listvolunteer.php" class="py-2 d-block">Volunteers</a></li>
               <li><a href="userProfileMain.php?userID="<?php echo $_SESSION['userID'] ?> class="py-2 d-block">Profile</a></li>
-              <li><a href="login.php" class="py-2 d-block">Log Out</a></li>
+              <li><a href="logout.php" class="py-2 d-block">Log Out</a></li>
             </ul>
           </div>
         </div>
