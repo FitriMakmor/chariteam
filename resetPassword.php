@@ -18,31 +18,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         window.location.href = "register.php";
     </script>';
   }else{
-
-    // Prepare a select statement
-    $sql = "SELECT userId FROM user WHERE u_email = :email";
-
-    if($stmt = $pdo->prepare($sql)){
-      // Bind variables to the prepared statement as parameters
-      $stmt->bindParam(":email", $param_email, PDO::PARAM_STR);
-      
-      // Set parameters
-      $param_email = trim($_POST["email"]);
-      
-      // Attempt to execute the prepared statement
-      if($stmt->execute()){
-          $email = trim($_POST["email"]);
-          if (empty($_POST["email"]) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
-              $emailErr = "Email address '$email' is considered valid.";
-          }
-      } else{
-          echo "Oops! Something went wrong. Please try again later.";
-      }
-
-      // Close statement
-      unset($stmt);
-      }
-    }
+    $email = trim($_POST["email"]);
+  }
 
   // Validate password
   if(empty(trim($_POST["password"]))){
@@ -50,14 +27,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       echo '
         <script type="text/javascript">
             alert("*Please enter a password."); 
-            window.location.href = "register.php";
+            window.location.href = "resetPassword.php";
         </script>';   
   } elseif(strlen(trim($_POST["password"])) < 6){
       $password_err = "Password must have at least 6 characters.";
       echo '
         <script type="text/javascript">
             alert("*Password must have at least 6 characters."); 
-            window.location.href = "register.php";
+            window.location.href = "resetPassword.php";
         </script>';  
   } else{
       $password = trim($_POST["password"]);
@@ -69,44 +46,64 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     // Prepare a select statement
     $sql = "SELECT u_email FROM user WHERE u_email = :email";
-    
-    $stmt->bindParam(":email", $param_email, PDO::PARAM_STR);
-    
-    // Set parameters
-    $param_email = trim($_POST["email"]);
       
     if($stmt = $pdo->prepare($sql)){
-      if($stmt->rowCount() == 1){
+      // Bind variables to the prepared statement as parameters
+      $stmt->bindParam(":email", $param_email, PDO::PARAM_STR);
+      
+      // Set parameters
+      $param_email = trim($_POST["email"]);
+      
+      // Attempt to execute the prepared statement
+      if($stmt->execute()){
+          // Check if username exists, if yes then update
+          if($stmt->rowCount() == 1){
+              
+            // Prepare a select statement
+            $sql = "UPDATE user SET user_password = :password WHERE u_email = :email";
+              
+            if($stmt = $pdo->prepare($sql)){
+              // Bind variables to the prepared statement as parameters
+              $stmt->bindParam(":password", $param_password, PDO::PARAM_STR);
+              $stmt->bindParam(":email", $param_email, PDO::PARAM_STR); 
 
-        // Prepare a select statement
-        $sql = "UPDATE user SET user_password = :password WHERE u_email = :email";
+              // Set parameters
+              $param_email = trim($_POST["email"]);
+              $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
 
-        if($stmt = $pdo->prepare($sql)){
-          // Bind variables to the prepared statement as parameters
-          $stmt->bindParam(":password", $param_password, PDO::PARAM_STR);
-          $stmt->bindParam(":email", $param_email, PDO::PARAM_STR); 
-  
-          // Set parameters
-          $param_email = trim($_POST["email"]);
-          $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-  
-          // Attempt to execute the prepared statement
-          if($stmt->execute()){
-            // Password updated successfully. Destroy the session, and redirect to login page
-            session_destroy();
-            header("location: login.php");
-            exit();
+              // Attempt to execute the prepared statement
+              if($stmt->execute()){
+                // Password updated successfully. Destroy the session, and redirect to login page
+                session_destroy();
+                header("location: login.php");
+                exit();
+              } else{
+                  echo "*Oops! Something went wrong. Please try again later.";
+              }
+
+                // Close statement
+                unset($stmt);
+            }
           } else{
+              // Display an error message if username doesn't exist
+              $emailErr = "*Email doest not exist.";
+              echo '
+              <script type="text/javascript">
+                  alert("*Email doest not exist."); 
+                  window.location.href = "resetPassword.php";
+              </script>';
+          }
+      } else{
           echo "*Oops! Something went wrong. Please try again later.";
-        } 
-      }else{
-        echo "*Oops! Something went wrong. Please try again later.";
-      } 
+      }
+
+      // Close statement
+      unset($stmt);
     }
   }
-  }
-  // Close statement
-  unset($stmt);
+  
+  // Close connection
+  unset($pdo);
 }
 ?>
 
