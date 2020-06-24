@@ -81,8 +81,8 @@ $nameErr = $telNumErr = $emailErr = "";
 
 if(isset($_POST['update']))
 {	
-    //if($_POST['update'] == 'details'){
- // $userID =$_POST['userID'];	
+  if ( isset($_POST["username"]) && isset($_POST["fullname"]) && isset($_POST["telnum"]) && isset($_POST["bio"]) && isset($_POST["dob"]) && isset($_POST["email"]) && isset($_POST["IC"])) { 
+  
   $username = $_POST['username'];	
   $u_name = $_POST['fullname'];
   $u_telNum = $_POST['telnum'];
@@ -90,7 +90,7 @@ if(isset($_POST['update']))
 	$u_DOB = $_POST['dob'];
 	$u_email = $_POST['email'];	
   $u_IC= $_POST['IC'];
- 
+  }
 
 
   $userID=$_SESSION["userID"];  
@@ -111,7 +111,7 @@ if(isset($_POST['update']))
   
 
 
-	if($stmt->execute()){
+	if($stmt->execute()){ 
     header('Location:userProfileMain.php?userID='.$userID);
   }
   else{
@@ -192,7 +192,7 @@ function test_input($data) {
     
   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
-      <a class="navbar-brand" href="projects.html">Chariteam</a>
+      <a class="navbar-brand" href="about.php">Chariteam</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
       </button>

@@ -320,13 +320,8 @@ session_start();
               <li><a href="about.php" class="py-2 d-block">About</a></li>
               <li><a href="projects.php" class="py-2 d-block">Projects</a></li>
               <li><a href="listvolunteer.php" class="py-2 d-block">Volunteers</a></li>
-<<<<<<< HEAD
-              <li><a href="userProfileMain.php?userID=" <?php echo $_SESSION['userID'] ?> class="py-2 d-block">Profile</a></li>
-              <li><a href="login.php" class="py-2 d-block">Log Out</a></li>
-=======
               <li><a href="userProfileMain.php?userID="<?php echo $_SESSION['userID'] ?> class="py-2 d-block">Profile</a></li>
               <li><a href="logout.php" class="py-2 d-block">Log Out</a></li>
->>>>>>> ccef5c5be33e863a6e895c2b01bfe0861a0f439e
             </ul>
           </div>
         </div>
