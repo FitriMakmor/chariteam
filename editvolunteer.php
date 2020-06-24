@@ -1,6 +1,6 @@
 <?php
 session_start();
-// $userID=$_SESSION["userID"];
+$userID=$_SESSION["userID"];
 
 $volunteer_ID = $v_firstName = $v_lastName = $v_email = $v_address1 = $v_address2 ="";
 $v_state = $v_status = $v_telNum = $v_publicInfo = $v_DOR = $v_image = "";
