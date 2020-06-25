@@ -280,7 +280,7 @@ if (isset($_POST['delete'])) {
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label for="select" class="col-4 col-form-label">Status</label>
+                      <label for="select" class="col-4 col-form-label">Status*</label>
                       <div class="col-8">
                         <?php $default_status = $row['v_status'] ?>
                         <select id="select" name="status" value="<?php echo $row['v_lastName']; ?>" class="custom-select">
