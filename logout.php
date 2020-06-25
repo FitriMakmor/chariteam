@@ -7,6 +7,9 @@ $_SESSION = array();
  
 // Destroy the session.
 session_destroy();
+ // Remove cookie variables
+ $days = 30;
+ setcookie ("rememberme","", time() - ($days * 24 * 60 * 60 * 1000));
  
 // Redirect to login page
 header("location: login.php");

@@ -63,7 +63,7 @@ $userID=$_SESSION["userID"];
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="listvolunteer.html">Volunteers</a></span><span>Display Profile</span></p>
+            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="listvolunteer.php?page=1">Volunteers</a></span><span>Display Profile</span></p>
             <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Volunteers</h1>
            
           </div>
@@ -262,7 +262,7 @@ $userID=$_SESSION["userID"];
 <?php  $pdo =null;?>
     
 
-    <footer class="ftco-footer ftco-section img">
+<footer class="ftco-footer ftco-section img">
     <div class="overlay"></div>
     <div class="container">
       <div class="row mb-5">
@@ -272,47 +272,35 @@ $userID=$_SESSION["userID"];
             <p>This is a simple and convenient system that helps Project Managers to manage their charity projects all in just one website</p>
           </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-1"></div>
+
+        <div class="col-md-4">
           <div class="ftco-footer-widget mb-4">
-            <h2 class="ftco-heading-2">Upcoming Projects</h2>
-            <div class="block-21 mb-4 d-flex">
-              <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-              <div class="text">
-                <h3 class="heading"><a href="projects.html">Safety Training to Growing Children</a></h3>
-                <div class="meta">
-                  <div><a href="#"><span class="icon-calendar"></span> July 12, 2019</a></div>
-                  <div><a href="#"><span class="icon-person" name="Organisation"></span> We Love Earth</a></div>
-                 
-                </div>
-              </div>
-            </div>
-            <div class="block-21 mb-4 d-flex">
-              <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-              <div class="text">
-                <h3 class="heading"><a href="projects.html">Clean Water for Rural Areas</a></h3>
-                <div class="meta">
-                  <div><a href="#"><span class="icon-calendar"></span> November 25, 2019</a></div>
-                  <div><a href="#"><span class="icon-person" name="Organisation"></span> Hope Org</a></div>
-                  
-                </div>
-              </div>
-            </div>
+            <h2 class="ftco-heading-2">Contact Us</h2>
+            <p>No. 39, Some Road Somewhere,
+              <br>Off Teluk Whatever,
+              <br>48900 A Place,
+              <br>someState, Malaysia
+            </p>
+            <p>03-12345678</p>
           </div>
         </div>
+        <div class="cold-md-3"></div>
+
         <div class="col-md-2">
-           <div class="ftco-footer-widget mb-4 ml-md-4">
+          <div class="ftco-footer-widget mb-4 ml-md-4">
             <h2 class="ftco-heading-2">Site Links</h2>
             <ul class="list-unstyled">
-              <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
-              <li class="nav-item"><a href="projects.php" class="nav-link">Projects</a></li>
-              <li class="nav-item"><a href="listvolunteer.php?page=1" class="nav-link">Volunteers</a></li>
-              <li class="nav-item"><a href="userProfileMain.php?userID=<?php echo $_SESSION['userID'] ?>" class="nav-link">Profile</a></li>
-              <li class="nav-item"><a href="logout.php" class="nav-link">Log Out</a></li> 
+              <li><a href="about.php" class="py-2 d-block">About</a></li>
+              <li><a href="projects.php" class="py-2 d-block">Projects</a></li>
+              <li><a href="listvolunteer.php?page=1" class="py-2 d-block">Volunteers</a></li>
+              <li><a href="userProfileMain.php?userID="<?php echo $_SESSION['userID'] ?> class="py-2 d-block">Profile</a></li>
+              <li><a href="logout.php" class="py-2 d-block">Log Out</a></li>
             </ul>
           </div>
         </div>
       </div>
-      
+
     </div>
   </footer>
     

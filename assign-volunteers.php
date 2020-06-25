@@ -1,3 +1,8 @@
+<?php
+  session_start();
+  $userID=$_SESSION["userID"];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,7 +37,7 @@
     <!-- START nav -->
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
       <div class="container">
-        <a class="navbar-brand" href="projects.html">Chariteam</a>
+        <a class="navbar-brand" href="about.php">Chariteam</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="oi oi-menu"></span> Menu
         </button>
@@ -55,8 +60,8 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a
-                  href="projects.html">Projects</a></span><span>Assign Volunteers </span></p>
+            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2">
+            <a href="projects.php">Projects</a></span><span>Assign Volunteers </span></p>
             <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Assign Volunteers </h1>
           </div>
         </div>
@@ -67,19 +72,17 @@
     <section class="ftco-section">
 
     <?php
-              include_once("scripts/config.php");
-              $projectID = $_GET["project_ID"];
-              try {
-                $pdo->beginTransaction();
-                $sql2 = "SELECT volunteer_ID, v_image, v_image_type, v_firstName, v_lastName, v_state FROM volunteer WHERE volunteer_ID NOT IN 
-                (SELECT volunteer_ID FROM project_volunteer WHERE project_volunteer.project_ID=".$projectID.') ';  
-                
-                $result2 = $pdo -> query($sql2);
-                //echo "all records selected successfully.";
-                $pdo->commit();
-              
-          
-          ?>
+      include_once("scripts/config.php");
+      $projectID = $_GET["project_ID"];
+      try {
+        $pdo->beginTransaction();
+        $sql2 = "SELECT volunteer_ID, v_image, v_image_type, v_firstName, v_lastName, v_state FROM volunteer WHERE volunteer_ID NOT IN 
+        (SELECT volunteer_ID FROM project_volunteer WHERE project_volunteer.project_ID=".$projectID.') ';  
+        
+        $result2 = $pdo -> query($sql2);
+        //echo "all records selected successfully.";
+        $pdo->commit();
+    ?>
           
       <div class="container">
         <div class="wrapper">
@@ -94,8 +97,6 @@
           </div>
           <br>
 
-          
-
           <!-- START table -->
           <table id="myTable" class="table table-striped table-dark table-hover">
             <form method="GET" action="scripts/assign-volunteer.php">
@@ -109,24 +110,22 @@
             </thead>
 
             <?php
-                while($data = $result2 -> fetch())  {
-                  $id = $data["volunteer_ID"];
-                  $image = $data["v_image"];
-                  $imageType = $data["v_image_type"];
+              while($data = $result2 -> fetch())  {
+                $id = $data["volunteer_ID"];
+                $image = $data["v_image"];
+                $imageType = $data["v_image_type"];
             ?>
           
               <tbody>
                 <tr>
                   <th scope="row"><img src="<?php echo 'data:' . $imageType . ';base64,' . base64_encode($image) . '';?>" class="mx-auto d-block"></th>
-                  <td><a href="displayprofile.html"><?php echo $data["v_firstName"] . " " . $data["v_lastName"]; ?></a></td>
+                  <td><a href ="displayprofile.php?v_ID=<?php echo $id;?>"><?php echo $data["v_firstName"] . " " . $data["v_lastName"]; ?></a></td>
                   <td><?php echo $data["v_state"]; ?></td>
                   <td><label class="switch "><input type="checkbox" value="<?php echo $id; ?>" name="selected[]" class="success" /><span class="slider round"></span></label></td>
                   <td class="hidden"><label class="switch hidden"><input type="checkbox" value="<?php echo $projectID; ?>" name="projectID" class="hidden" checked="yes"/></label></td>
                 </tr>
                 <?php } ?>
-              </tbody>
-              
-              
+              </tbody>             
             </table>
         </div>
       </div>
@@ -139,7 +138,7 @@
       echo "Error: ".$e;
     }
     $pdo = null;
-?>
+    ?>
 
     <section class="ftco-section-3 img" style="background-image: url(images/bg_3.jpg);">
       <div class="overlay"></div>
@@ -172,13 +171,9 @@
               </div>
             </div>
           </div>
-        </div>
-    
-        </form>
+        </div>   
+      </form>
 
-
-    
-		
     <!-- START footer -->
     <footer class="ftco-footer ftco-section img">
     <div class="overlay"></div>
@@ -217,8 +212,7 @@
             </ul>
           </div>
         </div>
-      </div>
-      
+      </div>      
     </div>
   </footer>
     
