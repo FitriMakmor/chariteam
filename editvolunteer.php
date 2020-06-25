@@ -189,7 +189,7 @@ if (isset($_POST['delete'])) {
               <form method="post" enctype="multipart/form-data">
                 <input style="margin-left: auto; margin-right: auto;text-align: center;" type="file" name="image" id="fileToUpload">
                 <br><br>
-                <button name="updateImage" type="submit" class="btn btn-primary">Update Profile</button>
+                <button name="updateImage" type="submit" class="btn btn-primary">Update Picture</button>
 
               </form>
             </ul>
@@ -293,7 +293,8 @@ if (isset($_POST['delete'])) {
                     </div>
                     <?php $pdo = null; ?>
                     <div class="form-group row">
-                      <label for="tel" class="col-4 col-form-label">Mobile.</label>
+                      <label for="tel" class="col-4 col-form-label">Tel.(Mobile)</label>
+
                       <div class="col-8">
                         <input id="tel" name="tel" placeholder="016-12345678" pattern="[0-9]{3}-[0-9]{7,8}" class="form-control here" value="<?php echo $row['v_telNum']; ?>" type="tel">
                       </div>
