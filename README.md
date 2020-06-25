@@ -1,4 +1,4 @@
-# chariteam
+# chariteam :innocent: :credit_card:
 ## A Web Programming Project
 > Chariteam is an online Charity Project Management System intended for use within an organization.
 
