@@ -83,7 +83,7 @@ include_once("scripts/config.php");
           $u_email = $res['u_email'];	
           $u_IC= $res['u_IC'];
          // $u_image = $res['u_image'];
-          //$u_dateJoined = $res['u_dateJoined'];
+          $dateJoined = $res['dateJoined'];
           $image=$res["u_image"];
           $imageType=$res["u_imageType"];
         
@@ -148,7 +148,7 @@ include_once("scripts/config.php");
                   </div>
                   <div class="text-center text-sm-right">
                     <span class="badge badge-secondary">Project Manager</span>
-                    <div class="text-muted"><small>Joined <!--?php echo $dateJoined?--></small></div>
+                    <div class="text-muted"><small>Joined <?php echo $dateJoined?></small></div>
                   </div>
                     </div>
                     </div>

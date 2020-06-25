@@ -241,7 +241,7 @@ header('Location:displayprofile.php?v_ID='.$last_ID);
                                 </div>
                               </div>
                               <div class="form-group row">
-                                <label for="select" class="col-4 col-form-label">Status</label> 
+                                <label for="select" class="col-4 col-form-label">Status*</label> 
                                 <div class="col-8">
                                   <select id="select" name="status" class="custom-select">
                                     <option value="Single"<?php echo (isset($_POST['status']) && $_POST['status'] === 'Single') ? 'selected' : ''; ?>>Single</option>
@@ -251,7 +251,7 @@ header('Location:displayprofile.php?v_ID='.$last_ID);
                                 </div>
                               </div>
                               <div class="form-group row">
-                                <label for="tel" class="col-4 col-form-label">Tel.</label> 
+                                <label for="tel" class="col-4 col-form-label">Mobile</label> 
                                 <div class="col-8">
                                   <input id="tel" name="tel"  placeholder="016-12345678" pattern="[0-9]{3}-[0-9]{7,8}"value="<?php echo $_POST['tel'] ?? ''; ?>"  class="form-control here" type="tel">
                                 </div>

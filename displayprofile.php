@@ -214,7 +214,7 @@ $userID=$_SESSION["userID"];
              </div>
                      <div class="row">
                         <div class="col-4">
-                          <label>Tel</label>
+                          <label>Mobile</label>
                         </div> 
                         <div class="col-8">
                             <h5><?php
