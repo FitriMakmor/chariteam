@@ -77,7 +77,7 @@ include_once("scripts/config.php");
     			<div class="col-md-6 pl-md-5 ftco-animate">
             <h1 class="mb-4">Welcome to Chariteam!</h1>
             <h4 class="mb-4">Established in 2020</h4>
-    				<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
+    				<p>Chariteam was founded by 6 Malaysian students at the start of 2020. This website serves as a system to manage charity projects within our organization. This website is for the use of project managers only. So start your charity project today!</p>
             <h5>Head Quarters</h5>
             <p>No. 39, Some Road Somewhere,
             <br>Off Teluk Whatever,

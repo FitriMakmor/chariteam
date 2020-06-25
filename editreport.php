@@ -113,7 +113,7 @@ $userID=$_SESSION["userID"];
                 <input name="endTime" type="time" class="form-control" value="<?php echo $res['r_endTime']?>" required>
               </div>
               <div class="form-group">
-                <p>Content of Meeting (Include Participants)</p>
+                <p>Content of Meeting</p>
                 <textarea name="content" class="form-control" cols="30" rows="6" maxlength="3000" required><?php echo $res['r_content']?></textarea>
               </div>
               <div class="form-group">

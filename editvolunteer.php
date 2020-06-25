@@ -195,6 +195,7 @@ if (isset($_POST['delete'])) {
             </ul>
 
 
+
           </div>
         </div>
         <div class="col-md-9">
@@ -204,6 +205,7 @@ if (isset($_POST['delete'])) {
                 <div class="col-md-12">
                   <h4>Edit Profile</h4>
                   <hr>
+                  
                 </div>
               </div>
 
@@ -291,7 +293,7 @@ if (isset($_POST['delete'])) {
                     </div>
                     <?php $pdo = null; ?>
                     <div class="form-group row">
-                      <label for="tel" class="col-4 col-form-label">Tel.</label>
+                      <label for="tel" class="col-4 col-form-label">Mobile.</label>
                       <div class="col-8">
                         <input id="tel" name="tel" placeholder="016-12345678" pattern="[0-9]{3}-[0-9]{7,8}" class="form-control here" value="<?php echo $row['v_telNum']; ?>" type="tel">
                       </div>
