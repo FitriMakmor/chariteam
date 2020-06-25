@@ -15,6 +15,7 @@ if(isset($_POST['update']))
 	$u_DOB = $_POST['dob'];
 	$u_email = $_POST['email'];	
   $u_IC= $_POST['IC'];
+
   }
 
 
@@ -48,13 +49,13 @@ if(isset($_POST['update']))
 
 
   if(!isset($errMSG)){
-	if($stmt->execute()) 
+	if($stmt->execute()) {
     header('Location:userProfileMain.php?userID='.$userID);
-  
+  }
 
-  // else{
-	//   echo "Error: ".$pdo->error."<br><br>";
-  // }
+  else{
+	  echo "Error: ".$pdo->error."<br><br>";
+  }
   }
 }
      
@@ -178,6 +179,7 @@ if(isset($_POST['updateimage'])){
           $res=$result->fetch(PDO::FETCH_ASSOC);
           $image=$res["u_image"];
           $imageType=$res["u_imageType"];
+          $dateJoined=$res['dateJoined'];
         
          ?> 
          
@@ -283,7 +285,7 @@ if(isset($_POST['updateimage'])){
                   </div>
                   <div class="text-center text-sm-right">
                     <span class="badge badge-secondary">Project Manager</span>
-                    <div class="text-muted"><small>Joined <!--?php echo $dateJoined?--></small></div>
+                    <div class="text-muted"><small>Joined <?php echo $dateJoined?></small></div>
                   </div>
                 </div>
               </div>
@@ -292,13 +294,16 @@ if(isset($_POST['updateimage'])){
               </ul>
               <div class="tab-content pt-3">
                 <div class="tab-pane active">
-                <?php if(isset($errMSG)){
-          ?>
+                
+            <?php if(isset($errMSG)){  ?>
+                
                 <div class="alert alert-danger">
                   <span class="glyphicon glyphicon-info-sign"></span> <strong><?php echo $errMSG; ?></strong>
                 </div>
-                <?php
-      }?>
+            <?php
+              }
+             ?>
+                
                 <form class="form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" onsubmit="return formValidator()">
                     <div class="row">
                       <div class="col">

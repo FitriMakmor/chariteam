@@ -44,11 +44,11 @@ include_once("scripts/config.php");
 
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
+          <li class="nav-item active"><a href="about.php" class="nav-link">About</a></li>
           <li class="nav-item"><a href="projects.php" class="nav-link">Projects</a></li>
           <li class="nav-item"><a href="listvolunteer.php?page=1" class="nav-link">Volunteers</a></li>
           <li class="nav-item"><a href="userProfileMain.php?userID=<?php echo $_SESSION['userID'] ?>" class="nav-link">Profile</a></li>
-          <li class="nav-item active"><a href="logout.php" class="nav-link">Log Out</a></li> 
+          <li class="nav-item"><a href="logout.php" class="nav-link">Log Out</a></li> 
         </ul>
       </div>
     </div>
@@ -77,7 +77,7 @@ include_once("scripts/config.php");
     			<div class="col-md-6 pl-md-5 ftco-animate">
             <h1 class="mb-4">Welcome to Chariteam!</h1>
             <h4 class="mb-4">Established in 2020</h4>
-    				<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
+    				<p>Chariteam was founded by 6 Malaysian students at the start of 2020. This website serves as a system to manage charity projects within our organization. This website is for the use of project managers only. So start your charity project today!</p>
             <h5>Head Quarters</h5>
             <p>No. 39, Some Road Somewhere,
             <br>Off Teluk Whatever,

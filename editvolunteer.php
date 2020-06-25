@@ -283,7 +283,7 @@ if(isset($_POST['delete'])){
                                 </div>
                               </div>
                               <div class="form-group row">
-                                <label for="select" class="col-4 col-form-label">Status</label> 
+                                <label for="select" class="col-4 col-form-label">Status*</label> 
                                 <div class="col-8">
                                 <?php $default_status = $row['v_status']?>
                                   <select id="select" name="status"  value="<?php echo $row['v_lastName']; ?>"class="custom-select">
@@ -296,7 +296,7 @@ if(isset($_POST['delete'])){
                               </div>
                               <?php $pdo=null;?>
                               <div class="form-group row">
-                                <label for="tel" class="col-4 col-form-label">Tel.</label> 
+                                <label for="tel" class="col-4 col-form-label">Mobile</label> 
                                 <div class="col-8">
                                   <input id="tel" name="tel"  placeholder="016-12345678" pattern="[0-9]{3}-[0-9]{7,8}" class="form-control here"  value="<?php echo $row['v_telNum']; ?>"type="tel">
                                 </div>
