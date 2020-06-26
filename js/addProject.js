@@ -25,10 +25,6 @@ $(document).ready(function() {
                 e.target.setCustomValidity("Please specify the starting date!");break;
                 case 'endInput' : 
                 e.target.setCustomValidity("Please specify the ending date!");break;
-                case 'summaryInput' : 
-                e.target.setCustomValidity("Please insert the project summary!");break;
-                case 'descriptionInput' : 
-                e.target.setCustomValidity("Please insert the project description!");break;
                 case 'projectImageForm' : 
                 e.target.setCustomValidity("Please insert the project image!");break;
             default : e.target.setCustomValidity("");break;
